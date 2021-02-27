@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:noname/widgets/badge/badge_position.dart';
+import 'package:noname/screens/widgets/badge/badge_position.dart';
 
 class BadgePositioned extends StatelessWidget {
   final Widget child;

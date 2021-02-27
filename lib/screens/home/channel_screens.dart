@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:noname/screens/home/widgets/discover_tab.dart';
-import 'package:noname/widgets/tab_bar.dart';
+import 'package:noname/screens/widgets/tab_bar.dart';
 
 class ChannelScreen extends StatelessWidget {
   ScrollController listViewScrollController = new ScrollController();

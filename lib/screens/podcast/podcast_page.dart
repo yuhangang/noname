@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/podcast/neumorphic_player.dart';
-import 'package:noname/widgets/badge/badge.dart';
-import 'package:noname/widgets/badge/badge_position.dart';
+import 'package:noname/screens/widgets/badge/badge.dart';
+import 'package:noname/screens/widgets/badge/badge_position.dart';
 
 class PodcastPage extends StatelessWidget {
   static const String route = "/podcast-page";

@@ -6,7 +6,7 @@ import 'package:noname/screens/home/channel_screens.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
 import 'package:noname/screens/home/widgets/stop_podcast_button.dart';
 import 'package:noname/screens/podcast/podcast_page.dart';
-import 'package:noname/widgets/neumorphic_bar.dart';
+import 'package:noname/screens/widgets/neumorphic_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const route = "/home-page";

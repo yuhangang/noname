@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/podcast/widgets/avatar.dart';
-import 'package:noname/widgets/badge/badge.dart';
-import 'package:noname/widgets/badge/badge_position.dart';
 
+ 
 class AudioPlayerSample extends StatefulWidget {
   @override
   _AudioPlayerSampleState createState() => _AudioPlayerSampleState();
 }
 
-class _AudioPlayerSampleState extends State<AudioPlayerSample> {
+class _AudioPlayerSampleState extends State<AudioPlayerSample> { 
   @override
   Widget build(BuildContext context) {
+    
     return NeumorphicTheme(
         themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(

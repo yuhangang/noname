@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/constants/app_config.dart';
-import 'package:noname/widgets/badge/badge.dart';
-import 'package:noname/widgets/badge/badge_position.dart';
+import 'package:noname/screens/widgets/badge/badge.dart';
+import 'package:noname/screens/widgets/badge/badge_position.dart';
 
 class AvatarCustom {
   final String url;
