@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/screens/home/podcast_detail_screen.dart';
-import 'package:noname/screens/home/widgets/bar_chart.dart';
 import 'package:noname/screens/podcast/widgets/avatar.dart';
-import 'package:noname/screens/podcast/widgets/podcast_summary_dialog.dart';
+import 'package:noname/utils/notification/alert/alert_helper.dart';
 
 class DiscoverTab extends StatelessWidget {
   const DiscoverTab({
@@ -43,12 +42,12 @@ class DiscoverTab extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        child: FlatButton(
+        child: TextButton(
+          style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
           clipBehavior: Clip.antiAlias,
           onPressed: () {
             Navigator.pushNamed(context, PodcastDetailPage.route);
           },
-          padding: EdgeInsets.all(0),
           child: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -97,16 +96,7 @@ class DiscoverTab extends StatelessWidget {
                       ),
                       InkWell(
                           onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CustomDialogBox(
-                                    title: "Custom Dialog Demo",
-                                    descriptions:
-                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                                    text: "Yes",
-                                  );
-                                });
+                            AlertDialogHelper.showDetailDialog();
                           },
                           child: Icon(CupertinoIcons.info))
                     ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noname/screens/intro_slider/intro_slider.dart';
 import 'main/routes.dart';
 import 'package:noname/main/routes.dart';
 import 'package:noname/providers/counter.dart';
@@ -7,31 +8,30 @@ import 'package:noname/styles/customSplashFactory.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = new GlobalKey();
+
 class MyApp extends StatelessWidget {
   static const PageRoutes pageRoutes = PageRoutes();
+  GlobalKey<NavigatorState> navigationKey;
+  MyApp({@required this.navigationKey});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // status bar color
+    ));
 
     return Consumer(builder: (context, watch, _) {
       final count = watch(counterProvider.state);
       return MaterialApp(
+        navigatorKey: navigationKey,
+        scaffoldMessengerKey: scaffoldMessengerKey,
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-
+          primaryColor: Colors.white,
+          accentColor: Colors.grey[400],
           fontFamily: 'Open Sans',
-          // Define the default TextTheme. Use this to specify the default
-          // text styling for headlines, titles, bodies of text, and more.
           splashColor: Colors.white,
           splashFactory: NoSplashFactory(),
           textTheme: TextTheme(
@@ -39,8 +39,12 @@ class MyApp extends StatelessWidget {
             headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          }),
         ),
-        initialRoute: LoginPage.route,
+        initialRoute: IntroPage.route,
         routes: pageRoutes.routes,
       );
     });

@@ -69,23 +69,27 @@ class PodcastDetailPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    FlatButton(
+                    TextButton(
                         onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: Colors.grey[800],
-                              width: 1.5,
-                              style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
+                        style: TextButton.styleFrom(
+                            textStyle: TextStyle(color: Colors.grey[800]),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            side: BorderSide(
+                                color: Colors.grey[800],
+                                width: 1.5,
+                                style: BorderStyle.solid)),
                         child: Text(true ? "follow" : "unfollow")),
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    TextButton(
                       onPressed: () {},
-                      shape: CircleBorder(),
+                      style: TextButton.styleFrom(
+                          shape: CircleBorder(),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          padding: EdgeInsets.all(0)),
                       child: LayoutBuilder(builder: (context, constraint) {
-                        return new Icon(CupertinoIcons.bell_circle, size: 40);
+                        return new Icon(CupertinoIcons.bell_circle,
+                            size: 40, color: Colors.grey[800]);
                       }),
                     ),
                   ],

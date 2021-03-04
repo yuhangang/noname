@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/home/channel_screens.dart';
+import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
-import 'package:noname/screens/home/widgets/stop_podcast_button.dart';
-import 'package:noname/screens/podcast/podcast_page.dart';
-import 'package:noname/screens/widgets/neumorphic_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const route = "/home-page";
@@ -22,57 +20,7 @@ class HomePage extends StatelessWidget {
     // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: BackgroundColor.mainPageColor,
-      appBar: AppBar(
-        toolbarHeight: 70,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          iconSize: 30,
-          splashRadius: 25,
-          padding: const EdgeInsets.all(10),
-          splashColor: Colors.white.withOpacity(0.3),
-          onPressed: () {},
-          icon: Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
-        ),
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "UTHOPIA",
-                style: ThemeData.light()
-                    .textTheme
-                    .headline1
-                    .copyWith(fontSize: 25),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                  "https://miro.medium.com/max/700/1*InbuykHMMQcVkNSC_uNp0A.png",
-                ),
-                radius: 15,
-                backgroundColor:
-                    SchedulerBinding.instance.window.platformBrightness ==
-                            Brightness.light
-                        ? Colors.grey[100]
-                        : Colors.grey[800],
-              ),
-              SizedBox(
-                width: 20,
-              ),
-            ],
-          )
-        ],
-      ),
+      appBar: HomePageAppBar(),
 
       body: Stack(
         children: [

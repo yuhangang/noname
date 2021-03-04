@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:noname/screens/home/home_page.dart';
+import 'package:noname/screens/intro_slider/intro_slider.dart';
 import 'package:noname/state/bloc/login/bloc_login_page.dart';
 
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class LoginFieldWithButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
+      height: 45,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
         padding: EdgeInsets.only(left: 35),
@@ -35,32 +36,34 @@ class LoginFieldWithButton extends StatelessWidget {
             Flexible(
               flex: 7,
               child: Container(
-                height: 55,
+                height: 45,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 3.5),
                   child: TextField(
                     focusNode: _focusNode,
-                    style: TextStyle(fontSize: 25.0, color: Colors.black),
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintStyle: TextStyle(
-                            color: Colors.grey.withOpacity(.9), fontSize: 25),
+                            color: Colors.grey.withOpacity(.9), fontSize: 16),
                         hintText: _passwordhintText),
                   ),
                 ),
               ),
             ),
-            FlatButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
+            TextButton(
+              style: TextButton.styleFrom(
+                  padding: EdgeInsets.all(0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)))),
               child: Container(
                   alignment: FractionalOffset.center,
                   decoration: new BoxDecoration(
                     color: Colors.white.withOpacity(0),
                   ),
-                  child: Icon(Icons.navigate_next, size: 50)),
+                  child: Icon(Icons.navigate_next, size: 40)),
               onPressed: () {
                 Navigator.pushNamed(context, HomePage.route);
               },
@@ -89,7 +92,7 @@ class LoginTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
+      height: 45,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
         padding: EdgeInsets.only(left: 35),
@@ -102,18 +105,18 @@ class LoginTextField extends StatelessWidget {
             Flexible(
               flex: 7,
               child: Container(
-                height: 55,
+                height: 45,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 3.5),
                   child: TextField(
                     focusNode: _focusNode,
-                    style: TextStyle(fontSize: 25.0, color: Colors.black),
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
                     controller: usernameController,
                     keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintStyle: TextStyle(
-                            color: Colors.grey.withOpacity(.9), fontSize: 25),
+                            color: Colors.grey.withOpacity(.9), fontSize: 16),
                         hintText: _userNameHintText),
                   ),
                 ),
@@ -134,13 +137,13 @@ class SkipLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FlatButton(
-        color: Colors.black.withOpacity(0.1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: Colors.black.withOpacity(0.1),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)))),
         onPressed: () {
-          Navigator.pushNamed(context, BlocLoginPage.route);
+          //Navigator.pushNamed(context, IntroPage.route);
         },
         child: Text(
           "Continue as Guest",
@@ -170,11 +173,11 @@ class SwapLoginRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FlatButton(
-        color: Colors.black.withOpacity(0.1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: Colors.black.withOpacity(0.1),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)))),
         onPressed: () {
           Navigator.pushReplacementNamed(context, route);
         },

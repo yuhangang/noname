@@ -8,11 +8,11 @@ class StopPodcastButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FlatButton(
-        color: Colors.black.withOpacity(0.3),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: Colors.black.withOpacity(0.3),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)))),
         onPressed: () {},
         child: Text(
           "STOP",

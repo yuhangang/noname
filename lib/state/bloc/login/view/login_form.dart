@@ -147,10 +147,8 @@ class LoginPasswordField extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     previous.status != current.status,
                 builder: (context, state) {
-                  return FlatButton(
+                  return TextButton(
                     key: const Key('loginForm_continue_raisedButton'),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
                     child: Container(
                         alignment: FractionalOffset.center,
                         decoration: new BoxDecoration(

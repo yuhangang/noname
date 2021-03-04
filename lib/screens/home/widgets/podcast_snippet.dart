@@ -17,9 +17,13 @@ class PodcastSnippet extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: FlatButton(
-                padding: EdgeInsets.all(0),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    textStyle: TextStyle(color: Colors.grey[800]),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    padding: EdgeInsets.all(0),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap),
                 onPressed: () {
                   Navigator.of(context).push(_createPodcastRoute());
                 },

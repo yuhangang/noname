@@ -4,16 +4,14 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/podcast/widgets/avatar.dart';
 
- 
 class AudioPlayerSample extends StatefulWidget {
   @override
   _AudioPlayerSampleState createState() => _AudioPlayerSampleState();
 }
 
-class _AudioPlayerSampleState extends State<AudioPlayerSample> { 
+class _AudioPlayerSampleState extends State<AudioPlayerSample> {
   @override
   Widget build(BuildContext context) {
-    
     return NeumorphicTheme(
         themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(
@@ -75,13 +73,12 @@ class __PageState extends State<_Page> {
         children: <Widget>[
           Align(
             alignment: Alignment.centerLeft,
-            child: FlatButton(
+            child: IconButton(
               padding: const EdgeInsets.all(8.0),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              shape: CircleBorder(),
-              child: Icon(
+              icon: Icon(
                 Icons.keyboard_arrow_down,
                 size: 35,
                 color: _iconsColor(),
@@ -98,8 +95,7 @@ class __PageState extends State<_Page> {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: FlatButton(
-              shape: CircleBorder(),
+            child: IconButton(
               padding: const EdgeInsets.all(15.0),
               onPressed: () {
                 setState(() {
@@ -109,7 +105,7 @@ class __PageState extends State<_Page> {
                   //    _useDark ? ThemeMode.dark : ThemeMode.light;
                 });
               },
-              child: Icon(
+              icon: Icon(
                 _follow ? Icons.favorite : Icons.favorite_border,
                 size: 25,
                 color: _follow ? Colors.red[600] : _iconsColor(),
