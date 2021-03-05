@@ -1,9 +1,11 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreference {
-  bool isDarkMode;
-  Color colorsTheme;
+  bool? isDarkMode;
+  Color? colorsTheme;
 }
 
 class AppPreferenceProvider extends ChangeNotifier {
@@ -11,8 +13,8 @@ class AppPreferenceProvider extends ChangeNotifier {
   static const String _muteInAutoPlayKey = 'mute_in_autoplay';
   static const String _videoAdsSortingMethodKey = 'video_ads_sorting_method';
 
-  bool _is_allow_autoplay;
-  bool _mute_in_autoplay;
+  bool? _is_allow_autoplay;
+  bool? _mute_in_autoplay;
 
   bool get mute_in_autoplay => _mute_in_autoplay ?? false;
   bool get is_allow_autoplay => _is_allow_autoplay ?? true;
@@ -22,13 +24,13 @@ class AppPreferenceProvider extends ChangeNotifier {
 
     _is_allow_autoplay = prefs.getString(_allowAutoPlayKey) == null
         ? true
-        : int.parse(prefs.getString(_allowAutoPlayKey)) == 1
+        : int.parse(prefs.getString(_allowAutoPlayKey)!) == 1
             ? true
             : false;
 
     _mute_in_autoplay = prefs.getString(_muteInAutoPlayKey) == null
         ? false
-        : int.parse(prefs.getString(_muteInAutoPlayKey)) == 1
+        : int.parse(prefs.getString(_muteInAutoPlayKey)!) == 1
             ? true
             : false;
   }

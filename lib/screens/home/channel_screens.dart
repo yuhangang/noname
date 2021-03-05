@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:noname/screens/home/widgets/discover_tab.dart';
@@ -26,7 +28,7 @@ class ChannelScreen extends StatelessWidget {
       body: PageView(
         controller: pageController,
         onPageChanged: (index) {
-          categoryState.currentState.changeCategoryIndex(index);
+          categoryState.currentState!.changeCategoryIndex(index);
         },
         children: [
           DiscoverTab(),
@@ -41,7 +43,7 @@ class ChannelScreen extends StatelessWidget {
 
 class CareerListCategories extends StatelessWidget {
   const CareerListCategories({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -150,10 +152,10 @@ class BottomBar extends StatefulWidget {
   String text;
   IconData icons;
   BottomBar(
-      {@required this.onPressed,
-      @required this.bottomIcons,
-      @required this.icons,
-      @required this.text});
+      {required this.onPressed,
+      required this.bottomIcons,
+      required this.icons,
+      required this.text});
   @override
   _BottomBarState createState() => _BottomBarState();
 }
@@ -162,7 +164,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: widget.onPressed,
+        onTap: widget.onPressed as void Function()?,
         child: widget.bottomIcons == true
             ? Container(
                 decoration: BoxDecoration(
@@ -207,16 +209,16 @@ class Job {
   final int jobMaxSalary;
 
   Job({
-    @required this.jobTitle,
-    @required this.jobDescription,
-    @required this.jobLocation,
-    @required this.jobPeriod,
-    @required this.jobType,
-    @required this.jobOrganization,
-    @required this.jobRequirement,
-    @required this.jobPositions,
-    @required this.jobMinSalary,
-    @required this.jobMaxSalary,
+    required this.jobTitle,
+    required this.jobDescription,
+    required this.jobLocation,
+    required this.jobPeriod,
+    required this.jobType,
+    required this.jobOrganization,
+    required this.jobRequirement,
+    required this.jobPositions,
+    required this.jobMinSalary,
+    required this.jobMaxSalary,
   });
 }
 

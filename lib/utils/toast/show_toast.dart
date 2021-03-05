@@ -9,7 +9,7 @@ class ToastHelper {
 
   static void showToast(String text) {
     Fluttertoast.showToast(
-        msg: text ?? "NULL VALUE",
+        msg: text,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

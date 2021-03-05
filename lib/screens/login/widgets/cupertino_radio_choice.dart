@@ -1,3 +1,5 @@
+
+
 library cupertino_radio_choice;
 
 import 'package:flutter/cupertino.dart';
@@ -6,9 +8,9 @@ import 'package:flutter/material.dart';
 class CupertinoRadioChoice extends StatefulWidget {
   /// CupertinoRadioChoice displays a radio choice widget with cupertino format
   CupertinoRadioChoice(
-      {@required this.choices,
-      @required this.onChange,
-      @required this.initialKeyValue,
+      {required this.choices,
+      required this.onChange,
+      required this.initialKeyValue,
       this.selectedColor = Colors.black,
       this.notSelectedColor = Colors.black,
       this.enabled = true});
@@ -68,7 +70,7 @@ class _CupertinoRadioChoiceState extends State<CupertinoRadioChoice> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: widget.choices.keys
-                  .map((key) => buildSelectionButton(key, widget.choices[key],
+                  .map((key) => buildSelectionButton(key, widget.choices[key]!,
                       selected: _selectedKey == key))
                   .toList(),
             ),

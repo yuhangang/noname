@@ -1,15 +1,16 @@
+
+
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/screens/home/podcast_detail_screen.dart';
 import 'package:noname/screens/podcast/widgets/avatar.dart';
 import 'package:noname/utils/notification/alert/alert_helper.dart';
 
 class DiscoverTab extends StatelessWidget {
   const DiscoverTab({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:noname/constants/const_styles.dart';
@@ -8,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String route = "/register-page";
-  RegisterPage({Key key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -21,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage>
   TextEditingController userEmailController = new TextEditingController();
   TextEditingController usernameController = new TextEditingController();
 
-  FocusNode _focusNode;
+  FocusNode? _focusNode;
   String _passwordhintText = "Password";
   String _userNameHintText = "Your Username";
   String _userEmailHintText = "Your Email";

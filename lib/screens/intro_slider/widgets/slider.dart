@@ -1,11 +1,13 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:noname/screens/intro_slider/widgets/slider_item.dart';
 
 class IntroSlider extends HookWidget {
   const IntroSlider({
-    @required PageController pageController,
-    @required this.onPageChanged2,
+    required PageController pageController,
+    required this.onPageChanged2,
   }) : _pageController = pageController;
 
   final PageController _pageController;
@@ -24,7 +26,7 @@ class IntroSlider extends HookWidget {
       child: PageView.builder(
           itemCount: 3,
           controller: _pageController,
-          onPageChanged: onPageChanged2,
+          onPageChanged: onPageChanged2 as void Function(int)?,
           itemBuilder: (_, index) {
             return SliderItem();
           }),

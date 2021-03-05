@@ -1,8 +1,10 @@
+
+
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {
   static const String route = "/search_screen";
-  TextEditingController _searchController;
+  TextEditingController? _searchController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +20,10 @@ class SearchScreen extends StatelessWidget {
 }
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({Key key, @required this.searchController})
+  const SearchTextField({Key? key, required this.searchController})
       : super(key: key);
 
-  final TextEditingController searchController;
+  final TextEditingController? searchController;
 
   @override
   Widget build(BuildContext context) {

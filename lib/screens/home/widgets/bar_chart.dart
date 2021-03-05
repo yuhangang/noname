@@ -10,8 +10,8 @@ class PollBarChart extends StatefulWidget {
   final List<Color> barColors;
 
   PollBarChart({
-    @required this.options,
-    @required this.barColors,
+    required this.options,
+    required this.barColors,
   });
   @override
   State<StatefulWidget> createState() => PollBarChartState();
@@ -21,7 +21,7 @@ class PollBarChartState extends State<PollBarChart> {
   static const double barWidth = 22;
 
   List<BarChartRodStackItem> items = [];
-  int sum = 0;
+  int? sum = 0;
   bool showZero = true;
   @override
   void initState() {
@@ -63,8 +63,8 @@ class PollBarChartState extends State<PollBarChart> {
                               width: showZero
                                   ? 0
                                   : (screenWidth *
-                                      (widget.options[index].count) /
-                                      sum),
+                                      widget.options[index].count /
+                                      sum!),
                               color: widget.barColors[index].withOpacity(0.5),
                             ))
                   ],
@@ -79,12 +79,8 @@ class Options {
   String optionName;
   int count;
 
-  Options({this.optionName, this.count});
+  Options({@required this.optionName = "err", @required this.count = -1});
 
-  Options.fromJson(Map<String, dynamic> json) {
-    optionName = json['option_name'];
-    count = json['count'];
-  }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['option_name'] = this.optionName;

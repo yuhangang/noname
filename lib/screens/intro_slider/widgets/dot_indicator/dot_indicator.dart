@@ -1,3 +1,5 @@
+
+
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -11,13 +13,13 @@ class DotsIndicator extends StatelessWidget {
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
-  final OnTap onTap;
+  final OnTap? onTap;
   final MainAxisSize mainAxisSize;
   final MainAxisAlignment mainAxisAlignment;
 
   const DotsIndicator({
-    Key key,
-    @required this.dotsCount,
+    Key? key,
+    required this.dotsCount,
     this.position = 0.0,
     this.decorator = const DotsDecorator(),
     this.axis = Axis.horizontal,
@@ -37,13 +39,13 @@ class DotsIndicator extends StatelessWidget {
   Widget _buildDot(int index) {
     final state = min(1.0, (position - index).abs());
 
-    final size = Size.lerp(decorator.activeSize, decorator.size, state);
+    final size = Size.lerp(decorator.activeSize, decorator.size, state)!;
     final color = Color.lerp(decorator.activeColor, decorator.color, state);
     final shape = ShapeBorder.lerp(
       decorator.activeShape,
       decorator.shape,
       state,
-    );
+    )!;
 
     final dot = Container(
       width: size.width,
@@ -58,7 +60,7 @@ class DotsIndicator extends StatelessWidget {
         ? dot
         : InkWell(
             customBorder: const CircleBorder(),
-            onTap: () => onTap(index.toDouble()),
+            onTap: () => onTap!(index.toDouble()),
             child: dot,
           );
   }

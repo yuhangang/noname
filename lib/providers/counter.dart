@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final counterProvider = StateNotifierProvider((ref) {
@@ -5,7 +6,7 @@ final counterProvider = StateNotifierProvider((ref) {
 });
 
 class Counter extends StateNotifier<Auth> {
-  Counter() : super(new Auth());
+  Counter() : super(new Auth(userName: "", userEmail: ""));
 
   void changeUserName(String _) => state.userName = _;
   void changeUserEmail(String _) => state.userEmail = _;
@@ -14,4 +15,5 @@ class Counter extends StateNotifier<Auth> {
 class Auth {
   String userName;
   String userEmail;
+  Auth({@required this.userName = "", @required this.userEmail = ""});
 }

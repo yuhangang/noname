@@ -1,7 +1,8 @@
+
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:noname/constants/app_config.dart';
 import 'package:noname/screens/widgets/badge/badge.dart';
 import 'package:noname/screens/widgets/badge/badge_position.dart';
@@ -23,32 +24,22 @@ class AvatarCustom {
         child: buildAvatar(),
       );
 
-  Widget buildAvatar({String imgUrl}) => Neumorphic(
-        style: NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.circle(),
-        ),
-        child: Container(
-            height: this.size,
-            width: this.size,
-            child: FadeInImage.assetNetwork(
-                placeholder: AppConfig.userImgPlaceHolderUrl,
-                image: imgUrl ?? this.url,
-                fit: fit)),
-      );
+  Widget buildAvatar({String? imgUrl}) => Container(
+      height: this.size,
+      width: this.size,
+      child: FadeInImage.assetNetwork(
+          placeholder: AppConfig.userImgPlaceHolderUrl,
+          image: imgUrl ?? this.url,
+          fit: fit));
 
-  Widget stackedAvatar({String link1, String link2}) => Padding(
+  Widget stackedAvatar({String? link1, String? link2}) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Stack(
           children: [
             Padding(
                 padding: EdgeInsets.only(left: 15, top: 15),
                 child: buildAvatar(imgUrl: link2)),
-            Neumorphic(
-              style: NeumorphicStyle(
-                boxShape: NeumorphicBoxShape.circle(),
-              ),
-              child: buildAvatar(imgUrl: link1),
-            ),
+            buildAvatar(imgUrl: link1)
           ],
         ),
       );

@@ -1,3 +1,5 @@
+
+
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -10,11 +12,11 @@ class Constants {
 }
 
 class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
-  final Image img;
+  final String? title, descriptions, text;
+  final Image? img;
 
   const CustomDialogBox(
-      {Key key, this.title, this.descriptions, this.text, this.img})
+      {Key? key, this.title, this.descriptions, this.text, this.img})
       : super(key: key);
 
   @override
@@ -55,7 +57,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             ),
           ),
           Text(
-            widget.title,
+            widget.title!,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -72,7 +74,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Text(
-                      widget.descriptions,
+                      widget.descriptions!,
                       style: TextStyle(fontSize: 14),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.fade,

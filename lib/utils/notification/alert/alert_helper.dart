@@ -1,18 +1,20 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:noname/screens/podcast/widgets/podcast_summary_dialog.dart';
 
-GlobalKey<NavigatorState> _navigationKey;
+late GlobalKey<NavigatorState> _navigationKey;
 
 class AlertDialogHelper {
   AlertDialogHelper();
-  AlertDialogHelper.init({@required GlobalKey<NavigatorState> navigationKey}) {
+  AlertDialogHelper.init({required GlobalKey<NavigatorState> navigationKey}) {
     _navigationKey = navigationKey;
   }
 
   static void showDetailDialog() {
     showDialog(
-        context: _navigationKey.currentContext,
+        context: _navigationKey.currentContext!,
         builder: (BuildContext context) {
           return CustomDialogBox(
             title: "Custom Dialog Demo",

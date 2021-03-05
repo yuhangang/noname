@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -29,7 +31,7 @@ class PodcastDetailPage extends StatelessWidget {
                 "PODCAST",
                 style: ThemeData.light()
                     .textTheme
-                    .headline1
+                    .headline1!
                     .copyWith(fontSize: 25),
               ),
               SizedBox(
@@ -41,7 +43,7 @@ class PodcastDetailPage extends StatelessWidget {
                 ),
                 radius: 15,
                 backgroundColor:
-                    SchedulerBinding.instance.window.platformBrightness ==
+                    SchedulerBinding.instance!.window.platformBrightness ==
                             Brightness.light
                         ? Colors.grey[100]
                         : Colors.grey[800],
@@ -77,7 +79,7 @@ class PodcastDetailPage extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                             side: BorderSide(
-                                color: Colors.grey[800],
+                                color: Colors.grey[800]!,
                                 width: 1.5,
                                 style: BorderStyle.solid)),
                         child: Text(true ? "follow" : "unfollow")),

@@ -1,16 +1,18 @@
+
+
 import 'package:flutter/material.dart';
 
 // Our Category List need StateFullWidget
 // I can use Provider on it, Then we dont need StatefulWidget
 
 class Categories extends StatefulWidget {
-  final PageController parentPageController;
-  final Color highlightColor;
-  final Color fontColor;
-  final Color fontFocusColor;
-  final List<String> categories;
+  final PageController? parentPageController;
+  final Color? highlightColor;
+  final Color? fontColor;
+  final Color? fontFocusColor;
+  final List<String>? categories;
   Categories(
-      {Key key,
+      {Key? key,
       this.parentPageController,
       this.categories,
       this.fontColor,
@@ -27,7 +29,7 @@ class CategoriesState extends State<Categories> {
   ScrollController listViewScrollController = new ScrollController();
 
   void changeCategoryIndex(int index) {
-    print(index >= widget.categories.length - 1);
+    print(index >= widget.categories!.length - 1);
     if (index == 0) {
       if (listViewScrollController.position.pixels > 0) {
         listViewScrollController.animateTo(0,
@@ -36,7 +38,7 @@ class CategoriesState extends State<Categories> {
                     (8 * listViewScrollController.position.pixels - 0).round()),
             curve: Curves.easeOut);
       }
-    } else if (index >= widget.categories.length - 1) {
+    } else if (index >= widget.categories!.length - 1) {
       if (listViewScrollController.position.maxScrollExtent >
           listViewScrollController.position.pixels) {
         print("true");
@@ -64,8 +66,8 @@ class CategoriesState extends State<Categories> {
         child: ListView.builder(
           controller: listViewScrollController,
           scrollDirection: Axis.horizontal,
-          itemCount: widget.categories.length + 1,
-          itemBuilder: (context, index) => index == widget.categories.length
+          itemCount: widget.categories!.length + 1,
+          itemBuilder: (context, index) => index == widget.categories!.length
               ? SizedBox(
                   width: 10,
                 )
@@ -79,11 +81,11 @@ class CategoriesState extends State<Categories> {
     return GestureDetector(
       onTap: () {
         if ((index - selectedIndex).abs() < 2) {
-          widget.parentPageController.animateToPage(index,
+          widget.parentPageController!.animateToPage(index,
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeIn);
         } else {
-          widget.parentPageController.jumpToPage(index);
+          widget.parentPageController!.jumpToPage(index);
         }
       },
       child: Container(
@@ -95,13 +97,13 @@ class CategoriesState extends State<Categories> {
         ),
         decoration: BoxDecoration(
             color: selectedIndex == index
-                ? Colors.brown[800].withOpacity(0.3)
+                ? Colors.brown[800]!.withOpacity(0.3)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(
               16, // 16
             )),
         child: Text(
-          widget.categories[index],
+          widget.categories![index],
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: selectedIndex == index ? Colors.black : Colors.grey[800],

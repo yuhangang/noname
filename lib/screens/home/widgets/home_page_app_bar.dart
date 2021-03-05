@@ -1,10 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:noname/screens/search_screen/seach_screen.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               "UTHOPIA",
               style:
-                  ThemeData.light().textTheme.headline1.copyWith(fontSize: 25),
+                  ThemeData.light().textTheme.headline1!.copyWith(fontSize: 25),
             ),
             SizedBox(
               width: 15,
@@ -51,7 +53,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               radius: 15,
               backgroundColor:
-                  SchedulerBinding.instance.window.platformBrightness ==
+                  SchedulerBinding.instance!.window.platformBrightness ==
                           Brightness.light
                       ? Colors.grey[100]
                       : Colors.grey[800],

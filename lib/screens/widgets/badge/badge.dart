@@ -10,7 +10,7 @@ class Badge extends StatefulWidget {
   final Widget child;
   final double elevation;
   final bool toAnimate;
-  final BadgePosition position;
+  final BadgePosition? position;
   final BadgeShape shape;
   final EdgeInsetsGeometry padding;
   final Duration animationDuration;
@@ -22,9 +22,8 @@ class Badge extends StatefulWidget {
   final BorderSide borderSide;
 
   Badge({
-    Key key,
-    this.badgeContent,
-    this.child,
+    this.badgeContent = const SizedBox(),
+    this.child = const SizedBox(),
     this.badgeColor = Colors.red,
     this.elevation = 2,
     this.toAnimate = true,
@@ -38,7 +37,7 @@ class Badge extends StatefulWidget {
     this.showBadge = true,
     this.ignorePointer = false,
     this.borderSide = BorderSide.none,
-  }) : super(key: key);
+  });
 
   @override
   BadgeState createState() {
@@ -47,8 +46,8 @@ class Badge extends StatefulWidget {
 }
 
 class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _animation;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   final Tween<Offset> _positionTween = Tween(
     begin: const Offset(-0.5, 0.9),
@@ -79,23 +78,19 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.child == null) {
-      return _getBadge();
-    } else {
-      return Stack(
-        alignment: widget.alignment,
-        clipBehavior: Clip.none,
-        children: [
-          widget.child,
-          BadgePositioned(
-            position: widget.position,
-            child: widget.ignorePointer
-                ? IgnorePointer(child: _getBadge())
-                : _getBadge(),
-          ),
-        ],
-      );
-    }
+    return Stack(
+      alignment: widget.alignment,
+      clipBehavior: Clip.none,
+      children: [
+        widget.child,
+        BadgePositioned(
+          position: widget.position,
+          child: widget.ignorePointer
+              ? IgnorePointer(child: _getBadge())
+              : _getBadge(),
+        ),
+      ],
+    );
   }
 
   Widget _getBadge() {
@@ -103,7 +98,7 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
         ? CircleBorder(side: widget.borderSide)
         : RoundedRectangleBorder(
             side: widget.borderSide,
-            borderRadius: widget.borderRadius ?? BorderRadius.zero,
+            borderRadius: widget.borderRadius,
           );
 
     Widget badgeView() {

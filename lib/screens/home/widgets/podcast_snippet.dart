@@ -1,10 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:noname/screens/home/widgets/stop_podcast_button.dart';
 import 'package:noname/screens/podcast/podcast_page.dart';
 
 class PodcastSnippet extends StatelessWidget {
   const PodcastSnippet({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -25,7 +27,7 @@ class PodcastSnippet extends StatelessWidget {
                     padding: EdgeInsets.all(0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap),
                 onPressed: () {
-                  Navigator.of(context).push(_createPodcastRoute());
+                  //Navigator.of(context).push(_createPodcastRoute());
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -53,22 +55,22 @@ class PodcastSnippet extends StatelessWidget {
   }
 }
 
-Route _createPodcastRoute() {
-  return PageRouteBuilder(
-    reverseTransitionDuration: const Duration(milliseconds: 200),
-    transitionDuration: const Duration(milliseconds: 200),
-    pageBuilder: (context, animation, secondaryAnimation) => PodcastPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(0.0, 1.0);
-      var end = Offset.zero;
-      var curve = Curves.easeOut;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
+//Route _createPodcastRoute() {
+//  return PageRouteBuilder(
+//    reverseTransitionDuration: const Duration(milliseconds: 200),
+//    transitionDuration: const Duration(milliseconds: 200),
+//    pageBuilder: (context, animation, secondaryAnimation) => PodcastPage(),
+//    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//      var begin = Offset(0.0, 1.0);
+//      var end = Offset.zero;
+//      var curve = Curves.easeOut;
+//
+//      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//
+//      return SlideTransition(
+//        position: animation.drive(tween),
+//        child: child,
+//      );
+//    },
+//  );
+//}

@@ -1,3 +1,5 @@
+
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -6,9 +8,9 @@ class NeumorphicBar extends StatefulWidget {
   GlobalKey<InnerContainerState> innerContainerState = new GlobalKey();
 
   NeumorphicBar(
-      {Key key,
-      @required this.width,
-      @required this.height,
+      {Key? key,
+      required this.width,
+      required this.height,
       value,
       this.onChange,
       this.text,
@@ -17,23 +19,23 @@ class NeumorphicBar extends StatefulWidget {
       : super(key: key) {
     this.value = value == null ? 30.0 : 100.0 - value;
   }
-  final LinearGradient linearGradient;
-  final Function onChange;
+  final LinearGradient? linearGradient;
+  final Function? onChange;
   final double width;
   final double height;
 
   /// Value from 1.0 to 0.0
-  double value;
+  double? value;
 
-  final String text;
-  final Color color;
+  final String? text;
+  final Color? color;
 
   @override
   _NeumorphicBarState createState() => _NeumorphicBarState();
 }
 
 class _NeumorphicBarState extends State<NeumorphicBar> {
-  double percentage = 0.0;
+  double? percentage = 0.0;
 
   double initial = 0.0;
   @override
@@ -46,7 +48,7 @@ class _NeumorphicBarState extends State<NeumorphicBar> {
   @override
   Widget build(BuildContext context) {
     final innerContainerWidth = widget.width * 0.95;
-    final innerContainerHeight = widget.height * (1 - percentage / 100) * 0.96;
+    final innerContainerHeight = widget.height * (1 - percentage! / 100) * 0.96;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -62,10 +64,10 @@ class _NeumorphicBarState extends State<NeumorphicBar> {
 
             setState(() {
               print('percentage ' +
-                  (percentage + percentageAddition)
+                  (percentage! + percentageAddition)
                       .clamp(0.0, 100.0)
                       .toString());
-              percentage = (percentage + percentageAddition)
+              percentage = (percentage! + percentageAddition)
                   .clamp(0.0, 100.0)
                   .roundToDouble();
 
@@ -100,7 +102,7 @@ class _NeumorphicBarState extends State<NeumorphicBar> {
         SizedBox(height: 10),
         if (widget.text != null)
           Text(
-            widget.text,
+            widget.text!,
             style: TextStyle(
               color: Colors.blueGrey[300],
             ),
@@ -112,17 +114,17 @@ class _NeumorphicBarState extends State<NeumorphicBar> {
 
 class InnerContainer extends StatefulWidget {
   InnerContainer(
-      {Key key,
-      @required this.height,
-      @required this.width,
+      {Key? key,
+      required this.height,
+      required this.width,
       this.color,
       this.linearGradient})
       : super(key: key);
 
   num height;
   num width;
-  final Color color;
-  final LinearGradient linearGradient;
+  final Color? color;
+  final LinearGradient? linearGradient;
 
   @override
   InnerContainerState createState() => InnerContainerState();
@@ -135,8 +137,8 @@ class InnerContainerState extends State<InnerContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final innerContainerWidth = widget.width * 0.95;
-    final innerContainerHeight = widget.height * (1 - _percentage / 100) * 0.96;
+    final num innerContainerWidth = widget.width * 0.95;
+    final num innerContainerHeight = widget.height * (1 - _percentage / 100) * 0.96;
 
     return Opacity(
       opacity: widget.height < widget.width * 0.85 / 1.5 ? 0 : 1,
@@ -179,9 +181,9 @@ class InnerContainerState extends State<InnerContainer> {
 
 class DugContainer extends StatelessWidget {
   const DugContainer({
-    Key key,
-    @required this.height,
-    @required this.width,
+    Key? key,
+    required this.height,
+    required this.width,
   }) : super(key: key);
   final num height;
   final num width;
@@ -191,15 +193,15 @@ class DugContainer extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: height * 600 / 896,
-        width: width,
+        width: width as double?,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: exteriorShadow,
+              color: exteriorShadow!,
               offset: Offset(0.0, 0.0),
             ),
             BoxShadow(
-              color: interiorShadow,
+              color: interiorShadow!,
               offset: Offset(0.0, 0.0),
               spreadRadius: -1.0,
               blurRadius: 11.0,
@@ -212,5 +214,5 @@ class DugContainer extends StatelessWidget {
   }
 }
 
-Color exteriorShadow = Colors.grey[400];
-Color interiorShadow = Colors.grey[200];
+Color? exteriorShadow = Colors.grey[400];
+Color? interiorShadow = Colors.grey[200];

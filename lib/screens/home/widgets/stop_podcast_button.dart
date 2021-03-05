@@ -1,8 +1,10 @@
+
+
 import 'package:flutter/material.dart';
 
 class StopPodcastButton extends StatelessWidget {
   const StopPodcastButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

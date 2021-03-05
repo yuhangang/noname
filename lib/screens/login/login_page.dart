@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter/gestures.dart';
@@ -12,7 +14,7 @@ import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = "/login-page";
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -25,7 +27,7 @@ class _LoginPageState extends State<LoginPage>
 
   TextEditingController usernameController = new TextEditingController();
 
-  FocusNode _focusNode;
+  FocusNode? _focusNode;
   String _passwordhintText = "Password";
   String _userNameHintText = "Your Username";
 

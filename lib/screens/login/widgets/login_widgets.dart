@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:noname/screens/home/home_page.dart';
 import 'package:noname/screens/intro_slider/intro_slider.dart';
-import 'package:noname/state/bloc/login/bloc_login_page.dart';
 
 import 'package:provider/provider.dart';
 
 class LoginFieldWithButton extends StatelessWidget {
   const LoginFieldWithButton({
-    Key key,
-    @required FocusNode focusNode,
-    @required this.passwordController,
-    @required String passwordhintText,
-  })  : _focusNode = focusNode,
+    Key? key,
+    required FocusNode? focusNode,
+    required this.passwordController,
+    required String passwordhintText,
+  })   : _focusNode = focusNode,
         _passwordhintText = passwordhintText,
         super(key: key);
 
-  final FocusNode _focusNode;
+  final FocusNode? _focusNode;
   final TextEditingController passwordController;
   final String _passwordhintText;
 
@@ -77,15 +76,15 @@ class LoginFieldWithButton extends StatelessWidget {
 
 class LoginTextField extends StatelessWidget {
   const LoginTextField({
-    Key key,
-    @required FocusNode focusNode,
-    @required this.usernameController,
-    @required String userNameHintText,
-  })  : _focusNode = focusNode,
+    Key? key,
+    required FocusNode? focusNode,
+    required this.usernameController,
+    required String userNameHintText,
+  })   : _focusNode = focusNode,
         _userNameHintText = userNameHintText,
         super(key: key);
 
-  final FocusNode _focusNode;
+  final FocusNode? _focusNode;
   final TextEditingController usernameController;
   final String _userNameHintText;
 
@@ -131,7 +130,7 @@ class LoginTextField extends StatelessWidget {
 
 class SkipLoginButton extends StatelessWidget {
   const SkipLoginButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -165,9 +164,9 @@ class SwapLoginRegister extends StatelessWidget {
   final String title;
 
   const SwapLoginRegister({
-    @required this.route,
-    @required this.title,
-    Key key,
+    required this.route,
+    required this.title,
+    Key? key,
   }) : super(key: key);
 
   @override
