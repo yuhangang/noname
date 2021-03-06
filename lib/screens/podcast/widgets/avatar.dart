@@ -1,9 +1,7 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:noname/constants/app_config.dart';
+import 'package:noname/commons/constants/app_config.dart';
 import 'package:noname/screens/widgets/badge/badge.dart';
 import 'package:noname/screens/widgets/badge/badge_position.dart';
 

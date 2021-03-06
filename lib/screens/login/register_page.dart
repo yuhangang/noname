@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/login/login_page.dart';
 import 'package:noname/screens/login/widgets/cupertino_radio_choice.dart';
 import 'package:noname/screens/login/widgets/login_widgets.dart';
@@ -63,7 +60,6 @@ class _RegisterPageState extends State<RegisterPage>
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(color: BackgroundColor.loginPageColor),
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

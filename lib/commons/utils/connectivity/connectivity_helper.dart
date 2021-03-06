@@ -1,11 +1,9 @@
-
-
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:noname/utils/toast/show_toast.dart';
+import 'package:noname/commons/utils/toast/show_toast.dart';
 
 class ConnectivityHelper {
   String _connectionStatus = 'Unknown';

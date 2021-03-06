@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/home/channel_screens.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
 import 'package:noname/screens/podcast/widgets/avatar.dart';
@@ -13,7 +10,6 @@ class PodcastDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor.mainPageColor,
       appBar: AppBar(
         toolbarHeight: 70,
 

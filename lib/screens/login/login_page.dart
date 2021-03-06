@@ -1,12 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter/gestures.dart';
 
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/login/register_page.dart';
 import 'package:noname/screens/login/widgets/login_widgets.dart';
 
@@ -53,7 +50,6 @@ class _LoginPageState extends State<LoginPage>
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(color: BackgroundColor.loginPageColor),
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:noname/constants/const_styles.dart';
 import 'package:noname/screens/home/channel_screens.dart';
 import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
@@ -21,7 +18,6 @@ class HomePage extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      backgroundColor: BackgroundColor.mainPageColor,
       appBar: HomePageAppBar(),
 
       body: Stack(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ToastHelper {
+abstract class ToastHelper {
   static void showNoInternetConnectionToast() =>
       showToast("Failed to connect to internet.");
   static void showIncorrectLoginToast() =>

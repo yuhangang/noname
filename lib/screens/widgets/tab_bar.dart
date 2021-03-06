@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 // Our Category List need StateFullWidget
@@ -29,19 +27,17 @@ class CategoriesState extends State<Categories> {
   ScrollController listViewScrollController = new ScrollController();
 
   void changeCategoryIndex(int index) {
-    print(index >= widget.categories!.length - 1);
-    if (index == 0) {
+    if (selectedIndex > index) {
       if (listViewScrollController.position.pixels > 0) {
         listViewScrollController.animateTo(0,
             duration: Duration(
                 milliseconds:
                     (8 * listViewScrollController.position.pixels - 0).round()),
-            curve: Curves.easeOut);
+            curve: Curves.easeOutExpo);
       }
-    } else if (index >= widget.categories!.length - 1) {
+    } else if (selectedIndex < index) {
       if (listViewScrollController.position.maxScrollExtent >
           listViewScrollController.position.pixels) {
-        print("true");
         listViewScrollController.animateTo(
             listViewScrollController.position.maxScrollExtent,
             duration: Duration(
@@ -49,7 +45,7 @@ class CategoriesState extends State<Categories> {
                     (8 * listViewScrollController.position.maxScrollExtent -
                             listViewScrollController.position.pixels)
                         .round()),
-            curve: Curves.easeOut);
+            curve: Curves.easeOutExpo);
       }
     }
     setState(() {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:noname/commons/constants/theme/theme.dart';
+import 'package:noname/navigation/routes.dart';
 import 'package:noname/screens/intro_slider/intro_slider.dart';
-import 'main/routes.dart';
-import 'package:noname/main/routes.dart';
-import 'package:noname/providers/counter.dart';
-import 'package:noname/styles/customSplashFactory.dart';
+import 'package:noname/state/providers/counter.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,22 +27,7 @@ class MyApp extends StatelessWidget {
         scaffoldMessengerKey: scaffoldMessengerKey,
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primaryColor: Colors.white,
-          accentColor: Colors.grey[400],
-          fontFamily: 'Open Sans',
-          splashColor: Colors.white,
-          splashFactory: NoSplashFactory(),
-          textTheme: TextTheme(
-            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-          ),
-          pageTransitionsTheme: PageTransitionsTheme(builders: {
-            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          }),
-        ),
+        theme: ThemeBuilder.buildThemeData(),
         initialRoute: IntroPage.route,
         routes: pageRoutes.routes,
       );

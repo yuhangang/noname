@@ -11,6 +11,7 @@ class ShowNotificationHelper {
           color: Colors.white,
           importance: Importance.max,
           priority: Priority.high,
+          largeIcon: const DrawableResourceAndroidBitmap('ic_logo_white_t'),
           ticker: 'ticker');
   final IOSNotificationDetails iOSPlatformChannelSpecifics =
       IOSNotificationDetails();
@@ -32,15 +33,6 @@ class ShowNotificationHelper {
     );
   }
 
-  Future<String> _downloadAndSaveFile(String url, String fileName) async {
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final String filePath = '${directory.path}/$fileName';
-    final http.Response response = await http.get(Uri(path: url));
-    final File file = File(filePath);
-    await file.writeAsBytes(response.bodyBytes);
-    return filePath;
-  }
-
   Future<void> _showNotificationNormal(
       {required int msgId,
       required String title,
@@ -51,8 +43,6 @@ class ShowNotificationHelper {
         android: (image != null)
             ? AndroidNotificationDetails('your channel id', 'your channel name',
                 'your channel description',
-                largeIcon: FilePathAndroidBitmap(
-                    await _downloadAndSaveFile(image, 'icon')),
                 color: Colors.white,
                 importance: Importance.max,
                 priority: Priority.max,

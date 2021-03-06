@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:noname/commons/utils/notification/notification_helper.dart';
 import 'package:noname/screens/intro_slider/widgets/slider.dart';
 import 'package:noname/screens/intro_slider/widgets/slider_item.dart';
 import 'package:noname/screens/intro_slider/widgets/dot_indicator/dot_indicator.dart';
@@ -16,6 +17,7 @@ class IntroPage extends HookWidget {
   Widget build(BuildContext context) {
     final index = useState<double>(0);
     Function onPageChanged2 = (idx) {
+      LocalNotificationHelper.showNotification(message: "from intro slider");
       index.value = idx.toDouble();
     };
 
