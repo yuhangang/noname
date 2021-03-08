@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 // Our Category List need StateFullWidget
 // I can use Provider on it, Then we dont need StatefulWidget
 
-class Categories extends StatefulWidget {
+class CustomTabBar extends StatefulWidget {
   final PageController? parentPageController;
   final Color? highlightColor;
   final Color? fontColor;
   final Color? fontFocusColor;
   final List<String>? categories;
-  Categories(
+  CustomTabBar(
       {Key? key,
       this.parentPageController,
       this.categories,
@@ -18,10 +18,10 @@ class Categories extends StatefulWidget {
       this.fontFocusColor})
       : super(key: key);
   @override
-  CategoriesState createState() => CategoriesState();
+  CustomTabBarState createState() => CustomTabBarState();
 }
 
-class CategoriesState extends State<Categories> {
+class CustomTabBarState extends State<CustomTabBar> {
   // By default first one is selected
   int selectedIndex = 0;
   ScrollController listViewScrollController = new ScrollController();
@@ -79,7 +79,7 @@ class CategoriesState extends State<Categories> {
         if ((index - selectedIndex).abs() < 2) {
           widget.parentPageController!.animateToPage(index,
               duration: const Duration(milliseconds: 500),
-              curve: Curves.easeIn);
+              curve: Curves.easeOutExpo);
         } else {
           widget.parentPageController!.jumpToPage(index);
         }
@@ -93,7 +93,7 @@ class CategoriesState extends State<Categories> {
         ),
         decoration: BoxDecoration(
             color: selectedIndex == index
-                ? Colors.brown[800]!.withOpacity(0.3)
+                ? Theme.of(context).primaryColorDark.withOpacity(0.3)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(
               16, // 16
@@ -102,7 +102,9 @@ class CategoriesState extends State<Categories> {
           widget.categories![index],
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: selectedIndex == index ? Colors.black : Colors.grey[800],
+            color: selectedIndex == index
+                ? Theme.of(context).primaryColorDark
+                : Theme.of(context).primaryColorDark.withOpacity(0.8),
           ),
         ),
       ),

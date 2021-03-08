@@ -1,5 +1,3 @@
-
-
 /*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -192,7 +190,7 @@ class __PageState extends State<_Page> {
 class NeumorphicRoundButton extends StatefulWidget {
   final IconData icon;
   final Function onPressed;
-  NeumorphicRoundButton({@required this.icon, this.onPressed});
+  NeumorphicRoundButton({required this.icon, this.onPressed});
   @override
   _NeumorphicRoundButtonState createState() => _NeumorphicRoundButtonState();
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:noname/screens/home/widgets/discover_tab.dart';
@@ -9,7 +7,7 @@ class ChannelScreen extends StatelessWidget {
   ScrollController listViewScrollController = new ScrollController();
 
   PageController pageController = PageController();
-  GlobalKey<CategoriesState> categoryState = new GlobalKey();
+  GlobalKey<CustomTabBarState> categoryState = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class ChannelScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       appBar: PreferredSize(
         preferredSize: Size(screenWidth, 60),
-        child: Categories(
+        child: CustomTabBar(
           key: categoryState,
           categories: ["All", "Internship", "Volunteer", "Full-Time"],
           parentPageController: pageController,
@@ -32,17 +30,17 @@ class ChannelScreen extends StatelessWidget {
         },
         children: [
           DiscoverTab(),
-          CareerListCategories(),
-          CareerListCategories(),
-          CareerListCategories(),
+          DiscoverTab(),
+          DiscoverTab(),
+          DiscoverTab(),
         ],
       ),
     );
   }
 }
 
-class CareerListCategories extends StatelessWidget {
-  const CareerListCategories({
+class CareerListCustomTabBar extends StatelessWidget {
+  const CareerListCustomTabBar({
     Key? key,
   }) : super(key: key);
 

@@ -1,7 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
+import 'package:noname/screens/account/account_page.dart';
 import 'package:noname/screens/search_screen/seach_screen.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -23,9 +23,9 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
         iconSize: 30,
         splashRadius: 25,
         padding: const EdgeInsets.all(10),
-        splashColor: Colors.white.withOpacity(0.3),
         onPressed: () {
-          Navigator.pushNamed(context, SearchScreen.route);
+          Navigator.of(context)
+              .push(CustomPageRoute.verticalTransition(SearchScreen()));
         },
         icon: Icon(
           Icons.search,
@@ -47,16 +47,21 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
             SizedBox(
               width: 15,
             ),
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://miro.medium.com/max/700/1*InbuykHMMQcVkNSC_uNp0A.png",
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, AccountPage.route);
+              },
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://miro.medium.com/max/700/1*InbuykHMMQcVkNSC_uNp0A.png",
+                ),
+                radius: 15,
+                backgroundColor:
+                    SchedulerBinding.instance!.window.platformBrightness ==
+                            Brightness.light
+                        ? Colors.grey[100]
+                        : Colors.grey[800],
               ),
-              radius: 15,
-              backgroundColor:
-                  SchedulerBinding.instance!.window.platformBrightness ==
-                          Brightness.light
-                      ? Colors.grey[100]
-                      : Colors.grey[800],
             ),
             SizedBox(
               width: 20,

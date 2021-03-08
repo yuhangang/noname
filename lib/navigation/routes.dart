@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:noname/screens/account/account_page.dart';
 import 'package:noname/screens/home/home_page.dart';
 import 'package:noname/screens/home/podcast_detail_screen.dart';
 import 'package:noname/screens/intro_slider/intro_slider.dart';
@@ -17,6 +16,7 @@ class PageRoutes {
         RegisterPage.route: (ctx) => RegisterPage(),
         PodcastDetailPage.route: (ctx) => PodcastDetailPage(),
         IntroPage.route: (ctx) => IntroPage(),
-        SearchScreen.route: (ctx) => SearchScreen()
+        SearchScreen.route: (ctx) => SearchScreen(),
+        AccountPage.route: (ctx) => AccountPage()
       };
 }

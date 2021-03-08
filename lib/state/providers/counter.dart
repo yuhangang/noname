@@ -24,13 +24,10 @@ class User {
   final String sId;
   String userName;
   String userEmail;
-  User({@required this.userName = "", @required this.userEmail = "", userId})
+  User({required this.userName, required this.userEmail, userId})
       : sId = userId ?? getId();
 
-  User._(
-      {@required this.userName = "",
-      @required this.userEmail = "",
-      @required userId})
+  User._({required this.userName, required this.userEmail, required userId})
       : sId = userId;
 
   factory User.fromJson(Map<String, dynamic> json) {

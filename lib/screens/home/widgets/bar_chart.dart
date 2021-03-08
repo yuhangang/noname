@@ -1,10 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 class PollBarChart extends StatefulWidget {
   List<Options> options;
   final List<Color> barColors;
@@ -79,7 +75,7 @@ class Options {
   String optionName;
   int count;
 
-  Options({@required this.optionName = "err", @required this.count = -1});
+  Options({required this.optionName, required this.count});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

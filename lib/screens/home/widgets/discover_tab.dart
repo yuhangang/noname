@@ -50,7 +50,7 @@ class DiscoverTab extends StatelessWidget {
           child: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.5),
+                color: Theme.of(context).primaryColor.withOpacity(0.5),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
