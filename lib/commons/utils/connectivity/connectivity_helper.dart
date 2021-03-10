@@ -41,7 +41,6 @@ class ConnectivityHelper {
         break;
       case ConnectivityResult.none:
         _connectionStatus = result.toString();
-        ToastHelper.showNoInternetConnectionToast();
         break;
       default:
         _connectionStatus = 'Failed to connected to Internet.';

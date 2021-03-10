@@ -1,5 +1,3 @@
-
-
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -11,19 +9,16 @@ class Constants {
   static const double avatarRadius = 45;
 }
 
-class CustomDialogBox extends StatefulWidget {
-  final String? title, descriptions, text;
+class PostCastSummaryDialog extends Dialog {
+  final String title, descriptions, text;
   final Image? img;
-
-  const CustomDialogBox(
-      {Key? key, this.title, this.descriptions, this.text, this.img})
+  const PostCastSummaryDialog(
+      {Key? key,
+      required this.title,
+      required this.descriptions,
+      required this.text,
+      this.img})
       : super(key: key);
-
-  @override
-  _CustomDialogBoxState createState() => _CustomDialogBoxState();
-}
-
-class _CustomDialogBoxState extends State<CustomDialogBox> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -31,7 +26,6 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
         borderRadius: BorderRadius.circular(Constants.padding),
       ),
       elevation: 0,
-      backgroundColor: Colors.transparent,
       child: contentBox(context),
     );
   }
@@ -40,7 +34,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.white,
+        //color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -57,7 +51,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             ),
           ),
           Text(
-            widget.title!,
+            title,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -74,7 +68,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Text(
-                      widget.descriptions!,
+                      descriptions,
                       style: TextStyle(fontSize: 14),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.fade,

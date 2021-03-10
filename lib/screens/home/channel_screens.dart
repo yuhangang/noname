@@ -17,8 +17,8 @@ class ChannelScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       appBar: PreferredSize(
         preferredSize: Size(screenWidth, 60),
-        child: CustomTabBar(
-          key: categoryState,
+        child: CategoryTabBar(
+          categoryState: categoryState,
           categories: ["All", "Internship", "Volunteer", "Full-Time"],
           parentPageController: pageController,
         ),

@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory.dart';
 
 abstract class ThemeBuilder {
-  static const colorThemeList = [Color(0xFFd0dfef)];
+  static const colorThemeList = [
+    //Color(0xFFd8d8d8),
+    Color(0xFFEAE7E2),
+    //Color(0xFFb0bec5),
+    //Color(0xFFFFFFFF),
+    //Color(0xFFFCFCFC)
+  ];
   static ThemeData buildThemeData(
       {required int themeColorIndex, required bool isDarkMode}) {
     return !isDarkMode
@@ -17,11 +23,13 @@ abstract class ThemeBuilder {
       accentColor: Colors.grey[400],
       fontFamily: 'Open Sans',
       splashColor: Colors.white,
-      canvasColor: Colors.blueGrey[300],
+      canvasColor: Color(0xFFCECBC6),
       dividerTheme: DividerThemeData(
           color: Colors.grey[400], indent: 15, endIndent: 15, space: 0),
       splashFactory: NoSplashFactory(),
       primaryTextTheme: TextTheme(button: TextStyle(color: Colors.grey[800])),
+      dialogBackgroundColor: Colors.white,
+      dialogTheme: DialogTheme(backgroundColor: Colors.white),
       appBarTheme: AppBarTheme(
           backgroundColor: Colors.transparent,
           brightness: Brightness.light,
@@ -49,6 +57,7 @@ abstract class ThemeBuilder {
         primaryColor: Colors.grey[800],
         primaryColorDark: Colors.white,
         scaffoldBackgroundColor: Color.fromRGBO(20, 20, 20, 1),
+        dialogTheme: DialogTheme(backgroundColor: Colors.grey[800]),
         appBarTheme: AppBarTheme(
             color: Colors.transparent,
             brightness: Brightness.dark,
@@ -71,6 +80,8 @@ abstract class ThemeBuilder {
               fontFamily: 'Hind',
               color: Color.fromRGBO(220, 220, 220, 1)),
         ),
+        dividerTheme: DividerThemeData(
+            color: Colors.grey[600], indent: 15, endIndent: 15, space: 0),
         iconTheme: IconThemeData(color: Colors.white),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(

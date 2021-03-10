@@ -1,7 +1,43 @@
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Our Category List need StateFullWidget
 // I can use Provider on it, Then we dont need StatefulWidget
+
+class CategoryTabBar extends StatelessWidget implements PreferredSizeWidget {
+  final GlobalKey<CustomTabBarState> categoryState;
+  final PageController parentPageController;
+  final Color? highlightColor;
+  final Color? fontColor;
+  final Color? fontFocusColor;
+  final List<String> categories;
+  @override
+  Size get preferredSize => new Size.fromHeight(55);
+
+  const CategoryTabBar(
+      {Key? key,
+      required this.categoryState,
+      required this.parentPageController,
+      required this.categories,
+      this.fontColor,
+      this.highlightColor,
+      this.fontFocusColor})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PreferredSize(
+      preferredSize: this.preferredSize,
+      child: CustomTabBar(
+        key: categoryState,
+        categories: ["All", "Internship", "Volunteer", "Full-Time"],
+        parentPageController: parentPageController,
+      ),
+    );
+  }
+}
 
 class CustomTabBar extends StatefulWidget {
   final PageController? parentPageController;
@@ -24,27 +60,29 @@ class CustomTabBar extends StatefulWidget {
 class CustomTabBarState extends State<CustomTabBar> {
   // By default first one is selected
   int selectedIndex = 0;
-  ScrollController listViewScrollController = new ScrollController();
+  ScrollController tabBarController = new ScrollController();
+  double widthPerItem = 100;
 
   void changeCategoryIndex(int index) {
     if (selectedIndex > index) {
-      if (listViewScrollController.position.pixels > 0) {
-        listViewScrollController.animateTo(0,
-            duration: Duration(
-                milliseconds:
-                    (8 * listViewScrollController.position.pixels - 0).round()),
+      if (tabBarController.position.pixels > 0) {
+        tabBarController.animateTo(
+            max(
+                tabBarController.position.pixels -
+                    widthPerItem * (selectedIndex - index),
+                0),
+            duration: Duration(milliseconds: (600 * (selectedIndex - index))),
             curve: Curves.easeOutExpo);
       }
     } else if (selectedIndex < index) {
-      if (listViewScrollController.position.maxScrollExtent >
-          listViewScrollController.position.pixels) {
-        listViewScrollController.animateTo(
-            listViewScrollController.position.maxScrollExtent,
-            duration: Duration(
-                milliseconds:
-                    (8 * listViewScrollController.position.maxScrollExtent -
-                            listViewScrollController.position.pixels)
-                        .round()),
+      if (tabBarController.position.maxScrollExtent >
+          tabBarController.position.pixels) {
+        tabBarController.animateTo(
+            min(
+                tabBarController.position.pixels +
+                    widthPerItem * (index - selectedIndex),
+                tabBarController.position.maxScrollExtent),
+            duration: Duration(milliseconds: (600 * (index - selectedIndex))),
             curve: Curves.easeOutExpo);
       }
     }
@@ -56,11 +94,11 @@ class CustomTabBarState extends State<CustomTabBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: 5),
       child: SizedBox(
         height: 35, // 35
         child: ListView.builder(
-          controller: listViewScrollController,
+          controller: tabBarController,
           scrollDirection: Axis.horizontal,
           itemCount: widget.categories!.length + 1,
           itemBuilder: (context, index) => index == widget.categories!.length
@@ -79,7 +117,7 @@ class CustomTabBarState extends State<CustomTabBar> {
         if ((index - selectedIndex).abs() < 2) {
           widget.parentPageController!.animateToPage(index,
               duration: const Duration(milliseconds: 500),
-              curve: Curves.easeOutExpo);
+              curve: Curves.easeOutCubic);
         } else {
           widget.parentPageController!.jumpToPage(index);
         }

@@ -19,20 +19,13 @@ class AccountPage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.all(0),
           children: [
-            Consumer(
-              builder: (context, watch, _) {
-                bool isDarkMode = watch(themeProvider).state.isDarkMode;
-
-                return SwitchItem(
-                  value: isDarkMode,
-                  title: "dark mode",
-                  onchange: (bool val) {
-                    context.read(themeProvider).switchDarkLightMode(val);
-                  },
-                );
+            SwitchItem(
+              value: context.read(themeProvider).state.isDarkMode,
+              title: "dark mode",
+              onchange: (bool val) {
+                context.read(themeProvider).switchDarkLightMode(val);
               },
             ),
-            Divider(),
             Divider(),
             SwitchItem(
               value: true,
@@ -84,7 +77,7 @@ class SwitchItem extends StatelessWidget {
         : IgnorePointer(
             child: ColorFiltered(
               colorFilter: ColorFilter.mode(
-                  Theme.of(context).accentColor.withOpacity(0.3),
+                  Theme.of(context).accentColor.withOpacity(0.2),
                   BlendMode.xor),
               child: buildSwitch(context),
             ),
