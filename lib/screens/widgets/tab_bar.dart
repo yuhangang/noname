@@ -93,20 +93,19 @@ class CustomTabBarState extends State<CustomTabBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      height: 45, // 35
       padding: EdgeInsets.symmetric(vertical: 5),
-      child: SizedBox(
-        height: 35, // 35
-        child: ListView.builder(
-          controller: tabBarController,
-          scrollDirection: Axis.horizontal,
-          itemCount: widget.categories!.length + 1,
-          itemBuilder: (context, index) => index == widget.categories!.length
-              ? SizedBox(
-                  width: 10,
-                )
-              : buildCategoriItem(index),
-        ),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: ListView.builder(
+        controller: tabBarController,
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.categories!.length + 1,
+        itemBuilder: (context, index) => index == widget.categories!.length
+            ? SizedBox(
+                width: 10,
+              )
+            : buildCategoriItem(index),
       ),
     );
   }

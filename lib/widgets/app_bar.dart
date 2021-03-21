@@ -7,8 +7,8 @@ import 'package:noname/screens/search_screen/seach_screen.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final List<Widget>? actions;
-  final String title;
-  const CustomAppBar({Key? key, this.leading, this.actions, this.title = ""})
+  final String? title;
+  const CustomAppBar({Key? key, this.leading, this.actions, this.title})
       : super(key: key);
 
   @override
@@ -37,9 +37,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
       // Here we take the value from the MyHomePage object that was created by
       // the App.build method, and use it to set our appbar title.
-      title: actions == null
+      title: title != null
           ? Text(
-              title,
+              title!,
               style: Theme.of(context).appBarTheme.titleTextStyle,
             )
           : null,

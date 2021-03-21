@@ -41,7 +41,7 @@ class ShowNotificationHelper {
       String? image}) async {
     NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: (image != null)
-            ? AndroidNotificationDetails('your channel id', 'your channel name',
+            ? AndroidNotificationDetails('default_channel', 'your channel name',
                 'your channel description',
                 color: Colors.white,
                 importance: Importance.max,
@@ -52,5 +52,56 @@ class ShowNotificationHelper {
 
     flutterLocalNotificationsPlugin!
         .show(msgId, title, body, platformChannelSpecifics, payload: payload);
+  }
+
+  Future<String> _downloadAndSaveFile(String url, String fileName) async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final String filePath = '${directory.path}/$fileName';
+    final http.Response response = await http.get(
+        Uri.https('iconspng.com', 'images/king-george-vi/king-george-vi.jpg'));
+    final File file = File(filePath);
+    await file.writeAsBytes(response.bodyBytes);
+    print("download file");
+    return filePath;
+  }
+
+  Future<void> showOngoingNotification(
+      {required String message, required String imageUrl}) async {
+    final String largeIconPath = await _downloadAndSaveFile(
+        'https://pbs.twimg.com/media/Et0-AVoXUAAsHab?format=png&name=4096x4096',
+        'largeIcon');
+    // this person object will use an icon that was downloaded
+    final Person lunchBot = Person(
+      name: 'Lunch bot',
+      key: 'bot',
+      bot: true,
+      icon: BitmapFilePathAndroidIcon(largeIconPath),
+    );
+
+    final BigPictureStyleInformation bigPictureStyleInformation =
+        BigPictureStyleInformation(FilePathAndroidBitmap(largeIconPath),
+            largeIcon: FilePathAndroidBitmap(largeIconPath),
+            contentTitle: 'overridden <b>big</b> content title',
+            htmlFormatContentTitle: true,
+            summaryText: 'summary <i>text</i>',
+            htmlFormatSummaryText: true);
+
+    AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+            'default_channel', 'your channel name', 'your channel description',
+            tag: "ongoing broadcast",
+            importance: Importance.max,
+            priority: Priority.high,
+            styleInformation: bigPictureStyleInformation,
+            ongoing: true,
+            ticker: "dsfew",
+            autoCancel: false);
+    NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin!.show(
+        123,
+        'ongoing notification title',
+        'ongoing notification body',
+        platformChannelSpecifics);
   }
 }

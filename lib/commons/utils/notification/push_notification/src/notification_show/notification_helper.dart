@@ -17,6 +17,12 @@ abstract class LocalNotificationHelper {
   static showLocalNotification({String message = "err"}) {
     notificationHelper.showNotification(message: message);
   }
+
+  static showOngoingNotification(
+      {required String message, required String imageUrl}) {
+    notificationHelper.showOngoingNotification(
+        message: message, imageUrl: imageUrl);
+  }
 }
 
 class NotificationHelper {
@@ -61,11 +67,21 @@ class NotificationHelper {
 
     selectNotificationSubject.stream.listen((String? payload) async {
       debugPrint('abcd notification payload: ${payload}');
-      NotificationNavigationHelper()
-          .navigateFromSelect(LoginPage.route, Get.key!.currentContext!);
+      //NotificationNavigationHelper()
+      //    .navigateFromSelect(LoginPage.route, Get.key!.currentContext!);
+      await flutterLocalNotificationsPlugin.cancel(123,
+          tag: 'ongoing broadcast');
     });
   }
+
   void showNotification({required String message}) {
     this.showNotificationHelper.showNotification(message);
+  }
+
+  void showOngoingNotification(
+      {required String message, required String imageUrl}) {
+    this
+        .showNotificationHelper
+        .showOngoingNotification(message: message, imageUrl: imageUrl);
   }
 }

@@ -32,11 +32,12 @@ dependencies:
   cupertino_icons: ^1.0.1
   fl_chart: ^0.20.1
   flex_color_picker: ^2.0.0-nullsafety.2
+  flutter_neumorphic: ^3.1.0
 
   #network
   html: ^0.15.0
   http: ^0.13.0
-  dio: ^4.0.0-beta4
+  dio: ^4.0.0-beta7
 
   #state
   flutter_bloc: ^7.0.0-nullsafety.3
@@ -55,6 +56,7 @@ dependencies:
   connectivity_plus: ^1.0.0
   shared_preferences: ^2.0.3
   device_info: ^2.0.0  
+  audio_service: ^0.17.0-nullsafety.0
 
   
 

@@ -1,9 +1,11 @@
-/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:noname/constants/const_styles.dart';
+import 'package:noname/commons/utils/notification/push_notification/push_notification.dart';
+import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_helper.dart';
+
 import 'package:noname/screens/podcast/widgets/avatar.dart';
+import 'package:noname/screens/podcast/widgets/rolling_stone.dart';
 
 class AudioPlayerSample extends StatefulWidget {
   @override
@@ -13,6 +15,10 @@ class AudioPlayerSample extends StatefulWidget {
 class _AudioPlayerSampleState extends State<AudioPlayerSample> {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(
+        Duration.zero,
+        () => LocalNotificationHelper.showOngoingNotification(
+            message: 'this message', imageUrl: "fdsf"));
     return NeumorphicTheme(
         themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(
@@ -41,7 +47,6 @@ class __PageState extends State<_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NeumorphicBackground(
-        backendColor: BackgroundColor.mainPageColor,
         child: Column(
           children: <Widget>[
             SafeArea(child: _buildTopBar(context)),
@@ -49,6 +54,7 @@ class __PageState extends State<_Page> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  RollingStone(),
                   _buildImage(context),
                   SizedBox(height: 20),
                   _buildTitle(context),
@@ -82,7 +88,7 @@ class __PageState extends State<_Page> {
               icon: Icon(
                 Icons.keyboard_arrow_down,
                 size: 35,
-                color: _iconsColor(),
+                color: Colors.black,
               ),
             ),
           ),
@@ -109,7 +115,7 @@ class __PageState extends State<_Page> {
               icon: Icon(
                 _follow ? Icons.favorite : Icons.favorite_border,
                 size: 25,
-                color: _follow ? Colors.red[600] : _iconsColor(),
+                color: _follow ? Colors.red[600] : Colors.grey,
               ),
             ),
           ),
@@ -176,20 +182,11 @@ class __PageState extends State<_Page> {
       ],
     );
   }
-
-  Color _iconsColor() {
-    final theme = NeumorphicTheme.of(context);
-    if (theme.isUsingDark) {
-      return theme.current.accentColor;
-    } else {
-      return null;
-    }
-  }
 }
 
 class NeumorphicRoundButton extends StatefulWidget {
   final IconData icon;
-  final Function onPressed;
+  final void Function()? onPressed;
   NeumorphicRoundButton({required this.icon, this.onPressed});
   @override
   _NeumorphicRoundButtonState createState() => _NeumorphicRoundButtonState();
@@ -208,18 +205,8 @@ class _NeumorphicRoundButtonState extends State<NeumorphicRoundButton> {
       child: Icon(
         widget.icon,
         size: 25,
-        color: _iconsColor(),
+        color: Colors.black,
       ),
     );
   }
-
-  Color _iconsColor() {
-    final theme = NeumorphicTheme.of(context);
-    if (theme.isUsingDark) {
-      return theme.current.accentColor;
-    } else {
-      return null;
-    }
-  }
 }
-*/

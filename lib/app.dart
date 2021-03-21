@@ -1,8 +1,11 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noname/commons/constants/theme/theme.dart';
 import 'package:noname/commons/utils/lifecycle/lifecycle_manager.dart';
 import 'package:noname/navigation/routes.dart';
+import 'package:noname/screens/home/home_page.dart';
+import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/intro_slider/intro_slider.dart';
 import 'package:noname/state/providers/counter.dart';
 import 'package:flutter/services.dart';
@@ -31,7 +34,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: theme.getTheme(),
           darkTheme: theme.getTheme(isSystemDarkMode: true),
-          initialRoute: IntroPage.route,
+          home: AudioServiceWidget(child: HomePage()),
           routes: pageRoutes.routes,
         );
       } as Widget Function(

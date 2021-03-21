@@ -25,10 +25,12 @@ class AvatarCustom {
   Widget buildAvatar({String? imgUrl}) => Container(
       height: this.size,
       width: this.size,
-      child: FadeInImage.assetNetwork(
-          placeholder: AppConfig.userImgPlaceHolderUrl,
-          image: imgUrl ?? this.url,
-          fit: fit));
+      child: ClipOval(
+        child: FadeInImage.assetNetwork(
+            placeholder: AppConfig.userImgPlaceHolderUrl,
+            image: imgUrl ?? this.url,
+            fit: fit),
+      ));
 
   Widget stackedAvatar({String? link1, String? link2}) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),

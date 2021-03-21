@@ -13,26 +13,32 @@ class ChannelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: PreferredSize(
-        preferredSize: Size(screenWidth, 60),
-        child: CategoryTabBar(
-          categoryState: categoryState,
-          categories: ["All", "Internship", "Volunteer", "Full-Time"],
-          parentPageController: pageController,
-        ),
-      ),
-      body: PageView(
-        controller: pageController,
-        onPageChanged: (index) {
-          categoryState.currentState!.changeCategoryIndex(index);
-        },
+    return Container(
+      child: Stack(
         children: [
-          DiscoverTab(),
-          DiscoverTab(),
-          DiscoverTab(),
-          DiscoverTab(),
+          Padding(
+            padding: const EdgeInsets.only(top: 45.0),
+            child: PageView(
+              controller: pageController,
+              onPageChanged: (index) {
+                categoryState.currentState!.changeCategoryIndex(index);
+              },
+              children: [
+                DiscoverTab(),
+                DiscoverTab(),
+                DiscoverTab(),
+                DiscoverTab(),
+              ],
+            ),
+          ),
+          PreferredSize(
+            preferredSize: Size(screenWidth, 60),
+            child: CategoryTabBar(
+              categoryState: categoryState,
+              categories: ["All", "Internship", "Volunteer", "Full-Time"],
+              parentPageController: pageController,
+            ),
+          ),
         ],
       ),
     );
