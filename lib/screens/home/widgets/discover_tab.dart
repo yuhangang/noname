@@ -25,7 +25,7 @@ class DiscoverTab extends StatelessWidget {
         },
         child: ListView(
           children: [
-            ...List.generate(4, (int index) => 5)
+            ...List.generate(8, (int index) => 5)
                 .map((e) => careerItem(context)),
             SizedBox(
               height: screenHeight / 10,

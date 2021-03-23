@@ -32,7 +32,7 @@ class CategoryTabBar extends StatelessWidget implements PreferredSizeWidget {
       preferredSize: this.preferredSize,
       child: CustomTabBar(
         key: categoryState,
-        categories: ["All", "Internship", "Volunteer", "Full-Time"],
+        categories: categories,
         parentPageController: parentPageController,
       ),
     );
@@ -98,6 +98,7 @@ class CustomTabBarState extends State<CustomTabBar> {
       padding: EdgeInsets.symmetric(vertical: 5),
       color: Theme.of(context).scaffoldBackgroundColor,
       child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
         controller: tabBarController,
         scrollDirection: Axis.horizontal,
         itemCount: widget.categories!.length + 1,

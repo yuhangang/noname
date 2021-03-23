@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
-import 'package:noname/screens/account/account_page.dart';
-import 'package:noname/screens/search_screen/seach_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
@@ -20,7 +16,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 45,
       automaticallyImplyLeading: false,
       elevation: 0,
-      backgroundColor: Colors.transparent,
+
+      backgroundColor:
+          Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
       leading: leading ??
           IconButton(
             iconSize: 30,

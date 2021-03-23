@@ -22,32 +22,29 @@ class AnimatedBottomNaviBar extends StatelessWidget {
         AnimatedBuilder(
           animation: bottomNaviController,
           builder: (_, child) {
-            return AnimatedContainer(
-              duration: Duration(milliseconds: 400),
-              child: SizeTransition(
-                axisAlignment: -1,
-                sizeFactor: bottomNaviController,
-                child: SizedBox(
-                  height: 54,
-                  child: BottomNavigationBar(
-                    key: bottomnavigationkey,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    currentIndex: index,
-                    onTap: onTapItem,
-                    elevation: 0,
-                    items: [
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.home), label: "dashboard"),
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.globe), label: "explore"),
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.news), label: "article"),
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.person), label: "me")
-                    ],
-                  ),
+            return SizeTransition(
+              axisAlignment: -1,
+              sizeFactor: bottomNaviController,
+              child: SizedBox(
+                height: 54,
+                child: BottomNavigationBar(
+                  key: bottomnavigationkey,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  currentIndex: index,
+                  onTap: onTapItem,
+                  elevation: 0,
+                  items: [
+                    BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.home), label: "dashboard"),
+                    BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
+                    BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.globe), label: "explore"),
+                    BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.news), label: "article"),
+                    BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.person), label: "me")
+                  ],
                 ),
               ),
             );

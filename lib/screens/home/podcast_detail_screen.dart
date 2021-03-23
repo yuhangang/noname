@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:noname/screens/home/views/channel_screens.dart';
+import 'package:noname/screens/search_screen/channel_screens.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
 import 'package:noname/screens/podcast/widgets/avatar.dart';
 
