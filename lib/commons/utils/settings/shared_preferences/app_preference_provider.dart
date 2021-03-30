@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:noname/state/providers/counter.dart';
+import 'package:noname/state/providers/auth_provider.dart';
+import 'package:noname/state/providers/todo_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreference {
@@ -9,26 +10,44 @@ class AppPreference {
   Color? colorsTheme;
 }
 
-class AppPreferenceProvider extends ChangeNotifier {
+abstract class AppPreferenceProvider extends ChangeNotifier {
   static const String _authentication = 'authentication';
+  static const String _todoList = 'todoList';
 
-  Future<User?> fetchSettings1() async {
+  static Future<User?> fetchSettings() async {
     var prefs = await SharedPreferences.getInstance();
-    User? user = ;
+
     try {
-      return User.fromJson(jsonDecode(prefs.getString('authentication') ?? ""));
+      return User.fromJson(jsonDecode(prefs.getString(_authentication) ?? ""));
     } catch (e) {
       return null;
     }
   }
 
-  Future<void> saveUserData(User userData) async {
+  static Future<void> saveUserData(User userData) async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setString(_authentication, jsonEncode(userData.toJson()));
   }
 
-  Future<void> removeUserData() async {
+  static Future<void> removeUserData() async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setString(_authentication, "");
+  }
+
+  static Future<void> saveTodoList(List<TodoTask> todos) async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        _todoList, jsonEncode(todos.map((e) => e.toJson()).toList()));
+  }
+
+  static Future<List<TodoTask>> fetchTodos() async {
+    var prefs = await SharedPreferences.getInstance();
+    try {
+      return List<TodoTask>.from(jsonDecode(prefs.getString(_todoList) ?? "")
+          .map((e) => TodoTask.fromJson(e)));
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
   }
 }

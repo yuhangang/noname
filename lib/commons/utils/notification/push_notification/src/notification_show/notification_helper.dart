@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_router.dart';
 import 'package:noname/commons/utils/notification/push_notification/src/notification_show/show_notification.dart';
 import 'package:noname/screens/login/login_page.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 late NotificationHelper notificationHelper;
 
@@ -20,6 +21,7 @@ abstract class LocalNotificationHelper {
 
   static showOngoingNotification(
       {required String message, required String imageUrl}) {
+    if (kIsWeb) return;
     notificationHelper.showOngoingNotification(
         message: message, imageUrl: imageUrl);
   }

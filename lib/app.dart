@@ -7,10 +7,12 @@ import 'package:noname/navigation/routes.dart';
 import 'package:noname/screens/home/home_page.dart';
 import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/intro_slider/intro_slider.dart';
-import 'package:noname/state/providers/counter.dart';
+import 'package:noname/screens/login/login_page.dart';
+import 'package:noname/state/providers/auth_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/theme_setting.dart';
+import 'package:noname/state/providers/globalProvider.dart';
+import 'package:noname/state/providers/theme_provider.dart';
 
 GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = new GlobalKey();
 
@@ -23,7 +25,9 @@ class MyApp extends StatelessWidget {
     return CoreManager(
       child: Consumer(
           builder: (context, watch, _) {
-        ThemeSetting theme = watch(themeProvider.state);
+        ThemeSetting theme = watch(GlobalProvider.themeProvider.state);
+        Auth auth = watch(GlobalProvider.authProvider.state);
+        print(auth.isAuth);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
         ));
@@ -34,7 +38,8 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: theme.getTheme(),
           darkTheme: theme.getTheme(isSystemDarkMode: true),
-          home: AudioServiceWidget(child: HomePage()),
+          home:
+              AudioServiceWidget(child: auth.isAuth ? HomePage() : LoginPage()),
           routes: pageRoutes.routes,
         );
       } as Widget Function(

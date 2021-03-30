@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/gestures.dart';
-
-import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:noname/screens/login/register_page.dart';
 import 'package:noname/screens/login/widgets/login_widgets.dart';
-
-import 'package:provider/provider.dart';
+import 'package:noname/state/providers/auth_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noname/state/providers/globalProvider.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = "/login-page";
@@ -75,9 +72,15 @@ class _LoginPageState extends State<LoginPage>
                     height: MediaQuery.of(context).size.height / 60,
                   ),
                   LoginFieldWithButton(
-                      focusNode: _focusNode,
-                      passwordController: passwordController,
-                      passwordhintText: _passwordhintText),
+                    focusNode: _focusNode,
+                    passwordController: passwordController,
+                    passwordhintText: _passwordhintText,
+                    onUserSubmit: () {
+                      context.read(GlobalProvider.authProvider).login(
+                          userName: usernameController.text,
+                          password: passwordController.text);
+                    },
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 30,
                   ),

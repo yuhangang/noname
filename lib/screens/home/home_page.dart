@@ -4,13 +4,17 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
 import 'package:noname/screens/account/account_page.dart';
+import 'package:noname/screens/add_todo/add_todo_screen.dart';
+import 'package:noname/screens/intro_slider/widgets/dot_indicator/dot_indicator.dart';
 import 'package:noname/screens/search_screen/channel_screens.dart';
 import 'package:noname/screens/home/views/trending_screens.dart';
 import 'package:noname/screens/home/widgets/animated_bottom_nav.dart';
 import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
-import 'package:noname/screens/search_screen/seach_screen.dart';
+import 'package:noname/screens/search_screen/search_screen.dart';
+import 'package:noname/screens/widgets/small_fab.dart';
 import 'package:noname/widgets/app_bar.dart';
+import 'package:noname/widgets/icon_button.dart';
 
 class HomePage extends StatefulWidget {
   static const route = "/home-page";
@@ -19,25 +23,20 @@ class HomePage extends StatefulWidget {
           {required String title}) =>
       CustomAppBar(
         title: title,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context)
-                .push(CustomPageRoute.verticalTransition(SearchScreen()));
-          },
-          icon: Icon(
-            CupertinoIcons.search,
-            color: Theme.of(context).primaryColorDark,
-          ),
-        ),
+        leading: null,
+        //leading: CustomIconButton(
+        //  onPressed: () {
+        //    Navigator.of(context)
+        //        .push(CustomPageRoute.verticalTransition(SearchScreen()));
+        //  },
+        //  icon: CupertinoIcons.search,
+        //),
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                  icon: Icon(
-                    CupertinoIcons.settings,
-                    color: Theme.of(context).primaryColorDark,
-                  ),
+              CustomIconButton(
+                  icon: CupertinoIcons.settings,
                   onPressed: () {
                     Navigator.pushNamed(context, AccountPage.route);
                   }),
@@ -66,19 +65,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     Container(
       child: Center(child: Text("ssf")),
     ),
-    Container(
-      child: Center(child: Text("ssf")),
-    ),
-    Container(
-      child: Center(child: Text("ssf")),
-    ),
+    AccountPage()
   ];
 
   static const List<String> titles = [
     'Dashboard',
     'Trending',
     "Page 3",
-    "Page 4",
     "Account"
   ];
 
@@ -100,6 +93,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           NotificationListener<UserScrollNotification>(
             onNotification: handleScrollActivityDetected,
@@ -134,7 +128,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 },
               ),
             ],
-          )
+          ),
+          SmallFAB(
+            icon: CupertinoIcons.search,
+            onTap: () => Navigator.of(context)
+                .push(CustomPageRoute.verticalTransition(SearchScreen())),
+            positionB: 220,
+            positionR: 15,
+            heroTag: 'Search Task',
+          ),
+          SmallFAB(
+            icon: CupertinoIcons.add,
+            onTap: () => Navigator.of(context)
+                .push(CustomPageRoute.verticalTransition(AddEditTodoScreen())),
+            positionB: 150,
+            positionR: 15,
+            heroTag: 'Add Task',
+          ),
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

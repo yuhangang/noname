@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/commons/constants/theme/theme.dart';
 
-final themeProvider = StateNotifierProvider((ref) {
-  return AppTheme();
-});
-
 class AppTheme extends StateNotifier<ThemeSetting> {
   AppTheme() : super(new ThemeSetting());
   void switchDarkLightMode(bool val) {

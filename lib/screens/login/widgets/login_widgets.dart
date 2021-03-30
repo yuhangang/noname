@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:noname/screens/home/home_page.dart';
-import 'package:noname/screens/intro_slider/intro_slider.dart';
-
-import 'package:provider/provider.dart';
 
 class LoginFieldWithButton extends StatelessWidget {
-  const LoginFieldWithButton({
-    Key? key,
-    required FocusNode? focusNode,
-    required this.passwordController,
-    required String passwordhintText,
-  })   : _focusNode = focusNode,
+  const LoginFieldWithButton(
+      {Key? key,
+      required FocusNode? focusNode,
+      required this.passwordController,
+      required String passwordhintText,
+      required this.onUserSubmit})
+      : _focusNode = focusNode,
         _passwordhintText = passwordhintText,
         super(key: key);
 
   final FocusNode? _focusNode;
   final TextEditingController passwordController;
   final String _passwordhintText;
+  final void Function() onUserSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +61,7 @@ class LoginFieldWithButton extends StatelessWidget {
                     color: Colors.white.withOpacity(0),
                   ),
                   child: Icon(Icons.navigate_next, size: 40)),
-              onPressed: () {
-                Navigator.pushNamed(context, HomePage.route);
-              },
+              onPressed: onUserSubmit,
             ),
           ],
         ),

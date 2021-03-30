@@ -6,6 +6,7 @@ import 'package:noname/commons/utils/notification/push_notification/src/notifica
 
 import 'package:noname/screens/podcast/widgets/avatar.dart';
 import 'package:noname/screens/podcast/widgets/rolling_stone.dart';
+import 'package:noname/widgets/icon_button.dart';
 
 class AudioPlayerSample extends StatefulWidget {
   @override
@@ -80,16 +81,11 @@ class __PageState extends State<_Page> {
         children: <Widget>[
           Align(
             alignment: Alignment.centerLeft,
-            child: IconButton(
-              padding: const EdgeInsets.all(8.0),
+            child: CustomIconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                size: 35,
-                color: Colors.black,
-              ),
+              icon: Icons.keyboard_arrow_down,
             ),
           ),
           Align(
@@ -102,8 +98,7 @@ class __PageState extends State<_Page> {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: IconButton(
-              padding: const EdgeInsets.all(15.0),
+            child: CustomIconButton(
               onPressed: () {
                 setState(() {
                   _follow = !_follow;
@@ -112,11 +107,9 @@ class __PageState extends State<_Page> {
                   //    _useDark ? ThemeMode.dark : ThemeMode.light;
                 });
               },
-              icon: Icon(
-                _follow ? Icons.favorite : Icons.favorite_border,
-                size: 25,
-                color: _follow ? Colors.red[600] : Colors.grey,
-              ),
+              icon: _follow ? Icons.favorite : Icons.favorite_border,
+              size: 25,
+              color: _follow ? Colors.red[600] : Colors.grey,
             ),
           ),
         ],

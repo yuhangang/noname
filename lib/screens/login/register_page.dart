@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:noname/screens/login/login_page.dart';
 import 'package:noname/screens/login/widgets/cupertino_radio_choice.dart';
 import 'package:noname/screens/login/widgets/login_widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:noname/state/providers/auth_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noname/state/providers/globalProvider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String route = "/register-page";
@@ -102,9 +104,16 @@ class _RegisterPageState extends State<RegisterPage>
                     height: MediaQuery.of(context).size.height / 60,
                   ),
                   LoginFieldWithButton(
-                      focusNode: _focusNode,
-                      passwordController: passwordController,
-                      passwordhintText: _passwordhintText),
+                    focusNode: _focusNode,
+                    passwordController: passwordController,
+                    passwordhintText: _passwordhintText,
+                    onUserSubmit: () {
+                      context.read(GlobalProvider.authProvider).register(
+                          userEmail: userEmailController.text,
+                          userName: usernameController.text,
+                          password: passwordController.text);
+                    },
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 30,
                   ),

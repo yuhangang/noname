@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:noname/screens/home/widgets/discover_tab.dart';
+import 'package:noname/screens/search_screen/search_screen_tab.dart';
 import 'package:noname/screens/widgets/categories_tab_bar.dart';
 
 class ChannelScreen extends StatelessWidget {
@@ -24,8 +24,8 @@ class ChannelScreen extends StatelessWidget {
                 categoryState.currentState!.changeCategoryIndex(index);
               },
               children: [
-                DiscoverTab(),
-                DiscoverTab(),
+                ScreenScreenTab(),
+                ScreenScreenTab(),
               ],
             ),
           ),

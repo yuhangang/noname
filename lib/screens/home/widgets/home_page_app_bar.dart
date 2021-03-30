@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
 import 'package:noname/screens/account/account_page.dart';
-import 'package:noname/screens/search_screen/seach_screen.dart';
+import 'package:noname/screens/search_screen/search_screen.dart';
+import 'package:noname/widgets/icon_button.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({
@@ -19,18 +21,12 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leading: IconButton(
-        iconSize: 30,
-        splashRadius: 25,
-        padding: const EdgeInsets.all(10),
+      leading: CustomIconButton(
         onPressed: () {
           Navigator.of(context)
               .push(CustomPageRoute.verticalTransition(SearchScreen()));
         },
-        icon: Icon(
-          Icons.search,
-          color: Colors.black,
-        ),
+        icon: CupertinoIcons.search,
       ),
       // Here we take the value from the MyHomePage object that was created by
       // the App.build method, and use it to set our appbar title.

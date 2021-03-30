@@ -33,6 +33,8 @@ class AnimatedBottomNaviBar extends StatelessWidget {
                   currentIndex: index,
                   onTap: onTapItem,
                   elevation: 0,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
                   items: [
                     BottomNavigationBarItem(
                         icon: Icon(CupertinoIcons.home), label: "dashboard"),
@@ -40,8 +42,6 @@ class AnimatedBottomNaviBar extends StatelessWidget {
                         icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
                     BottomNavigationBarItem(
                         icon: Icon(CupertinoIcons.globe), label: "explore"),
-                    BottomNavigationBarItem(
-                        icon: Icon(CupertinoIcons.news), label: "article"),
                     BottomNavigationBarItem(
                         icon: Icon(CupertinoIcons.person), label: "me")
                   ],
