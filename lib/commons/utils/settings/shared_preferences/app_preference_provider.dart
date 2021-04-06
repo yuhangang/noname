@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:noname/state/providers/auth_provider.dart';
-import 'package:noname/state/providers/todo_provider.dart';
+import 'package:noname/state/providers/global/auth/auth_provider.dart';
+
+import 'package:noname/state/providers/global/todo/src/todo_models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreference {

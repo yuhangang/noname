@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/screens/home/home_page.dart';
-import 'package:noname/state/providers/globalProvider.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
 
 class AccountPage extends StatelessWidget {
   static const route = "/account-page";
@@ -110,12 +110,14 @@ class SwitchButtonItem extends StatelessWidget {
   bool disabled;
   bool value;
   final String title;
+  TextStyle? titleStyle;
   SwitchButtonItem(
       {Key? key,
       required this.value,
       this.disabled = false,
       this.title = "NaN",
-      this.onchange})
+      this.onchange,
+      this.titleStyle})
       : super(key: key);
 
   @override
@@ -136,18 +138,21 @@ class SwitchButtonItem extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
                 child: Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: Text(title))),
+                    child: Text(
+                      title,
+                      style: titleStyle,
+                    ))),
             const SizedBox(
               width: 10,
             ),
-            CupertinoSwitch(
+            Switch(
               value: this.value,
               onChanged: this.onchange ?? (bool val) {},
               activeColor: Theme.of(context).canvasColor,

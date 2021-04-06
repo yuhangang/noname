@@ -4,7 +4,7 @@ import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory
 abstract class ThemeBuilder {
   static const colorThemeList = [
     //Color(0xFFD8CDB4),
-    Color(0xFFEEEBDD),
+    Color(0xFFFFFCF0),
     //Color(0xFFb0bec5),
     //Color(0xFFFFFFFF),
     //Color(0xFFFCFCFC)
@@ -18,7 +18,7 @@ abstract class ThemeBuilder {
 
   static ThemeData lightTheme(bool isDarkMode, int themeColorIndex) {
     return ThemeData(
-        colorScheme: ColorScheme.light(primary: Color(0xFFE6C043)),
+        colorScheme: ColorScheme.light(primary: Color(0xFFF7D158)),
         brightness: Brightness.light,
         primaryColor: Colors.white,
         primaryColorDark: Colors.grey[800],
@@ -44,7 +44,7 @@ abstract class ThemeBuilder {
               ),
             ])),
         textSelectionTheme:
-            TextSelectionThemeData(cursorColor: Color(0xFF635E4D)),
+            TextSelectionThemeData(cursorColor: Color(0xFF4D4A41)),
         scaffoldBackgroundColor: colorThemeList[themeColorIndex],
         textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(

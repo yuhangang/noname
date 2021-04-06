@@ -13,6 +13,7 @@ import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
 import 'package:noname/screens/search_screen/search_screen.dart';
 import 'package:noname/screens/widgets/small_fab.dart';
+import 'package:noname/screens/workspaces_screen/workspaces_screen.dart';
 import 'package:noname/widgets/app_bar.dart';
 import 'package:noname/widgets/icon_button.dart';
 
@@ -31,18 +32,7 @@ class HomePage extends StatefulWidget {
         //  },
         //  icon: CupertinoIcons.search,
         //),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomIconButton(
-                  icon: CupertinoIcons.settings,
-                  onPressed: () {
-                    Navigator.pushNamed(context, AccountPage.route);
-                  }),
-            ],
-          )
-        ],
+        actions: [],
       );
 
   @override
@@ -61,7 +51,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   final List<Widget> childPage = [
     TrendingScreen(),
-    TrendingScreen(),
+    WorkSpacesScreen(),
     Container(
       child: Center(child: Text("ssf")),
     ),
@@ -70,7 +60,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   static const List<String> titles = [
     'Dashboard',
-    'Trending',
+    'Workspaces',
     "Page 3",
     "Account"
   ];

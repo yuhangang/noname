@@ -8,7 +8,12 @@ import android.content.Context
 import android.graphics.Color
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity() {
+
+import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugins.GeneratedPluginRegistrant
+
+class MainActivity: FlutterFragmentActivity() {
 
      override fun onCreate(savedInstanceState: Bundle?) {
      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {  
@@ -22,8 +27,14 @@ class MainActivity: FlutterActivity() {
         notificationManager.createNotificationChannel(mChannel)
      }
      super.onCreate(savedInstanceState);
+
+    
     
 }
+
+ override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine)
+    }
 
 
 }

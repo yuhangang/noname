@@ -35,13 +35,13 @@ dependencies:
   flex_color_picker: ^2.0.0-nullsafety.2
   flutter_neumorphic: ^3.1.0
 
+
   #network
   html: ^0.15.0
   http: ^0.13.0
   dio: ^4.0.0-beta7
 
   #state
-  flutter_bloc: ^7.0.0-nullsafety.3
   provider: ^5.0.0-nullsafety.5
   flutter_riverpod: ^0.13.0-nullsafety.3
   flutter_hooks: ^0.16.0
@@ -61,6 +61,9 @@ dependencies:
   audio_service: ^0.17.0-nullsafety.0
   uuid: ^3.0.3
   intl: ^0.17.0
+  sqflite: ^2.0.0+3
+  file_picker: ^3.0.1
+  local_auth: ^1.1.1
 
   
 

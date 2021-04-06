@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:noname/screens/login/register_page.dart';
 import 'package:noname/screens/login/widgets/login_widgets.dart';
-import 'package:noname/state/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/globalProvider.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:local_auth/local_auth.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = "/login-page";
@@ -41,6 +41,16 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
+    var localAuth = LocalAuthentication();
+    localAuth
+        .authenticate(localizedReason: '', biometricOnly: true)
+        .then((value) {
+      if (value) {
+        context
+            .read(GlobalProvider.authProvider)
+            .login(userName: 'abcd', password: "1234");
+      }
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: null,

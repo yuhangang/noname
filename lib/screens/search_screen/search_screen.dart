@@ -9,6 +9,7 @@ import 'package:noname/widgets/icon_button.dart';
 
 class SearchScreen extends StatelessWidget {
   static const String route = "/search_screen";
+  FocusNode _focusNode = new FocusNode();
   final searchProvider = StateNotifierProvider.autoDispose((ref) {
     return SearchProvider();
   });
@@ -22,6 +23,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    Future.delayed(Duration.zero, () => _focusNode.requestFocus());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -42,12 +44,19 @@ class SearchScreen extends StatelessWidget {
                         },
                       ),
                       Expanded(
-                          child: CupertinoSearchTextField(
-                        controller: _searchController,
-                        onChanged: (val) => onSearchFieldChanged(val, context),
-                        itemSize: 25,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            5.8, 10, 5, 10),
+                          child: Theme(
+                        data: Theme.of(context).copyWith(
+                            colorScheme: Theme.of(context).colorScheme.copyWith(
+                                primary: Theme.of(context).primaryColorDark)),
+                        child: CupertinoSearchTextField(
+                          controller: _searchController,
+                          focusNode: _focusNode,
+                          onChanged: (val) =>
+                              onSearchFieldChanged(val, context),
+                          itemSize: 25,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              5.8, 10, 5, 10),
+                        ),
                       )),
                     ],
                   ),

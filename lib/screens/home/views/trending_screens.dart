@@ -10,8 +10,9 @@ import 'package:noname/screens/home/podcast_detail_screen.dart';
 import 'package:noname/screens/podcast/neumorphic_player.dart';
 import 'package:noname/screens/search_screen/search_screen.dart';
 import 'package:noname/screens/widgets/categories_tab_bar.dart';
-import 'package:noname/state/providers/globalProvider.dart';
-import 'package:noname/state/providers/todo_provider.dart';
+import 'package:noname/state/providers/global/todo/todo_provider.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
+
 import 'package:noname/widgets/icon_button.dart';
 
 class TrendingScreen extends StatelessWidget {

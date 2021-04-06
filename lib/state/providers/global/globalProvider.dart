@@ -1,8 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/commons/utils/settings/shared_preferences/app_preference_provider.dart';
-import 'package:noname/state/providers/auth_provider.dart';
-import 'package:noname/state/providers/theme_provider.dart';
-import 'package:noname/state/providers/todo_provider.dart';
+import 'package:noname/state/providers/global/auth/auth_provider.dart';
+import 'package:noname/state/providers/global/todo/todo_provider.dart';
+import 'package:noname/state/providers/global/theme/theme_provider.dart';
+export 'auth/auth_provider.dart';
+export 'todo/todo_provider.dart';
+export 'theme/theme_provider.dart';
 
 late final _GlobalProviderInstances instance;
 

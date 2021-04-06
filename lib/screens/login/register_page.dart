@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:noname/screens/login/login_page.dart';
 import 'package:noname/screens/login/widgets/cupertino_radio_choice.dart';
 import 'package:noname/screens/login/widgets/login_widgets.dart';
-import 'package:noname/state/providers/auth_provider.dart';
+import 'package:noname/state/providers/global/auth/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/globalProvider.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String route = "/register-page";

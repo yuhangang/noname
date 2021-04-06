@@ -1,35 +1,50 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/globalProvider.dart';
-import 'package:noname/state/providers/todo_provider.dart';
-
-enum EditTodoError { titleEmptyError, startDateEmptyError }
-
-extension ParseToString on EditTodoError {
-  String get str {
-    switch (this) {
-      case EditTodoError.titleEmptyError:
-        return "title is empty";
-      case EditTodoError.startDateEmptyError:
-        return "start date unselected";
-    }
-  }
-}
+import 'package:noname/state/providers/global/todo/todo_provider.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:noname/state/providers/local/edit_todo/src/edit_todo_enums.dart';
+import 'package:noname/state/providers/local/edit_todo/src/edit_todo_models.dart';
+export 'src/edit_todo_enums.dart';
+export 'src/edit_todo_models.dart';
 
 class EditTodoProvider extends StateNotifier<EditTodoState> {
   EditTodoProvider({DateTime? startDate, DateTime? endDate, TodoTask? todoTask})
       : super(new EditTodoState(
             startDate: startDate, endDate: endDate, todoTask: todoTask));
-  void changeStartDate({DateTime? startDate, DateTime? endDate}) {
+  void changeStartDate({DateTime? startDate}) {
     bool? shouldChangeStartDate;
     if (startDate != null && state.noStartDateError == false)
       shouldChangeStartDate = true;
     state = state.copyWith(
-        startDate: startDate,
-        endDate: endDate,
-        noStartDateError: shouldChangeStartDate);
+        startDate: startDate, noStartDateError: shouldChangeStartDate);
+    print(this._verifiedStartnEndDate());
   }
 
+  void changeEndDate({required DateTime? endDate}) {
+    state = state.copyWith(endDate: endDate);
+    print(this._verifiedStartnEndDate());
+  }
+
+  bool _verifiedStartnEndDate() {
+    if (state.startDate != null && state.endDate != null) {
+      if (state.startDate!.isAfter(state.endDate!)) {
+        if (state.noStartAfterEndError) {
+          state = state.copyWith(noStartAfterEndError: false);
+        }
+
+        return false;
+      } else if (!state.noStartAfterEndError) {
+        state = state.copyWith(noStartAfterEndError: true);
+      }
+    }
+    return true;
+  }
+
+  void switchNotificationTiming(NotificationTiming timing) =>
+      state = state.copyWith(notificationTiming: timing);
+  void switchNotificationMode() =>
+      state = state.copyWith(showNotification: !state.showNotification);
+  void clearEndDate() => state = state.copyWith(removeEndDate: true);
   void clearTitleError() => state = state.copyWith(noTitleError: true);
   void clearStartDateError() => state = state.copyWith(noStartDateError: true);
 
@@ -37,20 +52,20 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
       {required String title, required String description}) async {
     bool validTitle = title.length > 0;
     bool validStartDate = state.startDate != null;
+    bool startBeforeEnd = this._verifiedStartnEndDate();
 
-    if (!validTitle || !validStartDate) {
+    if (!validTitle || !validStartDate || !startBeforeEnd) {
       state = state.copyWith(
           noTitleError: validTitle, noStartDateError: validStartDate);
       if (!validTitle) throw EditTodoError.titleEmptyError.str;
       if (!validStartDate) throw EditTodoError.startDateEmptyError.str;
+      if (!startBeforeEnd) throw EditTodoError.stateAfterEndError;
     }
 
     if (state.todoTask == null) {
-      print("create");
-      _createTodoTask(context, title: title, description: description);
+      this._createTodoTask(context, title: title, description: description);
     } else {
-      print("add");
-      _changeTodoTask(context,
+      this._changeTodoTask(context,
           title: title, description: description, todoId: state.todoTask!.id);
     }
   }
@@ -73,35 +88,5 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
         description: description,
         startTime: state.startDate ?? DateTime.now(),
         endTime: state.endDate);
-  }
-}
-
-class EditTodoState {
-  EditTodoState(
-      {this.startDate,
-      this.endDate,
-      this.titleError,
-      this.noStartDateError = true,
-      this.todoTask});
-  DateTime? startDate;
-  DateTime? endDate;
-  String? titleError;
-  bool noStartDateError;
-  final TodoTask? todoTask;
-
-  EditTodoState copyWith(
-      {DateTime? startDate,
-      DateTime? endDate,
-      bool? noTitleError,
-      bool? noStartDateError}) {
-    return new EditTodoState(
-        startDate: startDate ?? this.startDate,
-        endDate: endDate ?? this.endDate,
-        titleError: noTitleError != null
-            ? noTitleError
-                ? null
-                : EditTodoError.titleEmptyError.str
-            : this.titleError,
-        noStartDateError: noStartDateError ?? this.noStartDateError);
   }
 }

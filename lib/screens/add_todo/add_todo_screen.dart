@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory.dart';
 import 'package:noname/commons/utils/toast/show_toast.dart';
+import 'package:noname/screens/add_todo/widgets/edit_todo_fields.dart';
 import 'package:noname/screens/widgets/small_fab.dart';
-import 'package:noname/state/providers/local/edit_todo_provider.dart';
-import 'package:noname/state/providers/todo_provider.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
+
+import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
+
 import 'package:noname/widgets/app_bar.dart';
-import 'package:intl/intl.dart';
 
 class AddEditTodoScreen extends StatelessWidget {
   final bool isNew;
@@ -55,8 +57,7 @@ class AddEditTodoScreen extends StatelessWidget {
           body: SafeArea(
             child: Stack(
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Stack(
                   children: [
                     EditTodoFields(
                         titleController: titleController,
@@ -65,57 +66,84 @@ class AddEditTodoScreen extends StatelessWidget {
                         isNew: isNew,
                         editTodoProvider: editTodoProvider,
                         screenWidth: screenWidth),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        children: [
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                                splashFactory: NoSplashFactory(),
-                                side: BorderSide(
-                                    color: Theme.of(context).primaryColorDark),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)))),
-                            child: Center(
-                                child: Text(
-                              "SAVE",
-                              style: Theme.of(context).textTheme.bodyText1,
-                            )),
-                            onPressed: () {
-                              context
-                                  .read(editTodoProvider)
-                                  .onSubmit(context,
-                                      title: titleController.text,
-                                      description: descriptionController.text)
-                                  .then((value) {
-                                Navigator.of(context).pop();
-                              }).onError((error, stackTrace) {
-                                ToastHelper.showToast(error.toString());
-                              });
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.all(20.0),
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  stops: [
+                                0,
+                                0.3,
+                                1
+                              ],
+                                  colors: [
+                                Theme.of(context)
+                                    .scaffoldBackgroundColor
+                                    .withOpacity(0.0),
+                                Theme.of(context)
+                                    .scaffoldBackgroundColor
+                                    .withOpacity(0.95),
+                                Theme.of(context).scaffoldBackgroundColor
+                              ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                    splashFactory: NoSplashFactory(),
+                                    side: BorderSide(
+                                        color:
+                                            Theme.of(context).primaryColorDark),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50)))),
+                                child: Center(
+                                    child: Text(
+                                  "SAVE",
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                )),
+                                onPressed: () {
+                                  context
+                                      .read(editTodoProvider)
+                                      .onSubmit(context,
+                                          title: titleController.text,
+                                          description:
+                                              descriptionController.text)
+                                      .then((value) {
+                                    Navigator.of(context).pop();
+                                  }).onError((error, stackTrace) {});
 
-                              //context.read(GlobalProvider.todoProvider).addTodo(
-                              //    TodoTask(
-                              //        title: "new title",
-                              //        description: '',
-                              //        startTime: DateTime.now()));
-                            },
+                                  //context.read(GlobalProvider.todoProvider).addTodo(
+                                  //    TodoTask(
+                                  //        title: "new title",
+                                  //        description: '',
+                                  //        startTime: DateTime.now()));
+                                },
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  splashFactory: NoSplashFactory(),
+                                ),
+                                child: Text(
+                                  "DISCARD",
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
                           ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              splashFactory: NoSplashFactory(),
-                            ),
-                            child: Text(
-                              "DISCARD",
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 SmallFAB(
@@ -151,14 +179,13 @@ class AddEditTodoScreen extends StatelessWidget {
               ),
             ),
             border: new OutlineInputBorder(
-              borderSide: BorderSide.none,
+              gapPadding: 0,
+              borderSide: BorderSide(color: Color(0xFFC7C7C7), width: 2),
               borderRadius: const BorderRadius.all(
                 const Radius.circular(10.0),
               ),
             ),
-            fillColor: Theme.of(context).brightness == Brightness.light
-                ? Colors.black.withOpacity(0.05)
-                : Colors.black.withOpacity(0.3)));
+            fillColor: Colors.transparent));
   }
 
   Future<dynamic> showDatePickerDIalog(BuildContext context) {
@@ -229,199 +256,5 @@ class AddEditTodoScreen extends StatelessWidget {
 
   void showToastOnDiscard() {
     if (isNew) ToastHelper.showToast("Saved changes as draft");
-  }
-}
-
-class EditTodoFields extends StatelessWidget {
-  const EditTodoFields({
-    Key? key,
-    required this.titleController,
-    required this.node,
-    required this.descriptionController,
-    required this.isNew,
-    required this.editTodoProvider,
-    required this.screenWidth,
-  }) : super(key: key);
-
-  final TextEditingController titleController;
-  final FocusScopeNode node;
-  final TextEditingController descriptionController;
-  final bool isNew;
-  final AutoDisposeStateNotifierProvider<EditTodoProvider> editTodoProvider;
-  final double screenWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Consumer(
-            builder: (context, watch, child) {
-              String? errTitle = watch(editTodoProvider.state).titleError;
-              return TextFormField(
-                  controller: titleController,
-                  onEditingComplete: () => node.nextFocus(),
-                  onChanged: (str) {
-                    if (errTitle != null) {
-                      context.read(editTodoProvider).clearTitleError();
-                    }
-                  },
-                  decoration: InputDecoration(
-                      hintText: "Title (Required)", errorText: errTitle));
-            },
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            scrollPadding: EdgeInsets.all(8),
-            controller: descriptionController,
-            decoration: InputDecoration(hintText: "Description"),
-            minLines: 5,
-            maxLines: null,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          AddTodoDateWidget(
-              isNew: isNew,
-              editTodoProvider: editTodoProvider,
-              screenWidth: screenWidth),
-        ],
-      ),
-    );
-  }
-}
-
-class AddTodoDateWidget extends StatelessWidget {
-  const AddTodoDateWidget({
-    Key? key,
-    required this.isNew,
-    required this.editTodoProvider,
-    required this.screenWidth,
-  }) : super(key: key);
-
-  final bool isNew;
-  final AutoDisposeStateNotifierProvider<EditTodoProvider> editTodoProvider;
-  final double screenWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-        borderRadius: BorderRadius.circular(3),
-        onTap: () {
-          DateTime? selectedTime;
-          showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: isNew ? DateTime.now() : DateTime(2000),
-            lastDate: DateTime(2025),
-          ).then((value) {
-            selectedTime = value;
-            showTimePicker(context: context, initialTime: TimeOfDay.now())
-                .then((value) {
-              if (selectedTime != null && value != null) {
-                selectedTime = new DateTime(
-                    selectedTime!.year,
-                    selectedTime!.month,
-                    selectedTime!.day,
-                    value.hour,
-                    value.minute,
-                    selectedTime!.second,
-                    selectedTime!.millisecond,
-                    selectedTime!.microsecond);
-                context
-                    .read(editTodoProvider)
-                    .changeStartDate(startDate: selectedTime);
-              }
-            });
-          });
-
-          //showDatePickerDIalog(context);
-        },
-        child: Consumer(
-          builder: (context, watch, child) {
-            EditTodoState todoState = watch(editTodoProvider.state);
-            return Container(
-              width: screenWidth,
-              decoration: BoxDecoration(
-                  border: todoState.noStartDateError
-                      ? null
-                      : Border.all(color: Colors.red),
-                  borderRadius: BorderRadius.circular(3),
-                  color: Theme.of(context).primaryColorDark.withOpacity(0.04)),
-              height: 50,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(
-                      CupertinoIcons.calendar,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
-                  ),
-                  Expanded(
-                      child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Start",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5!
-                                  .copyWith(fontSize: 16),
-                            ),
-                            Text(
-                              todoState.startDate != null
-                                  ? DateFormat("yyyy-MM-dd HH:mm")
-                                      .format(todoState.startDate!)
-                                  : "required",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "End",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5!
-                                  .copyWith(fontSize: 16),
-                            ),
-                            Text(
-                              todoState.startDate != null
-                                  ? DateFormat("yyyy-MM-dd HH:mm")
-                                      .format(todoState.startDate!)
-                                  : " - ",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )),
-                ],
-              ),
-            );
-          },
-        ));
   }
 }
