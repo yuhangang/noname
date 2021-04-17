@@ -17,7 +17,8 @@ class FileUploaderButton extends StatelessWidget {
   }) : super(key: key);
 
   final bool isNew;
-  final AutoDisposeStateNotifierProvider<EditTodoProvider> editTodoProvider;
+  final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
+      editTodoProvider;
   final double screenWidth;
 
   @override
@@ -39,7 +40,7 @@ class FileUploaderButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(3),
       child: Consumer(
         builder: (context, watch, child) {
-          EditTodoState todoState = watch(editTodoProvider.state);
+          EditTodoState todoState = watch(editTodoProvider);
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

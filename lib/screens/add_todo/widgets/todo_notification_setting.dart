@@ -12,13 +12,14 @@ class TodoNotificationSettings extends StatelessWidget {
     required this.editTodoProvider,
   }) : super(key: key);
 
-  final AutoDisposeStateNotifierProvider<EditTodoProvider> editTodoProvider;
+  final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
+      editTodoProvider;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, watch, child) {
-        EditTodoState editTodoState = watch(editTodoProvider.state);
+        EditTodoState editTodoState = watch(editTodoProvider);
 
         return Column(
           children: [
@@ -27,8 +28,9 @@ class TodoNotificationSettings extends StatelessWidget {
               title: "Notification",
               titleStyle:
                   Theme.of(context).textTheme.headline5!.copyWith(fontSize: 16),
-              onchange: (val) =>
-                  context.read(editTodoProvider).switchNotificationMode(),
+              onchange: (val) => context
+                  .read(editTodoProvider.notifier)
+                  .switchNotificationMode(),
             ),
             SizedBox(
               height: 10,
@@ -59,7 +61,7 @@ class TodoNotificationSettings extends StatelessWidget {
                         onChanged: (newValue) {
                           if (newValue != null)
                             context
-                                .read(editTodoProvider)
+                                .read(editTodoProvider.notifier)
                                 .switchNotificationTiming(newValue);
                         },
                         popupBackgroundColor: Color(0xFF36302E),

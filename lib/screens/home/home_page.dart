@@ -7,7 +7,7 @@ import 'package:noname/screens/account/account_page.dart';
 import 'package:noname/screens/add_todo/add_todo_screen.dart';
 import 'package:noname/screens/intro_slider/widgets/dot_indicator/dot_indicator.dart';
 import 'package:noname/screens/search_screen/channel_screens.dart';
-import 'package:noname/screens/home/views/trending_screens.dart';
+import 'package:noname/screens/home/views/dashboard_screens.dart';
 import 'package:noname/screens/home/widgets/animated_bottom_nav.dart';
 import 'package:noname/screens/home/widgets/home_page_app_bar.dart';
 import 'package:noname/screens/home/widgets/podcast_snippet.dart';
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool isAnimatedShow = false;
 
   final List<Widget> childPage = [
-    TrendingScreen(),
+    DashBoardScreen(),
     WorkSpacesScreen(),
     Container(
       child: Center(child: Text("ssf")),
@@ -81,6 +81,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -119,22 +121,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ],
           ),
-          SmallFAB(
-            icon: CupertinoIcons.search,
-            onTap: () => Navigator.of(context)
-                .push(CustomPageRoute.verticalTransition(SearchScreen())),
-            positionB: 220,
-            positionR: 15,
-            heroTag: 'Search Task',
-          ),
-          SmallFAB(
-            icon: CupertinoIcons.add,
-            onTap: () => Navigator.of(context)
-                .push(CustomPageRoute.verticalTransition(AddEditTodoScreen())),
-            positionB: 150,
-            positionR: 15,
-            heroTag: 'Add Task',
-          ),
+          SafeArea(
+            child: Stack(
+              children: [
+                SmallFAB(
+                  icon: CupertinoIcons.search,
+                  onTap: () => Navigator.of(context)
+                      .push(CustomPageRoute.verticalTransition(SearchScreen())),
+                  bottom: isPortrait ? 220 : null,
+                  top: !isPortrait ? 0 : null,
+                  right: isPortrait ? 15 : 75,
+                  heroTag: 'Search Task',
+                ),
+                SmallFAB(
+                  icon: CupertinoIcons.add,
+                  onTap: () => Navigator.of(context).push(
+                      CustomPageRoute.verticalTransition(AddEditTodoScreen())),
+                  bottom: isPortrait ? 150 : null,
+                  top: !isPortrait ? 0 : null,
+                  right: isPortrait ? 15 : 15,
+                  heroTag: 'Search Task',
+                ),
+              ],
+            ),
+          )
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

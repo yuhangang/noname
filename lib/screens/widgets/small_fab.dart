@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 class SmallFAB extends StatelessWidget {
   final IconData icon;
   final void Function() onTap;
-  final double positionR;
-  final double positionB;
+  final double? right;
+  final double? bottom;
+  final double? top;
+  final double? left;
   final String heroTag;
   const SmallFAB({
     required this.icon,
     required this.onTap,
-    required this.positionB,
-    required this.positionR,
+    this.bottom,
+    this.right,
+    this.top,
+    this.left,
     required this.heroTag,
     Key? key,
   }) : super(key: key);
@@ -18,8 +22,8 @@ class SmallFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      right: this.positionR,
-      bottom: this.positionB,
+      right: this.right,
+      bottom: this.bottom,
       child: FloatingActionButton(
         heroTag: Text(this.heroTag),
         elevation: 1,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory.dart';
+import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_helper.dart';
 import 'package:noname/commons/utils/toast/show_toast.dart';
 import 'package:noname/screens/add_todo/widgets/edit_todo_fields.dart';
 import 'package:noname/screens/widgets/small_fab.dart';
@@ -14,13 +15,15 @@ import 'package:noname/widgets/app_bar.dart';
 class AddEditTodoScreen extends StatelessWidget {
   final bool isNew;
   final TodoTask? todoTask;
-  late final AutoDisposeStateNotifierProvider<EditTodoProvider>
+  late final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
       editTodoProvider;
 
   AddEditTodoScreen({TodoTask? todoTask})
       : this.isNew = todoTask == null,
         this.todoTask = todoTask {
-    this.editTodoProvider = StateNotifierProvider.autoDispose((ref) {
+    this.editTodoProvider =
+        StateNotifierProvider.autoDispose<EditTodoProvider, EditTodoState>(
+            (ref) {
       return todoTask != null
           ? EditTodoProvider(
               todoTask: todoTask,
@@ -41,19 +44,18 @@ class AddEditTodoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final node = FocusScope.of(context);
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
       onWillPop: () async {
         this.showToastOnDiscard();
+        LocalNotificationHelper.showNotification(message: "from intro slider");
         return true;
       },
       child: Theme(
         data: addTodoTheme(context),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: CustomAppBar(
-            title: this.isNew ? "New Task" : "Edit Task",
-            onBackCalledBack: this.showToastOnDiscard,
-          ),
           body: SafeArea(
             child: Stack(
               children: [
@@ -91,9 +93,15 @@ class AddEditTodoScreen extends StatelessWidget {
                               ],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.end,
+                          child: Flex(
+                            direction:
+                                isPortrait ? Axis.vertical : Axis.horizontal,
+                            crossAxisAlignment: isPortrait
+                                ? CrossAxisAlignment.center
+                                : CrossAxisAlignment.end,
+                            mainAxisAlignment: isPortrait
+                                ? MainAxisAlignment.end
+                                : MainAxisAlignment.center,
                             children: [
                               OutlinedButton(
                                 style: OutlinedButton.styleFrom(
@@ -104,14 +112,19 @@ class AddEditTodoScreen extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(50)))),
-                                child: Center(
-                                    child: Text(
-                                  "SAVE",
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                )),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Center(
+                                      child: Text(
+                                    "SAVE",
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  )),
+                                ),
                                 onPressed: () {
                                   context
-                                      .read(editTodoProvider)
+                                      .read(editTodoProvider.notifier)
                                       .onSubmit(context,
                                           title: titleController.text,
                                           description:
@@ -127,17 +140,22 @@ class AddEditTodoScreen extends StatelessWidget {
                                   //        startTime: DateTime.now()));
                                 },
                               ),
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  splashFactory: NoSplashFactory(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    splashFactory: NoSplashFactory(),
+                                  ),
+                                  child: Text(
+                                    "DISCARD",
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
                                 ),
-                                child: Text(
-                                  "DISCARD",
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
                               ),
                             ],
                           ),
@@ -149,8 +167,8 @@ class AddEditTodoScreen extends StatelessWidget {
                 SmallFAB(
                     icon: Icons.menu_open,
                     onTap: () {},
-                    positionB: 200,
-                    positionR: 15,
+                    bottom: 200,
+                    right: 15,
                     heroTag: 'Options')
               ],
             ),
@@ -245,7 +263,7 @@ class AddEditTodoScreen extends StatelessWidget {
                     initialCalendarMode: DatePickerMode.day,
                     onDateChanged: (DateTime time) {
                       context
-                          .read(editTodoProvider)
+                          .read(editTodoProvider.notifier)
                           .changeStartDate(startDate: time);
                     }),
               ],

@@ -18,11 +18,11 @@ class AccountPage extends StatelessWidget {
             Consumer(
               builder: (_, watch, child) {
                 return SwitchButtonItem(
-                  value: watch(GlobalProvider.themeProvider.state).isDarkMode,
+                  value: watch(GlobalProvider.themeProvider).isDarkMode,
                   title: "dark mode",
                   onchange: (bool val) {
                     context
-                        .read(GlobalProvider.themeProvider)
+                        .read(GlobalProvider.themeProvider.notifier)
                         .switchDarkLightMode(val);
                   },
                 );
@@ -37,7 +37,7 @@ class AccountPage extends StatelessWidget {
               title: 'Sign Out',
               icon: Icon(Icons.logout),
               onTapItem: () {
-                context.read(GlobalProvider.authProvider).signOut();
+                context.read(GlobalProvider.authProvider.notifier).signOut();
               },
             )
           ],

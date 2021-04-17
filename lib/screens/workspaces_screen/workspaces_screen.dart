@@ -10,13 +10,15 @@ import 'package:noname/widgets/icon_button.dart';
 class WorkSpacesScreen extends StatelessWidget {
   final bool isNew;
   final TodoTask? todoTask;
-  late final AutoDisposeStateNotifierProvider<EditTodoProvider>
+  late final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
       editTodoProvider;
 
   WorkSpacesScreen({TodoTask? todoTask})
       : this.isNew = todoTask == null,
         this.todoTask = todoTask {
-    this.editTodoProvider = StateNotifierProvider.autoDispose((ref) {
+    this.editTodoProvider =
+        StateNotifierProvider.autoDispose<EditTodoProvider, EditTodoState>(
+            (ref) {
       return todoTask != null
           ? EditTodoProvider(
               todoTask: todoTask,

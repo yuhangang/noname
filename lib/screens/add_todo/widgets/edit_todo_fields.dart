@@ -22,7 +22,8 @@ class EditTodoFields extends StatelessWidget {
   final FocusScopeNode node;
   final TextEditingController descriptionController;
   final bool isNew;
-  final AutoDisposeStateNotifierProvider<EditTodoProvider> editTodoProvider;
+  final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
+      editTodoProvider;
   final double screenWidth;
 
   @override
@@ -34,13 +35,15 @@ class EditTodoFields extends StatelessWidget {
           children: [
             Consumer(
               builder: (context, watch, child) {
-                String? errTitle = watch(editTodoProvider.state).titleError;
+                String? errTitle = watch(editTodoProvider).titleError;
                 return TextFormField(
                     controller: titleController,
                     onEditingComplete: () => node.nextFocus(),
                     onChanged: (str) {
                       if (errTitle != null) {
-                        context.read(editTodoProvider).clearTitleError();
+                        context
+                            .read(editTodoProvider.notifier)
+                            .clearTitleError();
                       }
                     },
                     decoration: InputDecoration(

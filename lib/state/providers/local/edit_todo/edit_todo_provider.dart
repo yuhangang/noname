@@ -72,7 +72,7 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
 
   Future<void> _createTodoTask(BuildContext context,
       {required String title, required String description}) async {
-    context.read(GlobalProvider.todoProvider).addTodo(new TodoTask(
+    context.read(GlobalProvider.todoProvider.notifier).addTodo(new TodoTask(
         title: title,
         description: description,
         startTime: state.startDate ?? DateTime.now(),
@@ -83,7 +83,7 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
       {required String title,
       required String description,
       required String todoId}) async {
-    context.read(GlobalProvider.todoProvider).changeToDoTask(todoId,
+    context.read(GlobalProvider.todoProvider.notifier).changeToDoTask(todoId,
         title: title,
         description: description,
         startTime: state.startDate ?? DateTime.now(),

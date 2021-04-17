@@ -20,32 +20,33 @@ abstract class GlobalProvider {
     instance = new _GlobalProviderInstances(user: user);
   }
 
-  static StateNotifierProvider<AuthenticationProvider> get authProvider =>
+  static StateNotifierProvider<AuthenticationProvider, Auth> get authProvider =>
       instance.authProvider;
 
-  static StateNotifierProvider<AppTheme> get themeProvider =>
+  static StateNotifierProvider<AppTheme, ThemeSetting> get themeProvider =>
       instance.themeProvider;
 
-  static StateNotifierProvider<TodoProvider> get todoProvider =>
+  static StateNotifierProvider<TodoProvider, TodoList> get todoProvider =>
       instance.todoProvider;
 }
 
 class _GlobalProviderInstances {
   _GlobalProviderInstances({required User? user}) {
-    this.authProvider = StateNotifierProvider((ref) {
+    this.authProvider =
+        StateNotifierProvider<AuthenticationProvider, Auth>((ref) {
       return AuthenticationProvider(Auth(user: user));
     });
   }
 
-  late final StateNotifierProvider<AuthenticationProvider> authProvider;
+  late final StateNotifierProvider<AuthenticationProvider, Auth> authProvider;
 
-  final StateNotifierProvider<AppTheme> themeProvider =
-      StateNotifierProvider((ref) {
+  final StateNotifierProvider<AppTheme, ThemeSetting> themeProvider =
+      StateNotifierProvider<AppTheme, ThemeSetting>((ref) {
     return AppTheme();
   });
 
-  final StateNotifierProvider<TodoProvider> todoProvider =
-      StateNotifierProvider((ref) {
+  final StateNotifierProvider<TodoProvider, TodoList> todoProvider =
+      StateNotifierProvider<TodoProvider, TodoList>((ref) {
     return TodoProvider();
   });
 }

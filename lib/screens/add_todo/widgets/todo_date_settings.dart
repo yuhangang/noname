@@ -14,14 +14,15 @@ class AddTodoDateWidget extends StatelessWidget {
   }) : super(key: key);
 
   final bool isNew;
-  final AutoDisposeStateNotifierProvider<EditTodoProvider> editTodoProvider;
+  final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
+      editTodoProvider;
   final double screenWidth;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        EditTodoState todoState = watch(editTodoProvider.state);
+        EditTodoState todoState = watch(editTodoProvider);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +55,7 @@ class AddTodoDateWidget extends StatelessWidget {
                             onTap: () => onTapDatePicker(context,
                                 callBack: (DateTime selectedTime) {
                               context
-                                  .read(editTodoProvider)
+                                  .read(editTodoProvider.notifier)
                                   .changeStartDate(startDate: selectedTime);
                             }),
                             child: Padding(
@@ -94,14 +95,16 @@ class AddTodoDateWidget extends StatelessWidget {
                                 bottomRight: Radius.circular(3)),
                             onLongPress: () {
                               if (todoState.endDate != null) {
-                                context.read(editTodoProvider).clearEndDate();
+                                context
+                                    .read(editTodoProvider.notifier)
+                                    .clearEndDate();
                                 ToastHelper.showToast('End Date cleared');
                               }
                             },
                             onTap: () => onTapDatePicker(context,
                                 callBack: (DateTime? selectedTime) {
                               context
-                                  .read(editTodoProvider)
+                                  .read(editTodoProvider.notifier)
                                   .changeEndDate(endDate: selectedTime);
                             }),
                             child: Padding(

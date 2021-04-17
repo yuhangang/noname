@@ -43,9 +43,9 @@ dependencies:
 
   #state
   provider: ^5.0.0-nullsafety.5
-  flutter_riverpod: ^0.13.0-nullsafety.3
+  flutter_riverpod: ^0.14.0
   flutter_hooks: ^0.16.0
-  hooks_riverpod: ^0.13.1+1
+  hooks_riverpod: ^0.14.0
   get: ^4.0.0-nullsafety.2
 
   #notification

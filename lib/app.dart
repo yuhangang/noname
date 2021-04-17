@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
     return CoreManager(
       child: Consumer(
           builder: (context, watch, _) {
-        ThemeSetting theme = watch(GlobalProvider.themeProvider.state);
-        Auth auth = watch(GlobalProvider.authProvider.state);
+        ThemeSetting theme = watch(GlobalProvider.themeProvider);
+        Auth auth = watch(GlobalProvider.authProvider);
         print(auth.isAuth);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,

@@ -54,6 +54,7 @@ class _LifeCycleManagerState extends State<LifeCycleManager>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     _log.fine('App life cycle change to $state');
+    debugPrint(state.toString());
     servicesToManage.forEach((service) {
       if (state == AppLifecycleState.resumed) {
         service.start();

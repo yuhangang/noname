@@ -12,8 +12,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Future.wait(
-      [GlobalProvider.setup(), nonWebSetup(), UUidGenerator.setup()]);
+  await Future.wait([GlobalProvider.setup(), nonWebSetup()]);
 
   ConnectivityHelper connectivityHelper = new ConnectivityHelper();
 
@@ -22,10 +21,9 @@ void main() async {
 
 Future<void> nonWebSetup() async {
   if (!kIsWeb) {
-    await LocalNotificationHelper.setup();
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    //await SystemChrome.setPreferredOrientations([
+    //  DeviceOrientation.portraitUp,
+    //  DeviceOrientation.portraitDown,
+    //]);
   }
 }

@@ -6,28 +6,35 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_router.dart';
 import 'package:noname/commons/utils/notification/push_notification/src/notification_show/show_notification.dart';
-import 'package:noname/screens/login/login_page.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
-late NotificationHelper notificationHelper;
+class LocalNotificationHelper {
+  static final LocalNotificationHelper instance =
+      LocalNotificationHelper._privateConstructor();
 
-abstract class LocalNotificationHelper {
-  static Future<void> setup() async =>
-      notificationHelper = NotificationHelper();
+  LocalNotificationHelper._privateConstructor() {
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsIOS);
+    selectNotificationSubject = new StreamController<String>();
 
-  static showLocalNotification({String message = "err"}) {
-    notificationHelper.showNotification(message: message);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelect);
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+    showNotificationHelper = new ShowNotificationHelper(
+        flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin);
+    selectNotificationSubject.stream.listen((String? payload) async {
+      debugPrint('abcd notification payload: ${payload}');
+      //NotificationNavigationHelper()
+      //    .navigateFromSelect(LoginPage.route, Get.key!.currentContext!);
+      await flutterLocalNotificationsPlugin.cancel(123,
+          tag: 'ongoing broadcast');
+    });
   }
 
-  static showOngoingNotification(
-      {required String message, required String imageUrl}) {
-    if (kIsWeb) return;
-    notificationHelper.showOngoingNotification(
-        message: message, imageUrl: imageUrl);
-  }
-}
-
-class NotificationHelper {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   final AndroidInitializationSettings initializationSettingsAndroid =
@@ -50,40 +57,13 @@ class NotificationHelper {
       playSound: true,
       ledColor: Colors.white);
 
-  NotificationHelper() {
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS);
-    selectNotificationSubject = new StreamController<String>();
-
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelect);
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
-
-    showNotificationHelper = new ShowNotificationHelper(
-        flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin);
-
-    selectNotificationSubject.stream.listen((String? payload) async {
-      debugPrint('abcd notification payload: ${payload}');
-      //NotificationNavigationHelper()
-      //    .navigateFromSelect(LoginPage.route, Get.key!.currentContext!);
-      await flutterLocalNotificationsPlugin.cancel(123,
-          tag: 'ongoing broadcast');
-    });
+  static void showNotification({required String message}) {
+    instance.showNotificationHelper.showNotification(message);
   }
 
-  void showNotification({required String message}) {
-    this.showNotificationHelper.showNotification(message);
-  }
-
-  void showOngoingNotification(
+  static void showOngoingNotification(
       {required String message, required String imageUrl}) {
-    this
-        .showNotificationHelper
+    instance.showNotificationHelper
         .showOngoingNotification(message: message, imageUrl: imageUrl);
   }
 }

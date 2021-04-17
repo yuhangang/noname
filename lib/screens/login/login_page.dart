@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage>
         .then((value) {
       if (value) {
         context
-            .read(GlobalProvider.authProvider)
+            .read(GlobalProvider.authProvider.notifier)
             .login(userName: 'abcd', password: "1234");
       }
     });
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage>
                     passwordController: passwordController,
                     passwordhintText: _passwordhintText,
                     onUserSubmit: () {
-                      context.read(GlobalProvider.authProvider).login(
+                      context.read(GlobalProvider.authProvider.notifier).login(
                           userName: usernameController.text,
                           password: passwordController.text);
                     },

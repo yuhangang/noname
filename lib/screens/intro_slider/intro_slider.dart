@@ -17,8 +17,6 @@ class IntroPage extends HookWidget {
   Widget build(BuildContext context) {
     final index = useState<double>(0);
     Function onPageChanged2 = (idx) {
-      LocalNotificationHelper.showLocalNotification(
-          message: "from intro slider");
       index.value = idx.toDouble();
     };
 

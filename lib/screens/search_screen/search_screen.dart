@@ -10,14 +10,14 @@ import 'package:noname/widgets/icon_button.dart';
 class SearchScreen extends StatelessWidget {
   static const String route = "/search_screen";
   FocusNode _focusNode = new FocusNode();
-  final searchProvider = StateNotifierProvider.autoDispose((ref) {
+  final searchProvider = StateNotifierProvider.autoDispose<SearchProvider, SearchState>((ref) {
     return SearchProvider();
   });
   final TextEditingController _searchController = new TextEditingController();
   final _debouncer = Debouncer(delay: Duration(milliseconds: 0));
 
   void onSearchFieldChanged(String val, BuildContext context) {
-    _debouncer.call(() => context.read(searchProvider).fetchData(val));
+    _debouncer.call(() => context.read(searchProvider.notifier).fetchData(val));
   }
 
   @override
@@ -66,7 +66,7 @@ class SearchScreen extends StatelessWidget {
             ),
             Consumer(
               builder: (context, watch, child) {
-                return watch(searchProvider.state).isFetching
+                return watch(searchProvider).isFetching
                     ? Center(child: CircularProgressIndicator())
                     : SizedBox();
               },

@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 45,
+      toolbarHeight: 40,
       automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor:
@@ -32,6 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       //),
       // Here we take the value from the MyHomePage object that was created by
       // the App.build method, and use it to set our appbar title.
+      centerTitle: leading == null ? true : false,
       title: title != null
           ? Text(
               title!,
