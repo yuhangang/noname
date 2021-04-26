@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noname/screens/podcast/widgets/podcast_summary_dialog.dart';
+import 'package:noname/views/podcast/widgets/podcast_summary_dialog.dart';
 
 abstract class AlertDialogHelper {
   AlertDialogHelper();

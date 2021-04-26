@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noname/screens/home/home_page.dart';
-import 'package:noname/screens/login/login_page.dart';
+import 'package:noname/views/home/home_page.dart';
+import 'package:noname/views/login/login_page.dart';
 
 class NotificationNavigationHelper {
   Future<void> navigateFromSelect(String routeName, BuildContext context,

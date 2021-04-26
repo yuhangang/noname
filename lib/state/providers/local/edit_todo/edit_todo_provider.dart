@@ -8,9 +8,22 @@ export 'src/edit_todo_enums.dart';
 export 'src/edit_todo_models.dart';
 
 class EditTodoProvider extends StateNotifier<EditTodoState> {
-  EditTodoProvider({DateTime? startDate, DateTime? endDate, TodoTask? todoTask})
-      : super(new EditTodoState(
-            startDate: startDate, endDate: endDate, todoTask: todoTask));
+  late bool isNew;
+  EditTodoProvider(
+      {DateTime? startDate,
+      DateTime? endDate,
+      TodoTask? todoTask,
+      TodoImportance? importance,
+      NotificationTiming? notificationTiming,
+      List<TodoTag>? tags})
+      : isNew = todoTask == null,
+        super(new EditTodoState(
+            startDate: startDate,
+            endDate: endDate,
+            todoTask: todoTask,
+            importance: importance ?? TodoImportance.medium,
+            notificationTiming: notificationTiming ?? NotificationTiming.onTime,
+            tags: tags ?? []));
   void changeStartDate({DateTime? startDate}) {
     bool? shouldChangeStartDate;
     if (startDate != null && state.noStartDateError == false)
@@ -23,6 +36,19 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
   void changeEndDate({required DateTime? endDate}) {
     state = state.copyWith(endDate: endDate);
     print(this._verifiedStartnEndDate());
+  }
+
+  Future<bool> addTag(String str) async {
+    if (state.tags.where((element) => element.id == str).toList().length > 0)
+      return false;
+    state = state
+        .copyWith(tags: [...state.tags, TodoTag(str.toLowerCase().trim())]);
+    return true;
+  }
+
+  void removeTag(String str) {
+    state = state.copyWith(
+        tags: state.tags.where((element) => element.id != str).toList());
   }
 
   bool _verifiedStartnEndDate() {
@@ -40,10 +66,11 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
     return true;
   }
 
+  void changeTodoImportance(TodoImportance _) =>
+      state = state.copyWith(importance: _);
   void switchNotificationTiming(NotificationTiming timing) =>
       state = state.copyWith(notificationTiming: timing);
-  void switchNotificationMode() =>
-      state = state.copyWith(showNotification: !state.showNotification);
+
   void clearEndDate() => state = state.copyWith(removeEndDate: true);
   void clearTitleError() => state = state.copyWith(noTitleError: true);
   void clearStartDateError() => state = state.copyWith(noStartDateError: true);
@@ -62,31 +89,35 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
       if (!startBeforeEnd) throw EditTodoError.stateAfterEndError;
     }
 
-    if (state.todoTask == null) {
+    if (isNew) {
       this._createTodoTask(context, title: title, description: description);
     } else {
-      this._changeTodoTask(context,
-          title: title, description: description, todoId: state.todoTask!.id);
+      this._changeTodoTask(context, title: title, description: description);
     }
   }
 
   Future<void> _createTodoTask(BuildContext context,
       {required String title, required String description}) async {
-    context.read(GlobalProvider.todoProvider.notifier).addTodo(new TodoTask(
+    TodoTask newTask = new TodoTask(
         title: title,
         description: description,
+        importance: state.importance,
         startTime: state.startDate ?? DateTime.now(),
-        endTime: state.endDate));
+        endTime: state.endDate,
+        tags: state.tags,
+        notificationTiming: state.notificationTiming);
+    context.read(GlobalProvider.todoProvider.notifier).addTodo(newTask);
   }
 
   Future<void> _changeTodoTask(BuildContext context,
-      {required String title,
-      required String description,
-      required String todoId}) async {
-    context.read(GlobalProvider.todoProvider.notifier).changeToDoTask(todoId,
-        title: title,
-        description: description,
-        startTime: state.startDate ?? DateTime.now(),
-        endTime: state.endDate);
+      {required String title, required String description}) async {
+    context.read(GlobalProvider.todoProvider.notifier).changeToDoTask(
+        state.todoTask!.copyWith(
+            title: title,
+            description: description,
+            importance: state.importance,
+            startTime: state.startDate ?? DateTime.now(),
+            endTime: state.endDate,
+            notificationTiming: state.notificationTiming));
   }
 }

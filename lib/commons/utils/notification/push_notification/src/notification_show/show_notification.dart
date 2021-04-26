@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 class ShowNotificationHelper {
   final AndroidNotificationDetails androidPlatformChannelSpecifics =
@@ -15,9 +18,9 @@ class ShowNotificationHelper {
           ticker: 'ticker');
   final IOSNotificationDetails iOSPlatformChannelSpecifics =
       IOSNotificationDetails();
-  final FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  ShowNotificationHelper({this.flutterLocalNotificationsPlugin}) {}
+  ShowNotificationHelper({required this.flutterLocalNotificationsPlugin});
 
   Future<void> showNotification(message) async {
     int msgId = 1;
@@ -50,7 +53,7 @@ class ShowNotificationHelper {
             : androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
-    flutterLocalNotificationsPlugin!
+    flutterLocalNotificationsPlugin
         .show(msgId, title, body, platformChannelSpecifics, payload: payload);
   }
 
@@ -98,10 +101,44 @@ class ShowNotificationHelper {
             autoCancel: false);
     NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin!.show(
+    await flutterLocalNotificationsPlugin.show(
         123,
         'ongoing notification title',
         'ongoing notification body',
         platformChannelSpecifics);
+  }
+
+  void showScheduledNotification(DateTime startTime, int notificationTag,
+      {String? payload}) async {
+    String timezone = await FlutterNativeTimezone.getLocalTimezone();
+
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation(timezone));
+    AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+            'default_channel', 'your channel name', 'your channel description',
+            importance: Importance.max,
+            priority: Priority.high,
+            ongoing: true,
+            ticker: "dsfew",
+            autoCancel: false);
+    NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        notificationTag,
+        'scheduled title',
+        'scheduled body',
+        tz.TZDateTime.from(startTime, tz.local).add(const Duration(seconds: 5)),
+        const NotificationDetails(
+            android: AndroidNotificationDetails(
+          'your channel id',
+          'your channel name',
+          'your channel description',
+        )),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        payload: payload);
   }
 }

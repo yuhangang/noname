@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory.dart';
+import 'package:google_fonts/google_fonts.dart';
+import './custom_themes/customSplashFactory.dart';
 
 abstract class ThemeBuilder {
   static const colorThemeList = [
     //Color(0xFFD8CDB4),
-    Color(0xFFFFFCF0),
+    Color(0xFFFFFDF5),
     //Color(0xFFb0bec5),
     //Color(0xFFFFFFFF),
     //Color(0xFFFCFCFC)
@@ -35,14 +36,10 @@ abstract class ThemeBuilder {
         appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             brightness: Brightness.light,
-            titleTextStyle:
-                TextStyle(color: Color(0xFF947510), fontSize: 25, shadows: [
-              BoxShadow(
-                offset: Offset(1.5, 1.5),
-                color: Color(0x15272727),
-                blurRadius: 2,
-              ),
-            ])),
+            titleTextStyle: TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 25,
+                fontWeight: FontWeight.w400)),
         textSelectionTheme:
             TextSelectionThemeData(cursorColor: Color(0xFF4D4A41)),
         scaffoldBackgroundColor: colorThemeList[themeColorIndex],
@@ -53,8 +50,10 @@ abstract class ThemeBuilder {
                     TextStyle(color: Colors.white)))),
         textTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline5:
-              TextStyle(color: Colors.brown[700], fontWeight: FontWeight.w500),
+          headline5: GoogleFonts.sourceSansPro().copyWith(
+              color: Color(0xFF1414140),
+              fontWeight: FontWeight.w400,
+              fontSize: 20),
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
         pageTransitionsTheme: PageTransitionsTheme(builders: {
@@ -105,9 +104,10 @@ abstract class ThemeBuilder {
               fontSize: 72.0,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(220, 220, 220, 1)),
-          headline5: TextStyle(
-              color: Color.fromRGBO(200, 200, 255, 1),
-              fontWeight: FontWeight.w500),
+          headline5: GoogleFonts.sourceSansPro().copyWith(
+              color: Color(0xFFE4E4E4),
+              fontWeight: FontWeight.w400,
+              fontSize: 20),
           bodyText1: TextStyle(
               fontSize: 14.0,
               fontFamily: 'Hind',

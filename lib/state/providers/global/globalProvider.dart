@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/commons/utils/settings/shared_preferences/app_preference_provider.dart';
 import 'package:noname/state/providers/global/auth/auth_provider.dart';
+import 'package:noname/state/providers/global/todo/achieve_todo_provider.dart';
 import 'package:noname/state/providers/global/todo/todo_provider.dart';
 import 'package:noname/state/providers/global/theme/theme_provider.dart';
+import 'package:noname/state/providers/global/todo/todo_tag_provider.dart';
 export 'auth/auth_provider.dart';
 export 'todo/todo_provider.dart';
 export 'theme/theme_provider.dart';
@@ -28,6 +30,11 @@ abstract class GlobalProvider {
 
   static StateNotifierProvider<TodoProvider, TodoList> get todoProvider =>
       instance.todoProvider;
+
+  static StateNotifierProvider<AchievedTodoProvider, TodoList>
+      get achievedTodoProvider => instance.achievedTodoProvider;
+  static StateNotifierProvider<TodoTagProvider, TodoTagList>
+      get todoTagProvider => instance.todoTagProvider;
 }
 
 class _GlobalProviderInstances {
@@ -48,5 +55,16 @@ class _GlobalProviderInstances {
   final StateNotifierProvider<TodoProvider, TodoList> todoProvider =
       StateNotifierProvider<TodoProvider, TodoList>((ref) {
     return TodoProvider();
+  });
+
+  final StateNotifierProvider<AchievedTodoProvider, TodoList>
+      achievedTodoProvider =
+      StateNotifierProvider<AchievedTodoProvider, TodoList>((ref) {
+    return AchievedTodoProvider();
+  });
+
+  final StateNotifierProvider<TodoTagProvider, TodoTagList> todoTagProvider =
+      StateNotifierProvider<TodoTagProvider, TodoTagList>((ref) {
+    return TodoTagProvider();
   });
 }

@@ -6,6 +6,7 @@ import 'package:noname/commons/utils/toast/show_toast.dart';
 import '../dropdown_search.dart';
 
 class SelectDialog<T> extends StatefulWidget {
+  final void Function(String)? onAddItem;
   final T? selectedValue;
   final List<T>? items;
   final bool showSearchBox;
@@ -86,6 +87,7 @@ class SelectDialog<T> extends StatefulWidget {
       this.showFavoriteItems = false,
       this.favoriteItemsAlignment = MainAxisAlignment.start,
       this.searchBoxStyle,
+      this.onAddItem,
       this.dropDownItemTextStyle})
       : super(key: key);
 
@@ -391,8 +393,9 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
                   Container(
                     child: InkWell(
                       onTap: () {
-                        ToastHelper.showToast(
-                            'Keywords ${widget.searchBoxController?.text} Saved');
+                        if (widget.onAddItem != null &&
+                            widget.searchBoxController != null)
+                          widget.onAddItem!(widget.searchBoxController!.text);
                       },
                       child: Container(
                         color: widget.searchBoxDecoration?.fillColor,

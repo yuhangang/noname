@@ -36,6 +36,8 @@ typedef List<T> FavoriteItems<T>(List<T> items);
 enum Mode { DIALOG, BOTTOM_SHEET, MENU }
 
 class DropdownSearch<T> extends StatefulWidget {
+  final void Function(String)? onAddItem;
+
   ///DropDownSearch label
   final String? label;
 
@@ -237,6 +239,7 @@ class DropdownSearch<T> extends StatefulWidget {
       this.showFavoriteItems = false,
       this.favoriteItemsAlignment = MainAxisAlignment.start,
       this.searchBoxStyle,
+      this.onAddItem,
       this.dropDownItemTextStyle})
       : assert(showSelectedItem || compareFn != null),
         super(key: key);
@@ -506,6 +509,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>>
       favoriteItemBuilder: widget.favoriteItemBuilder,
       favoriteItemsAlignment: widget.favoriteItemsAlignment,
       dropDownItemTextStyle: widget.dropDownItemTextStyle,
+      onAddItem: widget.onAddItem,
     );
   }
 

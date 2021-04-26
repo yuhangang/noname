@@ -1,3 +1,4 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:noname/state/providers/global/globalProvider.dart';
 import 'package:noname/state/providers/local/edit_todo/src/edit_todo_enums.dart';
 
@@ -8,16 +9,19 @@ class EditTodoState {
       this.titleError,
       this.noStartDateError = true,
       this.noStartAfterEndError = true,
-      this.showNotification = false,
+      this.importance = TodoImportance.medium,
       this.todoTask,
-      this.notificationTiming = NotificationTiming.onTime});
+      this.notificationTiming = NotificationTiming.onTime,
+      this.tags = const []});
   DateTime? startDate;
   DateTime? endDate;
   String? titleError;
   bool noStartDateError;
   bool noStartAfterEndError;
   final TodoTask? todoTask;
-  bool showNotification;
+  List<TodoTag> tags;
+
+  TodoImportance importance;
 
   NotificationTiming notificationTiming;
 
@@ -27,8 +31,9 @@ class EditTodoState {
       bool? noTitleError,
       bool? noStartDateError,
       bool? noStartAfterEndError,
-      bool? showNotification,
+      TodoImportance? importance,
       bool removeEndDate = false,
+      List<TodoTag>? tags,
       NotificationTiming? notificationTiming}) {
     return new EditTodoState(
         startDate: startDate ?? this.startDate,
@@ -38,8 +43,10 @@ class EditTodoState {
                 ? null
                 : EditTodoError.titleEmptyError.str
             : this.titleError,
-        showNotification: showNotification ?? this.showNotification,
         noStartDateError: noStartDateError ?? this.noStartDateError,
+        importance: importance ?? this.importance,
+        todoTask: this.todoTask,
+        tags: tags ?? this.tags,
         noStartAfterEndError: noStartAfterEndError ?? this.noStartAfterEndError,
         notificationTiming: notificationTiming ?? this.notificationTiming);
   }

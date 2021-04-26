@@ -1,38 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noname/state/providers/global/globalProvider.dart';
 
 class SearchProvider extends StateNotifier<SearchState> {
-  SearchProvider() : super(new SearchState(users: [], podcasts: []));
+  SearchProvider() : super(new SearchState(results: []));
   void searchUser() => searchUser();
   Future<void> fetchData(String keyword) async {
-    state = SearchState(users: [], podcasts: [], isFetching: true);
-    Future.delayed(Duration(seconds: 2),
-        () => state = SearchState(users: [], podcasts: []));
+    state = SearchState(results: [], status: SearchStatus.loading);
+    Future.delayed(Duration(seconds: 2), () => state = state.search(keyword));
   }
 }
 
 class SearchState {
-  List<SearchedUser> users;
-  List<SearchedPodcast> podcasts;
-  SearchState(
-      {required this.users, required this.podcasts, this.isFetching = false});
+  List<TodoTask> results;
+  SearchStatus status;
+  SearchState({required this.results, this.status = SearchStatus.none});
 
-  bool isFetching;
+  SearchState search(String id) {
+    return SearchState(results: []);
+  }
 }
 
-String getId() => "fergef";
-
-class SearchedUser {
-  final String sId;
-  String userName;
-  String userEmail;
-  SearchedUser({required this.userName, required this.userEmail, userId})
-      : sId = userId ?? getId();
-}
-
-class SearchedPodcast {
-  final String sId;
-  String userName;
-  String userEmail;
-  SearchedPodcast({required this.userName, required this.userEmail, userId})
-      : sId = userId ?? getId();
-}
+enum SearchStatus { none, loading, doneWithResults, doneWithEmptyResult }
