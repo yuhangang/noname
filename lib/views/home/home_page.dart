@@ -1,19 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
 import 'package:noname/views/account/account_page.dart';
 import 'package:noname/views/add_todo/add_todo_screen.dart';
 import 'package:noname/views/home/dashboard/dashboard_screens.dart';
 import 'package:noname/views/home/widgets/animated_bottom_nav.dart';
-import 'package:noname/views/home/widgets/home_page_app_bar.dart';
-import 'package:noname/views/home/widgets/podcast_snippet.dart';
-import 'package:noname/views/search_screen/search_screen.dart';
 import 'package:noname/views/widgets/small_fab.dart';
 import 'package:noname/views/workspaces_screen/workspaces_screen.dart';
 import 'package:noname/widgets/app_bar.dart';
-import 'package:noname/widgets/icon_button.dart';
 
 class HomePage extends StatefulWidget {
   static const route = "/home-page";
@@ -50,18 +45,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final List<Widget> childPage = [
     DashBoardScreen(),
     WorkSpacesScreen(),
-    Container(
-      child: Center(child: Text("ssf")),
-    ),
     AccountPage()
   ];
 
-  static const List<String> titles = [
-    'Dashboard',
-    'Workspaces',
-    "Page 3",
-    "Account"
-  ];
+  static const List<String> titles = ['Dashboard', 'Workspaces', "Setting"];
 
   @override
   void initState() {
@@ -101,6 +88,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 bottomNaviController: bottomNaviController,
                 bottomnavigationkey: bottomnavigationkey,
                 index: index,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(CupertinoIcons.home), label: "dashboard"),
+                  BottomNavigationBarItem(
+                      icon: Icon(CupertinoIcons.chart_bar), label: "history"),
+                  BottomNavigationBarItem(
+                      icon: Icon(CupertinoIcons.globe), label: "setting"),
+                ],
                 onTapItem: (_) {
                   if (_ == index) return;
                   setState(() {

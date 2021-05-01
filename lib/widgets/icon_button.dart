@@ -17,12 +17,17 @@ class CustomIconButton extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(100),
       onTap: this.onPressed,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Icon(
-          this.icon,
-          size: this.size,
-          color: this.color ?? Theme.of(context).primaryColorDark,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              this.icon,
+              size: this.size,
+              color: this.color ?? Theme.of(context).primaryColorDark,
+            ),
+          ),
         ),
       ),
     );

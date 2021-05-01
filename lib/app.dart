@@ -9,11 +9,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/views/intro_slider/intro_slider.dart';
 import 'package:noname/views/login/login_page.dart';
 import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:noname/views/login/passcode_screen/passcode_screen.dart';
+
+import 'navigation/custom_page_route/custom_page_route.dart';
 
 GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = new GlobalKey();
 
 class MyApp extends StatelessWidget {
-  bool isFirstRun;
+  final bool isFirstRun;
   MyApp({required this.isFirstRun});
   static const PageRoutes pageRoutes = PageRoutes();
 
@@ -22,12 +25,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CoreManager(
       child: Consumer(
-          builder: (context, watch, _) {
+          builder: (context, watch, child) {
         ThemeSetting theme = watch(GlobalProvider.themeProvider);
         Auth auth = watch(GlobalProvider.authProvider);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-        ));
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.dark));
+        if (!auth.isAuth && !this.isFirstRun) {
+          Future.delayed(
+              Duration.zero,
+              () => Navigator.of(Get.key!.currentState!.context)
+                  .pushReplacement(CustomPageRoute.verticalTransition(
+                      PasscodeScreen(),
+                      animationDuration: Duration(milliseconds: 800))));
+        }
         return MaterialApp(
           navigatorKey: Get.key,
           scaffoldMessengerKey: scaffoldMessengerKey,
@@ -35,12 +46,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: theme.getTheme(),
           darkTheme: theme.getTheme(isSystemDarkMode: true),
-          home: AudioServiceWidget(
-              child: auth.isAuth
-                  ? HomePage()
-                  : this.isFirstRun
-                      ? IntroPage()
-                      : LoginPage()),
+          home: this.isFirstRun ? IntroPage() : HomePage(),
           routes: pageRoutes.routes,
         );
       } as Widget Function(

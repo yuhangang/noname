@@ -5,6 +5,7 @@ import 'package:noname/views/home/home_page.dart';
 import 'package:noname/views/home/podcast_detail_screen.dart';
 import 'package:noname/views/intro_slider/intro_slider.dart';
 import 'package:noname/views/login/login_page.dart';
+import 'package:noname/views/login/passcode_screen/passcode_screen.dart';
 import 'package:noname/views/login/register_page.dart';
 import 'package:noname/views/search_screen/search_screen.dart';
 
@@ -18,6 +19,7 @@ class PageRoutes {
         IntroPage.route: (ctx) => IntroPage(),
         SearchScreen.route: (ctx) => SearchScreen(),
         AccountPage.route: (ctx) => AccountPage(),
-        AddEditTodoScreen.route: (ctx) => AddEditTodoScreen()
+        AddEditTodoScreen.route: (ctx) => AddEditTodoScreen(),
+        PasscodeScreen.route: (ctx) => PasscodeScreen()
       };
 }

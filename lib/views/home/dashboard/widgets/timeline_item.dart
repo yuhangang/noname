@@ -16,12 +16,14 @@ import 'package:noname/widgets/expandable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TimeLineItem extends StatefulWidget {
-  TimeLineItem({
-    required this.title,
-    Key? key,
-    required this.todoList,
-  }) : super(key: key);
+  TimeLineItem(
+      {required this.title,
+      Key? key,
+      required this.todoList,
+      required this.timeLineTodo})
+      : super(key: key);
   final String title;
+  final TimeLineTodo timeLineTodo;
   List<TodoTask> todoList;
 
   @override
@@ -91,7 +93,7 @@ class _TimeLineItemState extends State<TimeLineItem> {
                 ),
                 InkWell(
                   onTap: () {
-                    showQuickCreateTodoModal(context, TimeLineTodo.today);
+                    showQuickCreateTodoModal(context, widget.timeLineTodo);
                   },
                   borderRadius: BorderRadius.circular(100),
                   child: Padding(

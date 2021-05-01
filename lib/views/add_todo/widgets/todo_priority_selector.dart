@@ -55,28 +55,33 @@ class PrioritySelector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ...TodoImportance.values.map(
-                (e) => Container(
-                  height: 30,
-                  width: 30,
-                  //padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: e == selectedItem ? Colors.blueGrey : null,
-                      border: Border.all(color: Colors.blueGrey)),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(50),
-                    onTap: () =>
-                        context.read(provider.notifier).changeTodoImportance(e),
-                    child: Center(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          e.itemAsString[0].toUpperCase(),
-                          style: TextStyle(
-                              color: e != selectedItem
-                                  ? Colors.blueGrey
-                                  : Colors.white),
+                (e) => Tooltip(
+                  message: e.itemAsString,
+                  preferBelow: false,
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    //padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: e == selectedItem ? Colors.blueGrey : null,
+                        border: Border.all(color: Colors.blueGrey)),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      onTap: () => context
+                          .read(provider.notifier)
+                          .changeTodoImportance(e),
+                      child: Center(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            e.itemAsString[0].toUpperCase(),
+                            style: TextStyle(
+                                color: e != selectedItem
+                                    ? Colors.blueGrey
+                                    : Colors.white),
+                          ),
                         ),
                       ),
                     ),

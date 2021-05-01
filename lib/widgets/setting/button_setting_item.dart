@@ -15,19 +15,26 @@ class ButtonSettingItem extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
                 child: Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: Text(title))),
+                    child: Text(
+                      title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(fontSize: 16),
+                    ))),
             const SizedBox(
               width: 10,
             ),
             InkWell(
                 onTap: onTapItem,
+                borderRadius: BorderRadius.circular(100),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: icon,

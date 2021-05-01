@@ -6,8 +6,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final String? title;
   final Function? onBackCalledBack;
+  final bool showbackButton;
+  final Color? backgroundColor;
   const CustomAppBar(
-      {Key? key, this.leading, this.actions, this.title, this.onBackCalledBack})
+      {Key? key,
+      this.leading,
+      this.actions,
+      this.title,
+      this.onBackCalledBack,
+      this.showbackButton = false,
+      this.backgroundColor})
       : super(key: key);
 
   @override
@@ -19,19 +27,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 40,
       automaticallyImplyLeading: false,
       elevation: 0,
-      backgroundColor:
+      backgroundColor: backgroundColor ??
           Theme.of(context).scaffoldBackgroundColor.withOpacity(0.97),
-      leading: leading,
-      //CustomIconButton(
-      //  size: 30,
-      //  onPressed: () {
-      //    if (onBackCalledBack != null) this.onBackCalledBack!();
-      //    Navigator.pop(context);
-      //  },
-      //  icon: Icons.arrow_back_ios,
-      //),
-      // Here we take the value from the MyHomePage object that was created by
-      // the App.build method, and use it to set our appbar title.
+      leading: showbackButton
+          ? CustomIconButton(
+              size: 30,
+              onPressed: () {
+                if (onBackCalledBack != null) this.onBackCalledBack!();
+                Navigator.pop(context);
+              },
+              icon: Icons.arrow_back_ios,
+            )
+          : leading,
       centerTitle: leading == null ? true : false,
       title: title != null
           ? Text(

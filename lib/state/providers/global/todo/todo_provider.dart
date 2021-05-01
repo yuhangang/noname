@@ -34,25 +34,35 @@ class TodoProvider extends StateNotifier<TodoList> {
         endTime: item.endTime));
   }
 
-  void removeTodo(TodoTask todo) {
-    state = state.removeItem(todo.id, state.tasks);
+  void removeTodo(TodoTask item) {
+    state = state.removeItem(item.id, state.tasks);
     Get.key!.currentState!.context
         .read(GlobalProvider.todoTagProvider.notifier)
-        .removeTodo(todo.id, todo.tags);
+        .removeTodo(item.id, item.tags);
 
     AppPreferenceProvider.saveTodoList(state.tasks);
     //AppPreferenceProvider.saveAchievedTodoList(todo);
+    //
+    LocalNotificationHelper.removeScheduledNotification(NotificationIdSet(
+        todoId: item.id,
+        startTime: item.startTime,
+        notificationTiming: item.notificationTiming,
+        endTime: item.endTime));
   }
 
   void setTodo() {
     state = state.copyWith(isDone: !state.isDone);
   }
 
-  Future<void> changeToDoTask(TodoTask task) async {
-    print(task.id);
-    TodoList? newTodoList = state.changeToDoTask(task);
+  Future<void> changeToDoTask(TodoTask item) async {
+    TodoList? newTodoList = state.changeToDoTask(item);
     if (newTodoList == null) throw "error";
     AppPreferenceProvider.saveTodoList(state.tasks);
     state = newTodoList;
+    LocalNotificationHelper.showScheduledNotification(NotificationIdSet(
+        todoId: item.id,
+        startTime: item.startTime,
+        notificationTiming: item.notificationTiming,
+        endTime: item.endTime));
   }
 }

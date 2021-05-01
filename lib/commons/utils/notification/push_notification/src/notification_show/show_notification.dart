@@ -10,7 +10,7 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 class ShowNotificationHelper {
   final AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails(
-          'default_channel', 'Podcast App', 'your channel description',
+          'default_channel_id', 'Podcast App', 'your channel description',
           color: Colors.white,
           importance: Importance.max,
           priority: Priority.high,
@@ -44,8 +44,8 @@ class ShowNotificationHelper {
       String? image}) async {
     NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: (image != null)
-            ? AndroidNotificationDetails('default_channel', 'your channel name',
-                'your channel description',
+            ? AndroidNotificationDetails('default_channel_id',
+                'High Priority Task', 'your channel description',
                 color: Colors.white,
                 importance: Importance.max,
                 priority: Priority.max,
@@ -90,8 +90,8 @@ class ShowNotificationHelper {
             htmlFormatSummaryText: true);
 
     AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-            'default_channel', 'your channel name', 'your channel description',
+        AndroidNotificationDetails('default_channel_id', 'High Priority Task',
+            'your channel description',
             tag: "ongoing broadcast",
             importance: Importance.max,
             priority: Priority.high,
@@ -114,9 +114,9 @@ class ShowNotificationHelper {
 
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation(timezone));
-    AndroidNotificationDetails androidPlatformChannelSpecifics =
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
-            'default_channel', 'your channel name', 'your channel description',
+            'default_channel_id', 'High Priority Task', '',
             importance: Importance.max,
             priority: Priority.high,
             ongoing: true,
@@ -130,12 +130,7 @@ class ShowNotificationHelper {
         'scheduled title',
         'scheduled body',
         tz.TZDateTime.from(startTime, tz.local).add(const Duration(seconds: 5)),
-        const NotificationDetails(
-            android: AndroidNotificationDetails(
-          'your channel id',
-          'your channel name',
-          'your channel description',
-        )),
+        const NotificationDetails(android: androidPlatformChannelSpecifics),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,

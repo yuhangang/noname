@@ -108,12 +108,12 @@ class _RegisterPageState extends State<RegisterPage>
                     passwordController: passwordController,
                     passwordhintText: _passwordhintText,
                     onUserSubmit: () {
-                      context
-                          .read(GlobalProvider.authProvider.notifier)
-                          .register(
-                              userEmail: userEmailController.text,
-                              userName: usernameController.text,
-                              password: passwordController.text);
+                      //    context
+                      //        .read(GlobalProvider.authProvider.notifier)
+                      //        .register(
+                      //            userEmail: userEmailController.text,
+                      //            userName: usernameController.text,
+                      //            password: passwordController.text);
                     },
                   ),
                   SizedBox(

@@ -18,17 +18,16 @@ abstract class AppPreferenceProvider extends ChangeNotifier {
   static const String _todoTags = 'todoTags';
   static const String _isFirstRun = 'isFirstRun';
 
-  static Future<User?> fetchSettings() async {
+  static Future<Auth> fetchSettings() async {
     var prefs = await SharedPreferences.getInstance();
-
     try {
-      return User.fromJson(jsonDecode(prefs.getString(_authentication) ?? ""));
+      return Auth.fromJson(jsonDecode(prefs.getString(_authentication) ?? ""));
     } catch (e) {
-      return null;
+      return Auth(isAuth: true);
     }
   }
 
-  static Future<void> saveUserData(User userData) async {
+  static Future<void> saveUserData(Auth userData) async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setString(_authentication, jsonEncode(userData.toJson()));
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noname/commons/constants/models/time_line.dart';
 import 'package:noname/commons/utils/Date/dateUtils.dart';
 import 'package:noname/views/home/dashboard/widgets/timeline_item.dart';
 import 'package:noname/state/providers/global/globalProvider.dart';
@@ -50,22 +51,30 @@ class DashboardDateView extends StatelessWidget {
                 //        placeholder: "Search Tasks",
                 //      ))),
                 //),
-                TimeLineItem(title: "TODAY", todoList: categoriesTodo.today),
+                TimeLineItem(
+                  title: "TODAY",
+                  todoList: categoriesTodo.today,
+                  timeLineTodo: TimeLineTodo.today,
+                ),
                 TimeLineItem(
                   title: "TOMORROW",
                   todoList: categoriesTodo.tomorrow,
+                  timeLineTodo: TimeLineTodo.tomorrow,
                 ),
                 TimeLineItem(
                   title: "Later This Week",
                   todoList: categoriesTodo.laterThisWeek,
+                  timeLineTodo: TimeLineTodo.laterThisWeek,
                 ),
                 TimeLineItem(
                   title: "Next Week",
                   todoList: categoriesTodo.nextWeek,
+                  timeLineTodo: TimeLineTodo.nextWeek,
                 ),
                 TimeLineItem(
                   title: "All",
                   todoList: categoriesTodo.other,
+                  timeLineTodo: TimeLineTodo.nextMonth,
                 ),
 
                 //Expanded(

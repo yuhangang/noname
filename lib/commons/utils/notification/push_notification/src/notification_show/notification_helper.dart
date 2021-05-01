@@ -53,7 +53,7 @@ class LocalNotificationHelper {
       selectNotificationSubject.add(data);
   late ShowNotificationHelper showNotificationHelper;
   final AndroidNotificationChannel channel = AndroidNotificationChannel(
-      "trolley_live_consumer_1",
+      "default_channel_id",
       'High Importance Notifications', // title
       'This channel is used for important notifications.', // description
       importance: Importance.high,
@@ -71,15 +71,21 @@ class LocalNotificationHelper {
         .showOngoingNotification(message: message, imageUrl: imageUrl);
   }
 
-  static void showScheduledNotification(NotificationIdSet info) {
+  static void removeScheduledNotification(NotificationIdSet info) {
     instance.flutterLocalNotificationsPlugin.cancel(
       info.startTag,
     );
+    if (info.endTag != null && info.endTime != null) {
+      instance.flutterLocalNotificationsPlugin.cancel(info.endTag!);
+    }
+  }
+
+  static void showScheduledNotification(NotificationIdSet info) {
+    removeScheduledNotification(info);
     instance.showNotificationHelper.showScheduledNotification(
         info.startTime, info.startTag,
         payload: info.todoId);
     if (info.endTag != null && info.endTime != null) {
-      instance.flutterLocalNotificationsPlugin.cancel(info.endTag!);
       instance.showNotificationHelper.showScheduledNotification(
           info.endTime!, info.endTag!,
           payload: info.todoId);

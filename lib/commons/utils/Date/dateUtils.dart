@@ -1,5 +1,30 @@
 import 'package:noname/state/providers/global/globalProvider.dart';
 
+const List<String> weekDay = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
+const List<String> month = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "Novement",
+  "December"
+];
+
 extension DateOnlyCompare on DateTime {
   int dayDiff(DateTime other) {
     int diff = difference(other).inDays;
@@ -13,7 +38,9 @@ extension DateOnlyCompare on DateTime {
   }
 
   bool isSameDay(DateTime other) {
-    return year == other.year && month == other.month && day == other.day;
+    return this.year == other.year &&
+        this.month == other.month &&
+        this.day == other.day;
   }
 
   int weekDiff(DateTime other) {
@@ -87,7 +114,7 @@ class DashBoardFilteredByDate {
   }
 }
 
-extension MyDateUtils on DateTime {
+extension CopyWithDate on DateTime {
   DateTime copyWith(
       {int? year,
       int? month,
@@ -108,4 +135,12 @@ extension MyDateUtils on DateTime {
       microsecond ?? this.microsecond,
     );
   }
+}
+
+extension WeekMonthName on DateTime {
+  String get getWeekDay => weekDay[this.weekday - 1];
+  String get getWeekDayShort => weekDay[this.weekday - 1].substring(0, 3);
+
+  String get getMonth => month[this.month - 1];
+  String get getMonthShort => month[this.month - 1].substring(0, 3);
 }

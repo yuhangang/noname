@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/views/home/home_page.dart';
 import 'package:noname/state/providers/global/globalProvider.dart';
 import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:noname/widgets/setting/auth_setting_item.dart';
 import 'package:noname/widgets/setting/button_setting_item.dart';
 import 'package:noname/widgets/setting/switch_button_item.dart';
 
@@ -33,9 +34,12 @@ class AccountPage extends StatelessWidget {
             ),
             const Divider(),
             SwitchButtonItem(
+              title: "Time Mode",
               value: true,
-              disabled: true,
             ),
+            const Divider(),
+            AuthSettingItem(title: "Authentication"),
+            const Divider(),
             ButtonSettingItem(
               title: 'Sign Out',
               icon: Icon(Icons.logout),

@@ -14,12 +14,7 @@ late final _GlobalProviderInstances instance;
 abstract class GlobalProvider {
   // Store the instance of all riverpod provider to be used in global scope
   static Future<void> setup() async {
-    User? user;
-    await AppPreferenceProvider.fetchSettings().then((value) {
-      print(value);
-      user = value;
-    });
-    instance = new _GlobalProviderInstances(user: user);
+    instance = new _GlobalProviderInstances();
   }
 
   static StateNotifierProvider<AuthenticationProvider, Auth> get authProvider =>
@@ -38,10 +33,12 @@ abstract class GlobalProvider {
 }
 
 class _GlobalProviderInstances {
-  _GlobalProviderInstances({required User? user}) {
-    this.authProvider =
-        StateNotifierProvider<AuthenticationProvider, Auth>((ref) {
-      return AuthenticationProvider(Auth(user: user));
+  _GlobalProviderInstances() {
+    AppPreferenceProvider.fetchSettings().then((value) {
+      this.authProvider =
+          StateNotifierProvider<AuthenticationProvider, Auth>((ref) {
+        return AuthenticationProvider(value);
+      });
     });
   }
 

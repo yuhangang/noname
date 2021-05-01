@@ -57,7 +57,7 @@ class AddTodoDateWidget extends StatelessWidget {
                               context
                                   .read(editTodoProvider.notifier)
                                   .changeStartDate(startDate: selectedTime);
-                            }),
+                            }, prevTime: todoState.startDate),
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 5),
@@ -106,7 +106,7 @@ class AddTodoDateWidget extends StatelessWidget {
                               context
                                   .read(editTodoProvider.notifier)
                                   .changeEndDate(endDate: selectedTime);
-                            }),
+                            }, prevTime: todoState.endDate),
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 5),
@@ -161,28 +161,32 @@ class AddTodoDateWidget extends StatelessWidget {
   }
 
   onTapDatePicker(BuildContext context,
-      {required void Function(DateTime time) callBack}) {
-    DateTime? selectedTime = DateTime.now();
+      {required void Function(DateTime time) callBack, DateTime? prevTime}) {
+    DateTime selectedTime = prevTime ?? DateTime.now();
+    print(selectedTime.toIso8601String());
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: selectedTime,
       firstDate: isNew ? DateTime.now() : DateTime(2000),
       lastDate: DateTime(2099),
     ).then((value) {
       if (value != null) selectedTime = value;
-      showTimePicker(context: context, initialTime: TimeOfDay.now())
+      showTimePicker(
+              context: context,
+              initialTime: TimeOfDay(
+                  hour: prevTime?.hour ?? 0, minute: prevTime?.minute ?? 0))
           .then((value) {
         if (value != null) {
           selectedTime = new DateTime(
-              selectedTime!.year,
-              selectedTime!.month,
-              selectedTime!.day,
+              selectedTime.year,
+              selectedTime.month,
+              selectedTime.day,
               value.hour,
               value.minute,
-              selectedTime!.second,
-              selectedTime!.millisecond,
-              selectedTime!.microsecond);
-          callBack(selectedTime!);
+              selectedTime.second,
+              selectedTime.millisecond,
+              selectedTime.microsecond);
+          callBack(selectedTime);
         }
       });
     });

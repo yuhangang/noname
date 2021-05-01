@@ -7,12 +7,15 @@ class AnimatedBottomNaviBar extends StatelessWidget {
       required this.bottomNaviController,
       required this.bottomnavigationkey,
       required this.index,
-      required this.onTapItem})
+      required this.onTapItem,
+      required this.items})
       : super(key: key);
   final void Function(int) onTapItem;
   final AnimationController bottomNaviController;
   final GlobalKey<State<StatefulWidget>> bottomnavigationkey;
   final int index;
+
+  final List<BottomNavigationBarItem> items;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +48,7 @@ class AnimatedBottomNaviBar extends StatelessWidget {
                   elevation: 0,
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
-                  items: [
-                    BottomNavigationBarItem(
-                        icon: Icon(CupertinoIcons.home), label: "dashboard"),
-                    BottomNavigationBarItem(
-                        icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
-                    BottomNavigationBarItem(
-                        icon: Icon(CupertinoIcons.globe), label: "explore"),
-                    BottomNavigationBarItem(
-                        icon: Icon(CupertinoIcons.person), label: "me")
-                  ],
+                  items: items,
                 ),
               ),
             );

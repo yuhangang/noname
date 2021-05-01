@@ -76,9 +76,9 @@ class _LoginPageState extends State<LoginPage>
                     passwordController: passwordController,
                     passwordhintText: _passwordhintText,
                     onUserSubmit: () {
-                      context.read(GlobalProvider.authProvider.notifier).login(
-                          userName: usernameController.text,
-                          password: passwordController.text);
+                      context
+                          .read(GlobalProvider.authProvider.notifier)
+                          .login(password: passwordController.text);
                     },
                   ),
                   SizedBox(

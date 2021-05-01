@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 abstract class CustomPageRoute {
-  static Route verticalTransition(Widget targetPage) {
+  static Route verticalTransition(Widget targetPage,
+      {Duration? animationDuration}) {
     return PageRouteBuilder(
-      reverseTransitionDuration: const Duration(milliseconds: 300),
-      transitionDuration: const Duration(milliseconds: 300),
+      reverseTransitionDuration:
+          animationDuration ?? const Duration(milliseconds: 300),
+      transitionDuration:
+          animationDuration ?? const Duration(milliseconds: 300),
       pageBuilder: (context, animation, secondaryAnimation) => targetPage,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
