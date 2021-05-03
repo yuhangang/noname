@@ -1,10 +1,10 @@
 /*
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:noname/constants/const_styles.dart';
-import 'package:noname/views/podcast/neumorphic_player.dart';
-import 'package:noname/views/widgets/badge/badge.dart';
-import 'package:noname/views/widgets/badge/badge_position.dart';
+import 'package:todonote/constants/const_styles.dart';
+import 'package:todonote/views/podcast/neumorphic_player.dart';
+import 'package:todonote/views/widgets/badge/badge.dart';
+import 'package:todonote/views/widgets/badge/badge_position.dart';
 
 class PodcastPage extends StatelessWidget {
   static const String route = "/podcast-page";

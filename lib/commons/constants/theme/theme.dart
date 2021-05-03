@@ -19,7 +19,8 @@ abstract class ThemeBuilder {
 
   static ThemeData lightTheme(bool isDarkMode, int themeColorIndex) {
     return ThemeData(
-        colorScheme: ColorScheme.light(primary: Color(0xFFF7D158)),
+        colorScheme: ColorScheme.light(
+            primary: Color(0xFFF7D158), primaryVariant: Color(0xFF444136)),
         brightness: Brightness.light,
         primaryColor: Colors.white,
         primaryColorDark: Colors.grey[800],
@@ -81,13 +82,15 @@ abstract class ThemeBuilder {
           backgroundColor: Colors.blueGrey[700],
         ),
         colorScheme: ColorScheme.dark(
-            primary: Color(0xFFA67AC4), surface: Color(0xFF3A3A3A)),
+            primary: Color(0xFF6FC9CF),
+            surface: Color(0xFF3A3A3A),
+            primaryVariant: Color(0x86FFFFFF)),
         canvasColor: Colors.blueAccent[800],
         brightness: Brightness.dark,
         primaryColor: Colors.grey[800],
         primaryColorDark: Colors.white,
         dialogTheme: DialogTheme(backgroundColor: Colors.blueGrey[700]),
-        scaffoldBackgroundColor: Color(0xFF24414E),
+        scaffoldBackgroundColor: Color(0xFF212F35),
         appBarTheme: AppBarTheme(
             color: Colors.transparent,
             brightness: Brightness.dark,
@@ -122,7 +125,7 @@ abstract class ThemeBuilder {
             backgroundColor: Colors.transparent,
             unselectedIconTheme: IconThemeData(color: Colors.grey[200]),
             unselectedItemColor: Colors.grey[200],
-            selectedIconTheme: IconThemeData(color: Color(0xFFB8709C)),
+            selectedIconTheme: IconThemeData(color: Color(0xFF6ECFD6)),
             selectedItemColor: Colors.blueGrey[600]),
         dividerTheme: DividerThemeData(
             color: Colors.grey[600], indent: 15, endIndent: 15, space: 0),

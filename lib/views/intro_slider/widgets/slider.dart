@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:noname/views/intro_slider/widgets/slider_item.dart';
+import 'package:todonote/views/intro_slider/widgets/slider_item.dart';
 
 class IntroSlider extends HookWidget {
   const IntroSlider({

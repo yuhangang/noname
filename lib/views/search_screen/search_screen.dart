@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
-import 'package:noname/views/search_screen/channel_screens.dart';
-import 'package:noname/state/providers/local/search_provider.dart';
-import 'package:noname/widgets/icon_button.dart';
+import 'package:todonote/views/search_screen/channel_screens.dart';
+import 'package:todonote/state/providers/local/search_provider.dart';
+import 'package:todonote/widgets/icon_button.dart';
 
 class SearchScreen extends StatelessWidget {
   static const String route = "/search_screen";

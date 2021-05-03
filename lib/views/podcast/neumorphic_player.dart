@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:noname/commons/utils/notification/push_notification/push_notification.dart';
-import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_helper.dart';
+import 'package:todonote/commons/utils/notification/push_notification/push_notification.dart';
+import 'package:todonote/commons/utils/notification/push_notification/src/notification_show/notification_helper.dart';
 
-import 'package:noname/views/podcast/widgets/avatar.dart';
-import 'package:noname/views/podcast/widgets/rolling_stone.dart';
-import 'package:noname/widgets/icon_button.dart';
+import 'package:todonote/views/podcast/widgets/avatar.dart';
+import 'package:todonote/views/podcast/widgets/rolling_stone.dart';
+import 'package:todonote/widgets/icon_button.dart';
 
 class AudioPlayerSample extends StatefulWidget {
   @override

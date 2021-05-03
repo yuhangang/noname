@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:noname/commons/utils/services/stoppable_sevice.dart';
+import 'package:todonote/commons/utils/services/stoppable_sevice.dart';
 
 /// A Widget that will wrap all the managers into one widget
 ///   - to add another manager just wrap the widget

@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/commons/constants/models/time_line.dart';
-import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory.dart';
-import 'package:noname/views/add_todo/widgets/edit_todo_fields.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
-import 'package:noname/commons/utils/Date/dateUtils.dart';
+import 'package:todonote/commons/constants/models/time_line.dart';
+import 'package:todonote/commons/constants/theme/custom_themes/customSplashFactory.dart';
+import 'package:todonote/views/add_todo/widgets/edit_todo_fields.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/commons/utils/Date/dateUtils.dart';
+import 'package:todonote/views/add_todo/widgets/todo_priority_selector.dart';
 
 void showQuickCreateTodoModal(BuildContext context, TimeLineTodo time) {
   showModalBottomSheet(
@@ -90,12 +91,9 @@ class _QuickCreateTodoState extends State<QuickCreateTodo> {
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.time.itemAsString),
-                    Text(dateTime?.toIso8601String() ?? '')
-                  ],
+                PrioritySelector(
+                  provider: widget.editTodoProvider,
+                  title: 'Priority',
                 )
               ],
             ),
@@ -119,7 +117,7 @@ class _QuickCreateTodoState extends State<QuickCreateTodo> {
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: Text(
                     "Save",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                 )),
               ),

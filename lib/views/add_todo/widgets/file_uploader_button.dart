@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:noname/commons/utils/toast/show_toast.dart';
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/commons/utils/toast/show_toast.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
 
 class FileUploaderButton extends StatelessWidget {
   const FileUploaderButton({

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:noname/views/login/register_page.dart';
-import 'package:noname/views/login/widgets/login_widgets.dart';
+import 'package:todonote/views/login/register_page.dart';
+import 'package:todonote/views/login/widgets/login_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LoginPage extends StatefulWidget {

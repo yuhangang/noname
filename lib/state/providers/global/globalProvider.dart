@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/commons/utils/settings/shared_preferences/app_preference_provider.dart';
-import 'package:noname/state/providers/global/auth/auth_provider.dart';
-import 'package:noname/state/providers/global/todo/achieve_todo_provider.dart';
-import 'package:noname/state/providers/global/todo/todo_provider.dart';
-import 'package:noname/state/providers/global/theme/theme_provider.dart';
-import 'package:noname/state/providers/global/todo/todo_tag_provider.dart';
+import 'package:todonote/commons/utils/settings/shared_preferences/app_preference_provider.dart';
+import 'package:todonote/state/providers/global/auth/auth_provider.dart';
+import 'package:todonote/state/providers/global/todo/achieve_todo_provider.dart';
+import 'package:todonote/state/providers/global/todo/todo_provider.dart';
+import 'package:todonote/state/providers/global/theme/theme_provider.dart';
+import 'package:todonote/state/providers/global/todo/todo_tag_provider.dart';
 export 'auth/auth_provider.dart';
 export 'todo/todo_provider.dart';
 export 'theme/theme_provider.dart';
@@ -40,14 +40,15 @@ class _GlobalProviderInstances {
         return AuthenticationProvider(value);
       });
     });
+    AppPreferenceProvider.fetchThemeSetting().then((value) =>
+        themeProvider = StateNotifierProvider<AppTheme, ThemeSetting>((ref) {
+          return AppTheme(value);
+        }));
   }
 
   late final StateNotifierProvider<AuthenticationProvider, Auth> authProvider;
 
-  final StateNotifierProvider<AppTheme, ThemeSetting> themeProvider =
-      StateNotifierProvider<AppTheme, ThemeSetting>((ref) {
-    return AppTheme();
-  });
+  late final StateNotifierProvider<AppTheme, ThemeSetting> themeProvider;
 
   final StateNotifierProvider<TodoProvider, TodoList> todoProvider =
       StateNotifierProvider<TodoProvider, TodoList>((ref) {

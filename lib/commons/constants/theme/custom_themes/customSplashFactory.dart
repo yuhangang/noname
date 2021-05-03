@@ -28,9 +28,7 @@ class NoSplash extends InteractiveInkFeature {
   NoSplash({
     required MaterialInkController controller,
     required RenderBox referenceBox,
-  })   : assert(controller != null),
-        assert(referenceBox != null),
-        super(
+  }) : super(
           color: Colors.transparent,
           controller: controller,
           referenceBox: referenceBox,

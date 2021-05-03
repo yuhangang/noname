@@ -28,12 +28,14 @@ class CategoryTabBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: this.preferredSize,
-      child: CustomTabBar(
-        key: categoryState,
-        categories: categories,
-        parentPageController: parentPageController,
+    return SafeArea(
+      child: PreferredSize(
+        preferredSize: this.preferredSize,
+        child: CustomTabBar(
+          key: categoryState,
+          categories: categories,
+          parentPageController: parentPageController,
+        ),
       ),
     );
   }
@@ -60,32 +62,32 @@ class CustomTabBar extends StatefulWidget {
 class CustomTabBarState extends State<CustomTabBar> {
   // By default first one is selected
   int selectedIndex = 0;
-  ScrollController tabBarController = new ScrollController();
+  //ScrollController tabBarController = new ScrollController();
   double widthPerItem = 100;
 
   void changeCategoryIndex(int index) {
-    if (selectedIndex > index) {
-      if (tabBarController.position.pixels > 0) {
-        tabBarController.animateTo(
-            max(
-                tabBarController.position.pixels -
-                    widthPerItem * (selectedIndex - index),
-                0),
-            duration: Duration(milliseconds: (600 * (selectedIndex - index))),
-            curve: Curves.easeOutExpo);
-      }
-    } else if (selectedIndex < index) {
-      if (tabBarController.position.maxScrollExtent >
-          tabBarController.position.pixels) {
-        tabBarController.animateTo(
-            min(
-                tabBarController.position.pixels +
-                    widthPerItem * (index - selectedIndex),
-                tabBarController.position.maxScrollExtent),
-            duration: Duration(milliseconds: (600 * (index - selectedIndex))),
-            curve: Curves.easeOutExpo);
-      }
-    }
+    //if (selectedIndex > index) {
+    //  if (tabBarController.position.pixels > 0) {
+    //    tabBarController.animateTo(
+    //        max(
+    //            tabBarController.position.pixels -
+    //                widthPerItem * (selectedIndex - index),
+    //            0),
+    //        duration: Duration(milliseconds: (600 * (selectedIndex - index))),
+    //        curve: Curves.easeOutExpo);
+    //  }
+    //} else if (selectedIndex < index) {
+    //  if (tabBarController.position.maxScrollExtent >
+    //      tabBarController.position.pixels) {
+    //    tabBarController.animateTo(
+    //        min(
+    //            tabBarController.position.pixels +
+    //                widthPerItem * (index - selectedIndex),
+    //            tabBarController.position.maxScrollExtent),
+    //        duration: Duration(milliseconds: (600 * (index - selectedIndex))),
+    //        curve: Curves.easeOutExpo);
+    //  }
+    //}
     setState(() {
       selectedIndex = index;
     });
@@ -93,22 +95,21 @@ class CustomTabBarState extends State<CustomTabBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40, // 35
-      decoration: BoxDecoration(
-          color: Theme.of(context).primaryColorDark.withOpacity(0.12),
-          borderRadius: BorderRadius.circular(
-            100, // 16
-          )),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+      child: Container(
+        height: 40, // 35
+        width: widget.categories.length * 100,
+        decoration: BoxDecoration(
+            color: Theme.of(context).primaryColorDark.withOpacity(0.12),
+            borderRadius: BorderRadius.circular(
+              10, // 16
+            )),
 
-      child: SingleChildScrollView(
-        controller: tabBarController,
-        scrollDirection: Axis.horizontal,
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
             ...List.generate(widget.categories.length, (index) => 0 + index)
-                .map((e) => buildCategoriItem(e))
+                .map((e) => Expanded(flex: 1, child: buildCategoriItem(e)))
           ],
         ),
       ),
@@ -138,12 +139,13 @@ class CustomTabBarState extends State<CustomTabBar> {
                 ? Theme.of(context).scaffoldBackgroundColor
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(
-              100, // 16
+              10, // 16
             )),
         child: Text(
           widget.categories[index],
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            fontWeight: FontWeight.w500,
             color: selectedIndex == index
                 ? Theme.of(context).primaryColorDark
                 : Theme.of(context).primaryColorDark.withOpacity(0.8),

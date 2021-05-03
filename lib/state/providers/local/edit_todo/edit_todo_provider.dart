@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/global/todo/todo_provider.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/local/edit_todo/src/edit_todo_enums.dart';
-import 'package:noname/state/providers/local/edit_todo/src/edit_todo_models.dart';
+import 'package:todonote/state/providers/global/todo/todo_provider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/local/edit_todo/src/edit_todo_enums.dart';
+import 'package:todonote/state/providers/local/edit_todo/src/edit_todo_models.dart';
 export 'src/edit_todo_enums.dart';
 export 'src/edit_todo_models.dart';
 

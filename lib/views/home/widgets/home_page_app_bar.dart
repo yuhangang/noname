@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
-import 'package:noname/views/account/account_page.dart';
-import 'package:noname/views/search_screen/search_screen.dart';
-import 'package:noname/widgets/icon_button.dart';
+import 'package:todonote/navigation/custom_page_route/custom_page_route.dart';
+import 'package:todonote/views/account/account_page.dart';
+import 'package:todonote/views/search_screen/search_screen.dart';
+import 'package:todonote/widgets/icon_button.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({

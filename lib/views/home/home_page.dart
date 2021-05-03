@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
-import 'package:noname/views/account/account_page.dart';
-import 'package:noname/views/add_todo/add_todo_screen.dart';
-import 'package:noname/views/home/dashboard/dashboard_screens.dart';
-import 'package:noname/views/home/widgets/animated_bottom_nav.dart';
-import 'package:noname/views/widgets/small_fab.dart';
-import 'package:noname/views/workspaces_screen/workspaces_screen.dart';
-import 'package:noname/widgets/app_bar.dart';
+import 'package:todonote/navigation/custom_page_route/custom_page_route.dart';
+import 'package:todonote/views/account/account_page.dart';
+import 'package:todonote/views/add_todo/add_todo_screen.dart';
+import 'package:todonote/views/history_screen/history_screen.dart';
+import 'package:todonote/views/home/dashboard/dashboard_screens.dart';
+import 'package:todonote/views/home/widgets/animated_bottom_nav.dart';
+import 'package:todonote/views/widgets/small_fab.dart';
+import 'package:todonote/widgets/app_bar.dart';
 
 class HomePage extends StatefulWidget {
   static const route = "/home-page";
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   final List<Widget> childPage = [
     DashBoardScreen(),
-    WorkSpacesScreen(),
+    HistoryScreen(),
     AccountPage()
   ];
 
@@ -69,7 +69,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     bool isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
+
+      appBar: AppBar(
+        brightness: Theme.of(context).brightness,
+        toolbarHeight: 0,
+        elevation: 0,
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [

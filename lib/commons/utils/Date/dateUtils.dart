@@ -1,4 +1,4 @@
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
 const List<String> weekDay = [
   "Monday",

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/views/login/passcode_screen/passcode_screen.dart';
-import 'package:noname/widgets/expandable.dart';
-import 'package:noname/widgets/setting/button_setting_item.dart';
-import 'package:noname/widgets/setting/switch_button_item.dart';
+import 'package:todonote/navigation/custom_page_route/custom_page_route.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/views/login/passcode_screen/passcode_screen.dart';
+import 'package:todonote/widgets/expandable.dart';
+import 'package:todonote/widgets/setting/button_setting_item.dart';
+import 'package:todonote/widgets/setting/switch_button_item.dart';
 
 class AuthSettingItem extends ConsumerWidget {
   AuthSettingItem({

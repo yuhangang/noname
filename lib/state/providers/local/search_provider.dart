@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
 class SearchProvider extends StateNotifier<SearchState> {
   SearchProvider() : super(new SearchState(results: []));

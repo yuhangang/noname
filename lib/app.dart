@@ -1,15 +1,15 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noname/commons/utils/lifecycle/lifecycle_manager.dart';
-import 'package:noname/navigation/routes.dart';
-import 'package:noname/views/home/home_page.dart';
+import 'package:todonote/commons/utils/lifecycle/lifecycle_manager.dart';
+import 'package:todonote/navigation/routes.dart';
+import 'package:todonote/views/home/home_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/views/intro_slider/intro_slider.dart';
-import 'package:noname/views/login/login_page.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/views/login/passcode_screen/passcode_screen.dart';
+import 'package:todonote/views/intro_slider/intro_slider.dart';
+
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/views/login/passcode_screen/passcode_screen.dart';
 
 import 'navigation/custom_page_route/custom_page_route.dart';
 
@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CoreManager(
-      child: Consumer(
-          builder: (context, watch, child) {
+      child: Consumer(builder: (context, watch, child) {
         ThemeSetting theme = watch(GlobalProvider.themeProvider);
         Auth auth = watch(GlobalProvider.authProvider);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -49,8 +48,7 @@ class MyApp extends StatelessWidget {
           home: this.isFirstRun ? IntroPage() : HomePage(),
           routes: pageRoutes.routes,
         );
-      } as Widget Function(
-              BuildContext, T Function<T>(ProviderBase<Object?, T>), Widget?)),
+      }),
     );
   }
 }

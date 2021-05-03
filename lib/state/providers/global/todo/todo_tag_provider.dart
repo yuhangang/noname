@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/commons/utils/settings/shared_preferences/app_preference_provider.dart';
-import 'package:noname/state/providers/global/todo/src/todo_models.dart';
+import 'package:todonote/commons/utils/settings/shared_preferences/app_preference_provider.dart';
+import 'package:todonote/state/providers/global/todo/src/todo_models.dart';
 export 'src/todo_models.dart';
 
 class TodoTagProvider extends StateNotifier<TodoTagList> {

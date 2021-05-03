@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noname/views/home/widgets/stop_podcast_button.dart';
-import 'package:noname/views/podcast/podcast_page.dart';
+import 'package:todonote/views/home/widgets/stop_podcast_button.dart';
+import 'package:todonote/views/podcast/podcast_page.dart';
 
 class PodcastSnippet extends StatelessWidget {
   const PodcastSnippet({

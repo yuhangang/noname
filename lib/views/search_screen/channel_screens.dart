@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:noname/views/search_screen/search_screen_tab.dart';
-import 'package:noname/views/widgets/categories_tab_bar.dart';
+import 'package:todonote/views/search_screen/search_screen_tab.dart';
+import 'package:todonote/views/widgets/categories_tab_bar.dart';
 
 class ChannelScreen extends StatelessWidget {
   ScrollController listViewScrollController = new ScrollController();

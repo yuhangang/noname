@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noname/commons/utils/notification/alert/alert_helper.dart';
-import 'package:noname/views/home/podcast_detail_screen.dart';
-import 'package:noname/views/podcast/widgets/avatar.dart';
+import 'package:todonote/commons/utils/notification/alert/alert_helper.dart';
+import 'package:todonote/views/home/podcast_detail_screen.dart';
+import 'package:todonote/views/podcast/widgets/avatar.dart';
 
 class ScreenScreenTab extends StatelessWidget {
   const ScreenScreenTab({

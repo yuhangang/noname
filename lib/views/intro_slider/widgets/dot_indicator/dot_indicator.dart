@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:noname/views/intro_slider/widgets/dot_indicator/dots_decorator.dart';
+import 'package:todonote/views/intro_slider/widgets/dot_indicator/dots_decorator.dart';
 
 typedef void OnTap(double position);
 

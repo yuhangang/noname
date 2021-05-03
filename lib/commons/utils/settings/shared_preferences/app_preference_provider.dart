@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:noname/state/providers/global/auth/auth_provider.dart';
+import 'package:todonote/state/providers/global/auth/auth_provider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
-import 'package:noname/state/providers/global/todo/src/todo_models.dart';
+import 'package:todonote/state/providers/global/todo/src/todo_models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreference {
@@ -17,7 +18,7 @@ abstract class AppPreferenceProvider extends ChangeNotifier {
   static const String _todoListAchieved = 'todoListAchieved';
   static const String _todoTags = 'todoTags';
   static const String _isFirstRun = 'isFirstRun';
-
+  static const String _theme = 'theme';
   static Future<Auth> fetchSettings() async {
     var prefs = await SharedPreferences.getInstance();
     try {
@@ -25,6 +26,20 @@ abstract class AppPreferenceProvider extends ChangeNotifier {
     } catch (e) {
       return Auth(isAuth: true);
     }
+  }
+
+  static Future<ThemeSetting> fetchThemeSetting() async {
+    var prefs = await SharedPreferences.getInstance();
+    try {
+      return ThemeSetting.fromJson(jsonDecode(prefs.getString(_theme)!));
+    } catch (e) {
+      return ThemeSetting();
+    }
+  }
+
+  static Future<void> saveThemeSetting(ThemeSetting value) async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_theme, jsonEncode(value.toJson()));
   }
 
   static Future<void> saveUserData(Auth userData) async {
@@ -70,6 +85,9 @@ abstract class AppPreferenceProvider extends ChangeNotifier {
   static Future<List<TodoTask>> fetchTodos() async {
     var prefs = await SharedPreferences.getInstance();
     try {
+      debugPrint(List<TodoTask>.from(
+          jsonDecode(prefs.getString(_todoList) ?? "")
+              .map((e) => TodoTask.fromJson(e))).toString());
       return List<TodoTask>.from(jsonDecode(prefs.getString(_todoList) ?? "")
           .map((e) => TodoTask.fromJson(e)));
     } catch (e) {

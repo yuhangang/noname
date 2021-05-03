@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/commons/constants/models/time_line.dart';
-import 'package:noname/commons/utils/Date/dateUtils.dart';
-import 'package:noname/views/home/dashboard/widgets/timeline_item.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/commons/constants/models/time_line.dart';
+import 'package:todonote/commons/utils/Date/dateUtils.dart';
+import 'package:todonote/views/home/dashboard/widgets/timeline_item.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
 class DashboardDateView extends StatelessWidget {
   const DashboardDateView({
@@ -12,8 +12,7 @@ class DashboardDateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+    return SafeArea(
       child: SingleChildScrollView(
         child: Consumer(
           builder: (context, watch, _) {
@@ -36,9 +35,6 @@ class DashboardDateView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 10,
-                ),
                 //Padding(
                 //  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 //  child: InkWell(
@@ -51,13 +47,16 @@ class DashboardDateView extends StatelessWidget {
                 //        placeholder: "Search Tasks",
                 //      ))),
                 //),
+                SizedBox(
+                  height: 20,
+                ),
                 TimeLineItem(
-                  title: "TODAY",
+                  title: "Today",
                   todoList: categoriesTodo.today,
                   timeLineTodo: TimeLineTodo.today,
                 ),
                 TimeLineItem(
-                  title: "TOMORROW",
+                  title: "Tomorrow",
                   todoList: categoriesTodo.tomorrow,
                   timeLineTodo: TimeLineTodo.tomorrow,
                 ),

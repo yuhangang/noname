@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:noname/commons/utils/settings/shared_preferences/app_preference_provider.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/global/todo/src/todo_models.dart';
+import 'package:todonote/commons/utils/settings/shared_preferences/app_preference_provider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/global/todo/src/todo_models.dart';
 export 'src/todo_models.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -36,5 +36,6 @@ class AchievedTodoProvider extends StateNotifier<TodoList> {
     Get.key!.currentState!.context
         .read(GlobalProvider.todoTagProvider.notifier)
         .removeTodo(todo.id, todo.tags);
+    AppPreferenceProvider.saveAchievedTodoList(state.tasks);
   }
 }

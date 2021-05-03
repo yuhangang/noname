@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.noname">
+    package="com.example.todoNote">
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
    <application
-        android:label="noname"
+        android:label="todoNote"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

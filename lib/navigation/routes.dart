@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:noname/views/account/account_page.dart';
-import 'package:noname/views/add_todo/add_todo_screen.dart';
-import 'package:noname/views/home/home_page.dart';
-import 'package:noname/views/home/podcast_detail_screen.dart';
-import 'package:noname/views/intro_slider/intro_slider.dart';
-import 'package:noname/views/login/login_page.dart';
-import 'package:noname/views/login/passcode_screen/passcode_screen.dart';
-import 'package:noname/views/login/register_page.dart';
-import 'package:noname/views/search_screen/search_screen.dart';
+import 'package:todonote/views/account/account_page.dart';
+import 'package:todonote/views/add_todo/add_todo_screen.dart';
+import 'package:todonote/views/home/home_page.dart';
+import 'package:todonote/views/home/podcast_detail_screen.dart';
+import 'package:todonote/views/intro_slider/intro_slider.dart';
+import 'package:todonote/views/login/login_page.dart';
+import 'package:todonote/views/login/passcode_screen/passcode_screen.dart';
+import 'package:todonote/views/login/register_page.dart';
+import 'package:todonote/views/search_screen/search_screen.dart';
 
 class PageRoutes {
   const PageRoutes();

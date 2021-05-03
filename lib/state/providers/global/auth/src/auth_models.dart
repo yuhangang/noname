@@ -1,4 +1,4 @@
-import 'package:noname/commons/utils/settings/shared_preferences/app_preference_provider.dart';
+import 'package:todonote/commons/utils/settings/shared_preferences/app_preference_provider.dart';
 
 class Auth {
   //User? user;

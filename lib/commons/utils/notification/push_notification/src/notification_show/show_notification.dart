@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:todonote/state/providers/global/todo/src/todo_models.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -109,7 +110,7 @@ class ShowNotificationHelper {
   }
 
   void showScheduledNotification(DateTime startTime, int notificationTag,
-      {String? payload}) async {
+      {String? payload, required TodoTask todo}) async {
     String timezone = await FlutterNativeTimezone.getLocalTimezone();
 
     tz.initializeTimeZones();
@@ -118,8 +119,8 @@ class ShowNotificationHelper {
         AndroidNotificationDetails(
             'default_channel_id', 'High Priority Task', '',
             importance: Importance.max,
-            priority: Priority.high,
-            ongoing: true,
+            priority: Priority.max,
+            ongoing: false,
             ticker: "dsfew",
             autoCancel: false);
     NotificationDetails platformChannelSpecifics =
@@ -127,8 +128,8 @@ class ShowNotificationHelper {
 
     flutterLocalNotificationsPlugin.zonedSchedule(
         notificationTag,
-        'scheduled title',
-        'scheduled body',
+        "a new task",
+        todo.title,
         tz.TZDateTime.from(startTime, tz.local).add(const Duration(seconds: 5)),
         const NotificationDetails(android: androidPlatformChannelSpecifics),
         androidAllowWhileIdle: true,

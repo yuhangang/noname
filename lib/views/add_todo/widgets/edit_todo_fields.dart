@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/commons/utils/toast/show_toast.dart';
-import 'package:noname/views/add_todo/widgets/file_uploader_button.dart';
-import 'package:noname/views/add_todo/widgets/todo_date_settings.dart';
-import 'package:noname/views/add_todo/widgets/todo_notification_setting.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
-import 'package:noname/widgets/drop_down_search/dropdown_search.dart';
+import 'package:todonote/commons/utils/toast/show_toast.dart';
+import 'package:todonote/views/add_todo/widgets/file_uploader_button.dart';
+import 'package:todonote/views/add_todo/widgets/todo_date_settings.dart';
+import 'package:todonote/views/add_todo/widgets/todo_notification_setting.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/widgets/drop_down_search/dropdown_search.dart';
 
 class EditTodoFields extends StatelessWidget {
   const EditTodoFields({

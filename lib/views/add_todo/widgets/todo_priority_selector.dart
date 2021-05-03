@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
 
 class PrioritySelector extends StatelessWidget {
   void Function()? onchange;
   bool disabled;
   final String title;
   AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState> provider;
-  TodoImportance selectedItem;
+
   PrioritySelector({
     Key? key,
     this.disabled = false,
     this.title = "NaN",
     this.onchange,
-    required this.selectedItem,
     required this.provider,
   }) : super(key: key);
 
@@ -58,33 +57,38 @@ class PrioritySelector extends StatelessWidget {
                 (e) => Tooltip(
                   message: e.itemAsString,
                   preferBelow: false,
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    //padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(left: 10),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: e == selectedItem ? Colors.blueGrey : null,
-                        border: Border.all(color: Colors.blueGrey)),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(50),
-                      onTap: () => context
-                          .read(provider.notifier)
-                          .changeTodoImportance(e),
-                      child: Center(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            e.itemAsString[0].toUpperCase(),
-                            style: TextStyle(
-                                color: e != selectedItem
-                                    ? Colors.blueGrey
-                                    : Colors.white),
+                  child: Consumer(
+                    builder: (context, watch, child) {
+                      TodoImportance selectedItem = watch(provider).importance;
+                      return Container(
+                        height: 30,
+                        width: 30,
+                        //padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: e == selectedItem ? Colors.blueGrey : null,
+                            border: Border.all(color: Colors.blueGrey)),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(50),
+                          onTap: () => context
+                              .read(provider.notifier)
+                              .changeTodoImportance(e),
+                          child: Center(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                e.itemAsString[0].toUpperCase(),
+                                style: TextStyle(
+                                    color: e != selectedItem
+                                        ? Colors.blueGrey
+                                        : Colors.white),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
               )

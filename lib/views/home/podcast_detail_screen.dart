@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:noname/views/search_screen/channel_screens.dart';
-import 'package:noname/views/home/widgets/podcast_snippet.dart';
-import 'package:noname/views/podcast/widgets/avatar.dart';
+import 'package:todonote/views/search_screen/channel_screens.dart';
+import 'package:todonote/views/home/widgets/podcast_snippet.dart';
+import 'package:todonote/views/podcast/widgets/avatar.dart';
 
 class PodcastDetailPage extends StatelessWidget {
   static const route = "/podcast";

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noname/views/login/login_page.dart';
-import 'package:noname/views/login/widgets/cupertino_radio_choice.dart';
-import 'package:noname/views/login/widgets/login_widgets.dart';
-import 'package:noname/state/providers/global/auth/auth_provider.dart';
+import 'package:todonote/views/login/login_page.dart';
+import 'package:todonote/views/login/widgets/cupertino_radio_choice.dart';
+import 'package:todonote/views/login/widgets/login_widgets.dart';
+import 'package:todonote/state/providers/global/auth/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String route = "/register-page";

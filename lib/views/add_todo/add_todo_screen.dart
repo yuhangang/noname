@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/commons/constants/theme/custom_themes/customSplashFactory.dart';
-import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_helper.dart';
-import 'package:noname/commons/utils/toast/show_toast.dart';
-import 'package:noname/views/add_todo/widgets/edit_todo_fields.dart';
-import 'package:noname/views/widgets/small_fab.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/commons/constants/theme/custom_themes/customSplashFactory.dart';
+import 'package:todonote/commons/utils/notification/push_notification/src/notification_show/notification_helper.dart';
+import 'package:todonote/commons/utils/toast/show_toast.dart';
+import 'package:todonote/views/add_todo/widgets/edit_todo_fields.dart';
+import 'package:todonote/views/widgets/small_fab.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
 
-import 'package:noname/widgets/app_bar.dart';
+import 'package:todonote/widgets/app_bar.dart';
 
 class AddEditTodoScreen extends StatelessWidget {
   final bool isNew;

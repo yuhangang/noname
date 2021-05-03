@@ -1,6 +1,9 @@
-name: noname
+name: todonote
 description: A new Flutter project.
 
+
+flutter_launcher_name:
+  name: "todoNote"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -34,6 +37,7 @@ dependencies:
   fl_chart: ^0.20.1
   flex_color_picker: ^2.0.0-nullsafety.2
   flutter_neumorphic: ^3.1.0
+  flutter_svg: ^0.22.0
 
 
   #network
@@ -63,8 +67,9 @@ dependencies:
   hive: ^2.0.4
   file_picker: ^3.0.1
   local_auth: ^1.1.1
-  jiffy: ^4.1.0
   flutter_native_timezone: ^1.0.10
+  permission_handler: ^7.1.0
+  json_serializable: ^4.1.1
 
   
 
@@ -90,6 +95,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/images/placeholders/
+     - assets/images/illustrations/
      - assets/images/
 
 

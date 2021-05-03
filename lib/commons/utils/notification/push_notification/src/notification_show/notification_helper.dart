@@ -4,12 +4,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:noname/commons/utils/notification/push_notification/src/notification_show/notification_router.dart';
-import 'package:noname/commons/utils/notification/push_notification/src/notification_show/show_notification.dart';
-import 'package:noname/views/add_todo/widgets/todo_notification_setting.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:jiffy/jiffy.dart';
-import 'package:jiffy/src/enums/units.dart';
+import 'package:todonote/commons/utils/notification/push_notification/src/notification_show/notification_router.dart';
+import 'package:todonote/commons/utils/notification/push_notification/src/notification_show/show_notification.dart';
+import 'package:todonote/views/add_todo/widgets/todo_notification_setting.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
 class LocalNotificationHelper {
   static final LocalNotificationHelper instance =
@@ -84,11 +82,11 @@ class LocalNotificationHelper {
     removeScheduledNotification(info);
     instance.showNotificationHelper.showScheduledNotification(
         info.startTime, info.startTag,
-        payload: info.todoId);
+        payload: info.todo.id, todo: info.todo);
     if (info.endTag != null && info.endTime != null) {
       instance.showNotificationHelper.showScheduledNotification(
           info.endTime!, info.endTag!,
-          payload: info.todoId);
+          payload: info.todo.id, todo: info.todo);
     }
   }
 }
@@ -98,11 +96,11 @@ class NotificationIdSet {
   late final DateTime? endTime;
   late final int startTag;
   late final int? endTag;
-  final String todoId;
+  final TodoTask todo;
   final NotificationTiming notificationTiming;
 
   NotificationIdSet(
-      {required this.todoId,
+      {required this.todo,
       required this.notificationTiming,
       required DateTime startTime,
       DateTime? endTime}) {
@@ -110,8 +108,8 @@ class NotificationIdSet {
     if (endTime != null)
       this.endTime = notificationTiming.adjustedTime(endTime);
 
-    startTag = int.parse(this.todoId.substring(0, 10));
+    startTag = int.parse(this.todo.id.substring(0, 10));
     endTag =
-        (endTime != null) ? int.parse(this.todoId.substring(0, 10)) + 1 : null;
+        (endTime != null) ? int.parse(this.todo.id.substring(0, 10)) + 1 : null;
   }
 }

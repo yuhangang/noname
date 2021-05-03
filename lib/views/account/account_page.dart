@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/views/home/home_page.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
-import 'package:noname/widgets/setting/auth_setting_item.dart';
-import 'package:noname/widgets/setting/button_setting_item.dart';
-import 'package:noname/widgets/setting/switch_button_item.dart';
+import 'package:todonote/views/home/home_page.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/widgets/setting/auth_setting_item.dart';
+import 'package:todonote/widgets/setting/button_setting_item.dart';
+import 'package:todonote/widgets/setting/switch_button_item.dart';
 
 class AccountPage extends StatelessWidget {
   static const route = "/account-page";
@@ -40,11 +40,20 @@ class AccountPage extends StatelessWidget {
             const Divider(),
             AuthSettingItem(title: "Authentication"),
             const Divider(),
-            ButtonSettingItem(
-              title: 'Sign Out',
-              icon: Icon(Icons.logout),
-              onTapItem: () {
-                context.read(GlobalProvider.authProvider.notifier).signOut();
+            Consumer(
+              builder: (context, watch, child) {
+                Auth auth = watch(GlobalProvider.authProvider);
+                return auth.isRequiredAuthentication
+                    ? ButtonSettingItem(
+                        title: 'Sign Out',
+                        icon: Icon(Icons.logout),
+                        onTapItem: () {
+                          context
+                              .read(GlobalProvider.authProvider.notifier)
+                              .signOut();
+                        },
+                      )
+                    : SizedBox();
               },
             )
           ],

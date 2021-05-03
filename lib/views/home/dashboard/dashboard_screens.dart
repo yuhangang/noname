@@ -2,17 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:noname/views/home/dashboard/dashboard_date_view.dart';
-import 'package:noname/views/home/dashboard/dashboard_task_view.dart';
+import 'package:todonote/views/home/dashboard/dashboard_date_view.dart';
+import 'package:todonote/views/home/dashboard/dashboard_task_view.dart';
 
-import 'package:noname/views/widgets/categories_tab_bar.dart';
+import 'package:todonote/views/widgets/categories_tab_bar.dart';
 
 class DashBoardScreen extends StatefulWidget {
   @override
   _DashBoardScreenState createState() => _DashBoardScreenState();
 }
 
-class _DashBoardScreenState extends State<DashBoardScreen> {
+class _DashBoardScreenState extends State<DashBoardScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   ScrollController listViewScrollController = new ScrollController();
 
   PageController pageController = PageController();
@@ -22,31 +25,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
-        //appBar: HomePage.homePageAppbar(context, title: "Dashboard"),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CategoryTabBar(
-                    categoryState: categoryState,
-                    parentPageController: pageController,
-                    categories: ["Calendar", "Tasks"]),
-              ),
-              Expanded(
-                child: PageView(
-                  controller: pageController,
-                  onPageChanged: (page) {
-                    categoryState.currentState!.changeCategoryIndex(page);
-                  },
-                  children: [DashboardDateView(), DashboardTaskView()],
-                ),
-              ),
-            ],
-          ),
+        appBar: CategoryTabBar(
+            categoryState: categoryState,
+            parentPageController: pageController,
+            categories: ["Calendar", "Tasks"]),
+        body: PageView(
+          controller: pageController,
+          onPageChanged: (page) {
+            categoryState.currentState!.changeCategoryIndex(page);
+          },
+          children: [DashboardDateView(), DashboardTaskView()],
         ));
   }
 }

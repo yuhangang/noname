@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noname/commons/utils/uuid/uuid_generator.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/global/todo/todo_provider.dart';
+import 'package:todonote/commons/utils/settings/shared_preferences/app_preference_provider.dart';
+import 'package:todonote/commons/utils/uuid/uuid_generator.dart';
 
 class TodoList {
   TodoList({required this.tasks, this.isDone = false});

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:noname/commons/utils/notification/push_notification/push_notification.dart';
-import 'package:noname/views/home/home_page.dart';
-import 'package:noname/views/intro_slider/widgets/slider.dart';
-import 'package:noname/views/intro_slider/widgets/slider_item.dart';
-import 'package:noname/views/intro_slider/widgets/dot_indicator/dot_indicator.dart';
-import 'package:noname/views/intro_slider/widgets/dot_indicator/dots_decorator.dart';
-import 'package:noname/views/intro_slider/widgets/transparent_image.dart';
-import 'package:noname/views/login/login_page.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
+import 'package:todonote/commons/utils/notification/push_notification/push_notification.dart';
+import 'package:todonote/views/home/home_page.dart';
+import 'package:todonote/views/intro_slider/widgets/slider.dart';
+import 'package:todonote/views/intro_slider/widgets/slider_item.dart';
+import 'package:todonote/views/intro_slider/widgets/dot_indicator/dot_indicator.dart';
+import 'package:todonote/views/intro_slider/widgets/dot_indicator/dots_decorator.dart';
+import 'package:todonote/views/intro_slider/widgets/transparent_image.dart';
+import 'package:todonote/views/login/login_page.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
 
 class IntroPage extends HookWidget {
   static const route = "/intro-page";

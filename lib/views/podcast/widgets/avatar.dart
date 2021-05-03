@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:noname/commons/constants/app_config.dart';
-import 'package:noname/views/widgets/badge/badge.dart';
-import 'package:noname/views/widgets/badge/badge_position.dart';
+import 'package:todonote/commons/constants/app_config.dart';
+import 'package:todonote/views/widgets/badge/badge.dart';
+import 'package:todonote/views/widgets/badge/badge_position.dart';
 
 class AvatarCustom {
   final String url;

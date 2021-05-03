@@ -10,15 +10,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:noname/commons/utils/toast/show_toast.dart';
-import 'package:noname/navigation/custom_page_route/custom_page_route.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/views/home/home_page.dart';
-import 'package:noname/views/login/passcode_screen/circle.dart';
-import 'package:noname/views/login/passcode_screen/keyboard.dart';
-import 'package:noname/views/login/passcode_screen/passcode_screen_status.dart';
-import 'package:noname/views/login/passcode_screen/shake_curve.dart';
-import 'package:noname/widgets/app_bar.dart';
+import 'package:todonote/commons/utils/toast/show_toast.dart';
+import 'package:todonote/navigation/custom_page_route/custom_page_route.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/views/home/home_page.dart';
+import 'package:todonote/views/login/passcode_screen/circle.dart';
+import 'package:todonote/views/login/passcode_screen/keyboard.dart';
+import 'package:todonote/views/login/passcode_screen/passcode_screen_status.dart';
+import 'package:todonote/views/login/passcode_screen/shake_curve.dart';
+import 'package:todonote/widgets/app_bar.dart';
 
 typedef IsValidCallback = void Function();
 typedef CancelCallback = void Function();
@@ -357,7 +357,7 @@ class _PasscodeScreenState extends State<PasscodeScreen>
           case PasscodeScreenStatus.remove:
             Get.key!.currentContext!
                 .read(GlobalProvider.authProvider.notifier)
-                .login(password: enteredPasscode)
+                .remove(enteredPasscode)
                 .then((value) => _handleFinal(value));
             break;
         }

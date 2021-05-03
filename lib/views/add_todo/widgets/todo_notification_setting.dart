@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/views/add_todo/widgets/todo_priority_selector.dart';
-import 'package:noname/state/providers/global/globalProvider.dart';
-import 'package:noname/state/providers/local/edit_todo/edit_todo_provider.dart';
-import 'package:noname/widgets/drop_down_search/dropdown_search.dart';
-import 'package:noname/widgets/expanded_session.dart';
-import 'package:noname/widgets/setting/switch_button_item.dart';
+import 'package:todonote/views/add_todo/widgets/todo_priority_selector.dart';
+import 'package:todonote/state/providers/global/globalProvider.dart';
+import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
+import 'package:todonote/widgets/drop_down_search/dropdown_search.dart';
+import 'package:todonote/widgets/expanded_session.dart';
+import 'package:todonote/widgets/setting/switch_button_item.dart';
 
 class TodoNotificationSettings extends StatelessWidget {
   const TodoNotificationSettings({
@@ -31,7 +31,6 @@ class TodoNotificationSettings extends StatelessWidget {
             PrioritySelector(
               title: 'Priority',
               provider: editTodoProvider,
-              selectedItem: editTodoState.importance,
             ),
             SizedBox(
               height: 10,
