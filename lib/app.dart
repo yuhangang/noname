@@ -1,6 +1,6 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:todonote/commons/utils/lifecycle/lifecycle_manager.dart';
 import 'package:todonote/navigation/routes.dart';
 import 'package:todonote/views/home/home_page.dart';
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       child: Consumer(builder: (context, watch, child) {
         ThemeSetting theme = watch(GlobalProvider.themeProvider);
         Auth auth = watch(GlobalProvider.authProvider);
+
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.dark));
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
                       PasscodeScreen(),
                       animationDuration: Duration(milliseconds: 800))));
         }
+
         return MaterialApp(
           navigatorKey: Get.key,
           scaffoldMessengerKey: scaffoldMessengerKey,

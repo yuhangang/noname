@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todonote/commons/utils/toast/show_toast.dart';
 import 'src/auth_models.dart';
 export 'src/auth_models.dart';
 
@@ -25,18 +26,19 @@ class AuthenticationProvider extends StateNotifier<Auth> {
 
   void signOut() {
     state = Auth(isAuth: false, passcode: state.passcode);
-
     //Navigator.pop(Get.key!.currentState!.context);
   }
 
   Future<bool> setup(String passcode) async {
     state = Auth(isAuth: state.isAuth, passcode: passcode);
+    ToastHelper.showToast('authentication enabled');
     return true;
   }
 
   Future<bool> remove(String passcode) async {
     if (passcode == state.passcode) {
       state = Auth(isAuth: state.isAuth, passcode: null);
+      ToastHelper.showToast('authentication disabled');
       return true;
     }
     return false;

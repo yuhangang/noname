@@ -13,7 +13,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomePage.homePageAppbar(context, title: 'Account'),
+      appBar: HomePage.homePageAppbar(context, title: 'Settings'),
       body: Container(
         padding: const EdgeInsets.only(top: 10),
         child: ListView(
@@ -32,11 +32,11 @@ class AccountPage extends StatelessWidget {
                 );
               },
             ),
-            const Divider(),
-            SwitchButtonItem(
-              title: "Time Mode",
-              value: true,
-            ),
+            //const Divider(),
+            //SwitchButtonItem(
+            //  title: "Time Mode",
+            //  value: true,
+            //),
             const Divider(),
             AuthSettingItem(title: "Authentication"),
             const Divider(),

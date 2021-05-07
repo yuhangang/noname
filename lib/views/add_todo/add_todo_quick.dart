@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todonote/commons/constants/models/time_line.dart';
 import 'package:todonote/commons/constants/theme/custom_themes/customSplashFactory.dart';
+import 'package:todonote/navigation/custom_page_route/custom_page_route.dart';
+import 'package:todonote/views/add_todo/add_todo_screen.dart';
 import 'package:todonote/views/add_todo/widgets/edit_todo_fields.dart';
 import 'package:todonote/state/providers/global/globalProvider.dart';
 import 'package:todonote/state/providers/local/edit_todo/edit_todo_provider.dart';
@@ -15,30 +17,16 @@ void showQuickCreateTodoModal(BuildContext context, TimeLineTodo time) {
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     context: context,
     builder: (context) {
-      DateTime timeNow = DateTime.now();
-      AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
-          editTodoProvider =
-          StateNotifierProvider.autoDispose<EditTodoProvider, EditTodoState>(
-              (ref) {
-        return EditTodoProvider(
-          startDate: time.adjustedTime,
-          importance: TodoImportance.medium,
-        );
-      });
       return QuickCreateTodo(
         time: time,
-        editTodoProvider: editTodoProvider,
       );
     },
   );
 }
 
 class QuickCreateTodo extends StatefulWidget {
-  QuickCreateTodo({required this.time, required this.editTodoProvider});
+  QuickCreateTodo({required this.time});
   TimeLineTodo time;
-
-  final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
-      editTodoProvider;
 
   @override
   _QuickCreateTodoState createState() => _QuickCreateTodoState();
@@ -46,44 +34,80 @@ class QuickCreateTodo extends StatefulWidget {
 
 class _QuickCreateTodoState extends State<QuickCreateTodo> {
   TextEditingController titleController = new TextEditingController();
+  late final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
+      editTodoProvider;
   DateTime? dateTime;
-  late TimeOfDay dayTime;
   @override
   void initState() {
-    dayTime = TimeOfDay(hour: 0, minute: 0);
+    editTodoProvider =
+        StateNotifierProvider.autoDispose<EditTodoProvider, EditTodoState>(
+            (ref) {
+      return EditTodoProvider(
+        startDate: widget.time.adjustedTime,
+        importance: TodoImportance.medium,
+      );
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-    return Container(
-        padding: EdgeInsets.only(top: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: InkWell(
+              onTap: () {
+                EditTodoState editState = context.read(editTodoProvider);
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    CustomPageRoute.verticalTransition(
+                        AddEditTodoScreen.fromQuick(
+                            todoTitle: titleController.text,
+                            startTime: editState.startDate!,
+                            importance: editState.importance)));
+              },
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                      width: 0.5,
+                      color:
+                          Theme.of(context).primaryColorDark.withOpacity(0.3)),
+                ),
+                child: Text(
+                  "advanced",
+                  style: TextStyle(
+                      color:
+                          Theme.of(context).primaryColorDark.withOpacity(0.6)),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 40,
                   child: SelectTime(
                     selected: widget.time,
-                    onChange: (e) {
-                      setState(() {
-                        dateTime = DateTime.now();
-                      });
-                      context
-                          .read(widget.editTodoProvider.notifier)
-                          .changeStartDate(startDate: DateTime.now());
-                    },
-                    editTodoProvider: widget.editTodoProvider,
+                    editTodoProvider: editTodoProvider,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TodoTitleField(
-                    editTodoProvider: widget.editTodoProvider,
+                    editTodoProvider: editTodoProvider,
                     titleController: titleController,
                     node: node,
                     onSavedField: (str) {
@@ -92,50 +116,47 @@ class _QuickCreateTodoState extends State<QuickCreateTodo> {
                   ),
                 ),
                 PrioritySelector(
-                  provider: widget.editTodoProvider,
+                  provider: editTodoProvider,
                   title: 'Priority',
-                )
+                ),
               ],
             ),
-            InkWell(
-              onTap: () {
-                context
-                    .read(widget.editTodoProvider.notifier)
-                    .onSubmit(context,
-                        title: titleController.text, description: '')
-                    .then((value) {
-                  Navigator.pop(context);
-                }).onError((error, stackTrace) {
-                  print("error");
-                  return;
-                });
-              },
-              child: Container(
-                color: Theme.of(context).colorScheme.primary,
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: Text(
-                    "Save",
-                    style: TextStyle(fontSize: 18, color: Colors.black),
-                  ),
-                )),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            context
+                .read(editTodoProvider.notifier)
+                .onSubmit(context, title: titleController.text, description: '')
+                .then((value) {
+              Navigator.pop(context);
+            }).onError((error, stackTrace) {
+              print("error");
+              return;
+            });
+          },
+          child: Container(
+            color: Theme.of(context).colorScheme.primary,
+            child: Center(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Save",
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
-            ),
-          ],
-        ));
+            )),
+          ),
+        ),
+      ],
+    );
   }
 }
 
 class SelectTime extends StatefulWidget {
-  SelectTime(
-      {Key? key,
-      required this.selected,
-      required this.onChange,
-      required this.editTodoProvider})
+  SelectTime({Key? key, required this.selected, required this.editTodoProvider})
       : super(key: key);
   TimeLineTodo selected;
-  final void Function(TimeLineTodo) onChange;
+
   final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
       editTodoProvider;
 
@@ -162,17 +183,21 @@ class _SelectTimeState extends State<SelectTime> {
                 ),
                 InkWell(
                   onTap: () {
+                    DateTime oldTime =
+                        context.read(widget.editTodoProvider).startDate!;
                     showDatePicker(
                             context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
+                            initialDate: oldTime,
+                            firstDate: oldTime,
                             lastDate: DateTime(2100))
                         .then((value) {
                       if (value != null) {
                         context
                             .read(widget.editTodoProvider.notifier)
                             .changeStartDate(
-                                startDate: value.copyWith(hour: 0, minute: 0));
+                                startDate: value.copyWith(
+                                    hour: oldTime.hour,
+                                    minute: oldTime.minute));
                       }
                     });
                   },
@@ -210,31 +235,23 @@ class _SelectTimeState extends State<SelectTime> {
                 ),
                 InkWell(
                   onTap: () {
+                    DateTime oldTime =
+                        context.read(widget.editTodoProvider).startDate!;
                     showTimePicker(
                       context: context,
                       initialEntryMode: TimePickerEntryMode.input,
-                      initialTime: TimeOfDay(hour: 9, minute: 0),
+                      initialTime:
+                          TimeOfDay(hour: oldTime.hour, minute: oldTime.minute),
                       builder: (BuildContext context, Widget? child) {
-                        return MediaQuery(
-                          data: MediaQuery.of(context)
-                              .copyWith(alwaysUse24HourFormat: false),
-                          child: child ?? Container(),
-                        );
+                        return child ?? Container();
                       },
                     ).then((value) {
                       if (value != null) {
                         context
                             .read(widget.editTodoProvider.notifier)
                             .changeStartDate(
-                                startDate: context
-                                        .read(widget.editTodoProvider)
-                                        .startDate
-                                        ?.copyWith(
-                                            hour: value.hour,
-                                            minute: value.minute) ??
-                                    DateTime.now().copyWith(
-                                        hour: value.hour,
-                                        minute: value.minute));
+                                startDate: oldTime.copyWith(
+                                    hour: value.hour, minute: value.minute));
                       }
                     });
                   },
@@ -256,8 +273,8 @@ class _SelectTimeState extends State<SelectTime> {
                     child: Consumer(
                       builder: (context, watch, child) {
                         DateTime startTime =
-                            watch(widget.editTodoProvider).startDate ??
-                                DateTime.now();
+                            watch(widget.editTodoProvider).startDate!;
+
                         return Text(
                           '${startTime.hour.toString().padLeft(2, '0')}:${startTime.minute.toString().padLeft(2, '0')}',
                           style: Theme.of(context).textTheme.bodyText1,
@@ -286,11 +303,7 @@ class _SelectTimeState extends State<SelectTime> {
                                 .read(widget.editTodoProvider)
                                 .startDate!;
                             date = date.add(Duration(days: -1)).copyWith(
-                                hour: 9,
-                                minute: 0,
-                                second: 0,
-                                microsecond: 0,
-                                millisecond: 0);
+                                second: 0, microsecond: 0, millisecond: 0);
                             context
                                 .read(widget.editTodoProvider.notifier)
                                 .changeStartDate(startDate: date);
@@ -319,12 +332,9 @@ class _SelectTimeState extends State<SelectTime> {
                     onTap: () {
                       DateTime date =
                           context.read(widget.editTodoProvider).startDate!;
-                      date = date.add(Duration(days: 1)).copyWith(
-                          hour: 9,
-                          minute: 0,
-                          second: 0,
-                          microsecond: 0,
-                          millisecond: 0);
+                      date = date
+                          .add(Duration(days: 1))
+                          .copyWith(second: 0, microsecond: 0, millisecond: 0);
                       context
                           .read(widget.editTodoProvider.notifier)
                           .changeStartDate(startDate: date);

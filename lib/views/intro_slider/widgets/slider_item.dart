@@ -9,31 +9,34 @@ class SliderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.transparent,
         child: Stack(
-          children: [
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  "YOUR VOICE",
-                  style: GoogleFonts.cinzel(
-                      color: Colors.white,
-                      fontSize: 70,
-                      fontWeight: FontWeight.w500,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(2, 2),
-                          blurRadius: 10.0,
-                          color: const Color.fromARGB(20, 20, 20, 255),
-                        ),
-                      ]),
-                ),
+      children: [
+        Center(
+            child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              "todoNote",
+              style: GoogleFonts.openSans(
+                fontSize: 70,
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Color(0xFF000000),
+                fontWeight: FontWeight.w600,
+                //shadows: [
+                //  Shadow(
+                //    offset: const Offset(2, 2),
+                //    blurRadius: 10.0,
+                //    color: const Color.fromARGB(20, 20, 20, 255),
+                //  ),
+                //]
               ),
-            ))
-          ],
-        ));
+            ),
+          ),
+        ))
+      ],
+    ));
   }
 }

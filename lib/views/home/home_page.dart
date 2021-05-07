@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:todonote/commons/constants/models/time_line.dart';
 import 'package:todonote/navigation/custom_page_route/custom_page_route.dart';
 import 'package:todonote/views/account/account_page.dart';
+import 'package:todonote/views/add_todo/add_todo_quick.dart';
 import 'package:todonote/views/add_todo/add_todo_screen.dart';
 import 'package:todonote/views/history_screen/history_screen.dart';
 import 'package:todonote/views/home/dashboard/dashboard_screens.dart';
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     AccountPage()
   ];
 
-  static const List<String> titles = ['Dashboard', 'Workspaces', "Setting"];
+  //static const List<String> titles = ['Dashboard', 'Workspaces', "Setting"];
 
   @override
   void initState() {
@@ -66,8 +68,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    bool isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    //bool isPortrait =
+    //    MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
@@ -97,14 +99,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 index: index,
                 items: [
                   BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.home), label: "dashboard"),
+                      icon: Icon(CupertinoIcons.list_dash), label: "dashboard"),
                   BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.chart_bar), label: "history"),
+                      icon: Icon(Icons.history), label: "history"),
                   BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.globe), label: "setting"),
+                      icon: Icon(CupertinoIcons.person), label: "setting"),
+                  BottomNavigationBarItem(
+                      icon: ClipOval(
+                          child: Container(
+                        color: Theme.of(context).colorScheme.primary,
+                        child:
+                            Icon(CupertinoIcons.add, color: Color(0xFF242424)),
+                      )),
+                      label: "new task"),
                 ],
                 onTapItem: (_) {
                   if (_ == index) return;
+                  if (_ == 3) {
+                    showQuickCreateTodoModal(context, TimeLineTodo.today);
+                    return;
+                  }
                   setState(() {
                     index = _;
                     pageController.jumpToPage(_);
@@ -134,15 +148,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 //  right: isPortrait ? 15 : 75,
                 //  heroTag: 'Search Task',
                 //),
-                SmallFAB(
-                  icon: CupertinoIcons.add,
-                  onTap: () => Navigator.of(context).push(
-                      CustomPageRoute.verticalTransition(AddEditTodoScreen())),
-                  bottom: isPortrait ? 150 : null,
-                  top: !isPortrait ? 0 : null,
-                  right: isPortrait ? 15 : 15,
-                  heroTag: 'Search Task',
-                ),
+                //SmallFAB(
+                //  icon: CupertinoIcons.add,
+                //  onTap: () => Navigator.of(context).push(
+                //      CustomPageRoute.verticalTransition(AddEditTodoScreen())),
+                //  bottom: isPortrait ? 150 : null,
+                //  top: !isPortrait ? 0 : null,
+                //  right: isPortrait ? 15 : 15,
+                //  heroTag: 'Search Task',
+                //),
               ],
             ),
           )

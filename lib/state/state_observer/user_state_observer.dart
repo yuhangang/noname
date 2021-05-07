@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserStateObserver extends ProviderObserver {
@@ -8,7 +6,7 @@ class UserStateObserver extends ProviderObserver {
     print('''
 {
   "provider": "${provider.name ?? provider.runtimeType}",
-  "newValue": "$newValue"
+  "newValue": "$newValue}"
 }''');
   }
 }

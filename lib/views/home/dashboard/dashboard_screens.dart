@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:todonote/views/home/dashboard/dashboard_date_view.dart';
 import 'package:todonote/views/home/dashboard/dashboard_task_view.dart';
@@ -30,13 +29,13 @@ class _DashBoardScreenState extends State<DashBoardScreen>
         appBar: CategoryTabBar(
             categoryState: categoryState,
             parentPageController: pageController,
-            categories: ["Calendar", "Tasks"]),
+            categories: ["Tasks", "Calendar"]),
         body: PageView(
           controller: pageController,
           onPageChanged: (page) {
             categoryState.currentState!.changeCategoryIndex(page);
           },
-          children: [DashboardDateView(), DashboardTaskView()],
+          children: [DashboardTaskView(), DashboardDateView()],
         ));
   }
 }

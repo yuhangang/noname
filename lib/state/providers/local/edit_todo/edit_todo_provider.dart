@@ -23,19 +23,23 @@ class EditTodoProvider extends StateNotifier<EditTodoState> {
             todoTask: todoTask,
             importance: importance ?? TodoImportance.medium,
             notificationTiming: notificationTiming ?? NotificationTiming.onTime,
-            tags: tags ?? []));
+            tags: tags ?? [])) {
+    print(state.startDate?.toIso8601String());
+  }
+
   void changeStartDate({DateTime? startDate}) {
     bool? shouldChangeStartDate;
     if (startDate != null && state.noStartDateError == false)
       shouldChangeStartDate = true;
     state = state.copyWith(
         startDate: startDate, noStartDateError: shouldChangeStartDate);
-    print(this._verifiedStartnEndDate());
+    this._verifiedStartnEndDate();
+    print(state.startDate?.toIso8601String());
   }
 
   void changeEndDate({required DateTime? endDate}) {
     state = state.copyWith(endDate: endDate);
-    print(this._verifiedStartnEndDate());
+    this._verifiedStartnEndDate();
   }
 
   Future<bool> addTag(String str) async {

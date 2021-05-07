@@ -172,9 +172,10 @@ class AddTodoDateWidget extends StatelessWidget {
     ).then((value) {
       if (value != null) selectedTime = value;
       showTimePicker(
+              initialEntryMode: TimePickerEntryMode.input,
               context: context,
               initialTime: TimeOfDay(
-                  hour: prevTime?.hour ?? 0, minute: prevTime?.minute ?? 0))
+                  hour: prevTime?.hour ?? 9, minute: prevTime?.minute ?? 0))
           .then((value) {
         if (value != null) {
           selectedTime = new DateTime(

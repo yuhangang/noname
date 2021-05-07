@@ -15,9 +15,30 @@ import 'package:todonote/widgets/app_bar.dart';
 class AddEditTodoScreen extends StatelessWidget {
   final bool isNew;
   final TodoTask? todoTask;
+  final String? todoTitle = null;
+
+  static const String route = "/add_to_screen";
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
   late final AutoDisposeStateNotifierProvider<EditTodoProvider, EditTodoState>
       editTodoProvider;
-
+  AddEditTodoScreen.fromQuick(
+      {required String todoTitle,
+      required DateTime startTime,
+      required TodoImportance importance})
+      : this.isNew = true,
+        this.todoTask = null {
+    titleController.text = todoTitle;
+    this.editTodoProvider =
+        StateNotifierProvider.autoDispose<EditTodoProvider, EditTodoState>(
+            (ref) {
+      return EditTodoProvider(
+        startDate: startTime,
+        importance: importance,
+      );
+    });
+  }
   AddEditTodoScreen({TodoTask? todoTask})
       : this.isNew = todoTask == null,
         this.todoTask = todoTask {
@@ -39,9 +60,6 @@ class AddEditTodoScreen extends StatelessWidget {
       descriptionController.text = todoTask.description;
     }
   }
-  static const String route = "/add_to_screen";
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +69,7 @@ class AddEditTodoScreen extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
       onWillPop: () async {
-        this.showToastOnDiscard();
+        //this.showToastOnDiscard();
         return true;
       },
       child: Theme(

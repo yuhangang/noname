@@ -75,6 +75,9 @@ class DashboardDateView extends StatelessWidget {
                   todoList: categoriesTodo.other,
                   timeLineTodo: TimeLineTodo.nextMonth,
                 ),
+                SizedBox(
+                  height: 50,
+                ),
 
                 //Expanded(
                 //  child: Consumer(

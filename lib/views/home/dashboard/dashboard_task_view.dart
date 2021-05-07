@@ -27,7 +27,6 @@ class DashboardTaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final filteredTodoListProvider =
         Provider.autoDispose<List<TodoTask>>((ref) {
       final filter = ref.watch(searchProvider);
@@ -51,33 +50,49 @@ class DashboardTaskView extends StatelessWidget {
                     ? SafeArea(
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Theme(
-                                data: Theme.of(context).copyWith(
-                                    colorScheme: Theme.of(context)
-                                        .colorScheme
-                                        .copyWith(
-                                            primary: Theme.of(context)
-                                                .primaryColorDark)),
-                                child: CupertinoSearchTextField(
-                                  backgroundColor: Colors.transparent,
-                                  controller: _searchController,
-                                  focusNode: _focusNode,
-                                  onChanged: (val) =>
-                                      onSearchFieldChanged(val, context),
-                                  itemSize: 25,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      5.8, 10, 5, 10),
-                                ),
-                              ),
+                            SizedBox(
+                              height: 10,
                             ),
+                            //Padding(
+                            //  padding: const EdgeInsets.all(12),
+                            //  child: Theme(
+                            //    data: Theme.of(context).copyWith(
+                            //        colorScheme: Theme.of(context)
+                            //            .colorScheme
+                            //            .copyWith(
+                            //                primary: Theme.of(context)
+                            //                    .primaryColorDark)),
+                            //    child: CupertinoSearchTextField(
+                            //      backgroundColor: Colors.transparent,
+                            //      controller: _searchController,
+                            //      focusNode: _focusNode,
+                            //      onChanged: (val) =>
+                            //          onSearchFieldChanged(val, context),
+                            //      itemSize: 25,
+                            //      padding: const EdgeInsetsDirectional.fromSTEB(
+                            //          5.8, 10, 5, 10),
+                            //    ),
+                            //  ),
+                            //),
                             SingleChildScrollView(
-                              child: Column(
-                                  children: todos
-                                      .map((e) =>
-                                          TodoTaskTile(context: context, e: e))
-                                      .toList()),
+                              child: Column(children: [
+                                Text("Incoming",
+                                    style:
+                                        Theme.of(context).textTheme.headline5),
+                                ...todos.map((e) =>
+                                    TodoTaskTile(context: context, e: e)),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Text(
+                                  "Ongoing",
+                                  style: Theme.of(context).textTheme.headline5,
+                                ),
+                                Text(
+                                  "Overdue",
+                                  style: Theme.of(context).textTheme.headline5,
+                                ),
+                              ]),
                             ),
                           ],
                         ),
